@@ -1,0 +1,12 @@
+{
+  "index.html": {
+    "href": "index.html",
+    "resources": [
+      "dist/build.js",
+      "/dist/build.js",
+      "dist/htm5J.js"
+    ],
+    "refer": [],
+    "priority": 0
+  }
+}

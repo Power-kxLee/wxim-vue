@@ -1,0 +1,29 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.example.hello"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.example.hello"
+        },
+        "cordova-plugin-x-toast": {
+            "PACKAGE_NAME": "com.example.hello"
+        },
+        "jpush-phonegap-plugin": {
+            "APP_KEY": "your_jpush_appkey",
+            "PACKAGE_NAME": "com.example.hello"
+        }
+    },
+    "dependent_plugins": {
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.example.hello"
+        }
+    }
+}

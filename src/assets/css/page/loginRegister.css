@@ -1,0 +1,233 @@
+
+.loginandreg input:focus{
+	outline: none;
+}
+.loginandreg canvas{
+		display:block;
+		vertical-align:bottom;
+}
+.loginandreg .commonbox{
+	width: 100%;
+		height: 100%;
+		background-color: #232741;
+		background-size: cover;
+		background-position: 50% 50%;
+		background-repeat: no-repeat;
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 1;
+}
+.loginandreg .cent-box{
+	width: 300px;
+	vertical-align: middle;
+	white-space: normal;
+	margin: 0 auto;
+	position: relative;
+	z-index: 2;
+
+}
+.loginandreg .register-box{
+}
+.loginandreg .cent-box-header{
+	text-align: center;
+}
+.loginandreg .hide{
+	font: 0/0 a;
+	color: transparent;
+	text-shadow: none;
+	background-color: transparent;
+	border: 0;
+}
+.loginandreg .cent-box-header .main-title{
+	width: 160px;
+	height: 74px;
+	margin: 0 auto;
+	background-size: contain;
+}
+.loginandreg .cent-box-header .sub-title{
+	margin: 30px 0 20px;
+	font-weight: 400;
+	font-size: 18px;
+	line-height: 1;
+	    color: #e7f2ff;
+}
+.loginandreg .clearfix:before{
+	content: '';
+	display: table;
+}
+.loginandreg .index-tab{
+	text-align: center;
+	font-size: 18px;
+	margin-bottom: 10px;
+}
+.loginandreg .index-tab .index-slide-nav{
+	display: inline-block;
+	position: relative;
+}
+.loginandreg .index-tab .index-slide-nav a{
+	float: left;
+	width: 4em;
+	line-height: 35px;
+	opacity: 0.7;
+	-webkit-transition: opacity .15s,color .15s;
+	transition: opacity .15s,color .15s;
+	color: #fff;
+}
+.loginandreg .index-tab .index-slide-nav a:hover{
+	color: #0f88eb;
+	opacity: 1;
+}
+.loginandreg .index-tab .index-slide-nav a.active{
+	opacity: 1;
+	color: #0f88eb;
+}
+.loginandreg .slide-bar{
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	margin: 0 .8em;
+	width: 2.4em;
+	height: 2px;
+	background: #0f88eb;
+}
+.loginandreg .slide-bar1{
+	left: 4em;
+}
+.loginandreg .form{
+	float: none;
+	margin: auto;
+	text-align: left;
+	width: 300px;
+}
+.loginandreg .form .group{
+	border: 1px solid #d5d5d5;
+	border-radius: 3px;
+}
+.loginandreg .form .group .group-ipt{
+	position: relative;
+	margin: 0;
+	overflow: hidden;
+}
+.loginandreg .form .group .group-ipt input{
+	padding: 1em .8em;
+	width: 100%;
+	box-sizing: border-box;
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
+	background: rgba(255,255,255,0.5);
+	font-family: 'Microsoft Yahei';
+	color: #232741;
+	position: relative;
+}
+.loginandreg #password,#verify,#user,#password1{
+	border-top: 1px solid #e8e8e8;
+}
+.loginandreg .imgcode{
+	width: 95px;
+	position: absolute;
+	right: 0;
+	top: 2px;
+	cursor: pointer;
+	height: 40px;
+}
+.loginandreg .button{
+	margin-top:18px; 
+}
+.loginandreg .login-btn{
+	width: 100%;
+	background: #0f88eb;
+	box-shadow: none;
+	border: 0;
+	border-radius: 3px;
+	line-height: 41px;
+	color: #fff;
+	display: block;
+	font-size: 15px;
+	cursor: pointer;
+	font-family: 'Microsoft Yahei';
+}
+.loginandreg .login-btn:hover{
+	background: #80c3f7;
+}
+.loginandreg .remember{
+	margin-top: 10px;
+	line-height: 30px;
+}
+.loginandreg .remember label{
+	display: block;
+}
+.loginandreg .remember-me{
+	font-size: 14px;
+	float: left;
+	position: relative;
+	cursor: pointer;
+}
+.loginandreg .icon{
+	width: 11px;
+	height: 11px;
+	display: block;
+	border: 1px solid #ccc;
+	float: left;
+	margin-top: 8px;
+	margin-right: 5px;
+	cursor: pointer;
+}
+.loginandreg .zt{
+	width: 9px;
+	height: 9px;
+	background: #0f88eb;
+	margin: 1px;
+	display: block;
+}
+.loginandreg #remember-me{
+	position: absolute;
+	left: 0;
+	top: 8px;
+	opacity: 0;
+	cursor: pointer;
+}
+.loginandreg .forgot-password{
+	float: right;
+	font-size: 14px;
+}
+.loginandreg .forgot-password a{
+	color: #e7f2ff;
+}
+.loginandreg .forgot-password a:hover{
+	text-decoration: underline;
+}
+.loginandreg .footer{
+    position: relative;
+    width: 100%;
+    height: 40px;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    color: #999;
+    z-index: 2;
+    padding-top: 30px;
+    font-size: 13px;
+}
+.loginandreg .footer a{
+	color: #666;
+	text-decoration: underline;
+}
+
+
+
+.loginandreg .cent-box  ::-webkit-input-placeholder { 
+color: #232741; 
+} 
+.loginandreg .cent-box  :-moz-placeholder { 
+color: #232741; 
+} 
+.loginandreg .cent-box  ::-moz-placeholder { 
+color: #232741; 
+} 
+.loginandreg .cent-box  :-ms-input-placeholder { 
+color: #232741; 
+} 

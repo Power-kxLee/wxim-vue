@@ -1,0 +1,161 @@
+.nav ul{
+	height: 40px;
+	
+}
+.nav ul li{
+	    text-align: center;
+    position: relative;
+    height: 100%;
+    line-height: 40px;
+}
+.nav ul li a{
+	position: relative;
+}
+.nav ul li a .mint-badge{
+	position: absolute;
+	    top: -11px;
+    right: -19px;
+        line-height: normal;
+}
+.nav ul li.table-cur:before{
+	content: "";
+	width: 100%;
+	height: 4px;
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	background:#f44336;
+}
+.page-loadmore{
+	background:white;
+	font-size: 14px;
+}
+.page-loadmore .pm-item-list{
+	padding: 10px;
+}
+.page-loadmore .pm-item-list .pm-item-divbox{
+	border:1px solid #bababa;
+}
+.page-loadmore .pm-item-list .pm-item-divbox .pm-item-head{
+	background: #E5E5E5;
+	padding: 5px 10px;
+	border-bottom: 1px solid #bababa;
+}
+.page-loadmore .pm-item-list .pm-item-divbox .pi-head-cont{
+overflow: hidden;
+text-overflow: ellipsis;
+-webkit-text-overflow: ellipsis;
+-moz-text-overflow: ellipsis;
+-o-text-overflow: ellipsis;
+white-space: nowrap;
+padding: 0 5px;
+}
+.pm-item-cont{
+	background: #F3F3F3;
+	padding: 5px 10px;
+	padding-right: 0px;
+}
+.pm-item-cont .my-imgersandname{
+	width: 60px;
+}
+.pm-item-cont .my-imgersandname img{
+	width: 100%;
+	display: block;
+}
+.pm-item-cont .my-imgersandname .my-name{
+	width: 100%;
+	overflow: hidden;
+text-overflow: ellipsis;
+display: block;
+white-space: nowrap;
+}
+.pm-item-foot{
+	border-top:1px solid #bababa;
+}
+.my-message-info{
+	    position: relative;
+    padding-left: 17px;
+
+}
+.my-message-info .ms-content{
+	    background: #B2E866;
+    border: 1px solid #73C215;
+    border-radius: 10px;
+    padding: 8px 10px;
+    overflow: hidden;
+	
+}
+.my-message-info .ms-content span{
+	overflow: hidden;
+	word-wrap:break-word; 
+	white-space:normal; 
+	word-break:break-all;
+}
+.my-message-info .ms-sj{
+	width: 0px;
+	height: 0px;
+	border:7px solid transparent;
+	border-right: 10px solid #75C318;
+	position: absolute;
+	top:50%;
+	margin-top: -7px;
+	left: 0px;
+}
+.my-message-info .ms-sj:before{
+	    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    width: 0;
+    border: 7px solid transparent;
+    border-right: 10px solid #B2E866;
+    position: absolute;
+    top: -7px;
+    left: -6px;
+}
+.pm-item-foot{
+	background: #d2d5dc;
+	padding: 5px 5px;
+	color: black;
+}
+.pm-item-foot > span{
+	word-wrap:break-word; 
+white-space:normal; 
+word-break:break-all;
+overflow: hidden;
+}
+.pm-item-foot .vorder-btn{
+	color: #f2f2e6;
+	border:1px solid black;
+	color: black;
+}
+
+.message-info{
+	background: white;
+	position: fixed;
+	bottom:0px;
+	left: 0px;
+	width: 100%;
+	box-shadow: 0 0 5px #868686;
+	padding: 7px 10px;
+}
+.message-newbox{
+	padding-bottom: 50px;
+}
+.page-js{
+	    font-size: 12px;
+    background: #ffffff;
+    padding: 10px;
+    padding-bottom: 0px;
+}
+.page-js p{
+	margin-bottom: 5px;
+    padding-left: 8px;
+    border-left: 3px solid #dadada;
+}
+.page-js p:last-child{
+	margin-bottom: 0px;
+}
+.jiantou .icon-right{
+	font-size: 30px;
+}

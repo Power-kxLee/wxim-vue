@@ -1,0 +1,201 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {
+            "res/xml/config.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"Whitelist\"><param name=\"android-package\" value=\"org.apache.cordova.whitelist.WhitelistPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SplashScreen\"><param name=\"android-package\" value=\"org.apache.cordova.splashscreen.SplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Toast\"><param name=\"android-package\" value=\"nl.xservices.plugins.Toast\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"JPushPlugin\"><param name=\"android-package\" value=\"cn.jpush.phonegap.JPushPlugin\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
+            },
+            "AndroidManifest.xml": {
+                "parents": {
+                    "/manifest": [
+                        {
+                            "xml": "<uses-permission android:name=\"com.example.hello.permission.JPUSH_MESSAGE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.RECEIVE_USER_PRESENT\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.INTERNET\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.WAKE_LOCK\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.READ_EXTERNAL_STORAGE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.VIBRATE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.SYSTEM_ALERT_WINDOW\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<permission android:name=\"com.example.hello.permission.JPUSH_MESSAGE\" android:protectionLevel=\"signature\" />",
+                            "count": 1
+                        }
+                    ],
+                    "/manifest/application": [
+                        {
+                            "xml": "<activity android:configChanges=\"orientation|keyboardHidden\" android:name=\"cn.jpush.android.ui.PushActivity\" android:theme=\"@android:style/Theme.Translucent.NoTitleBar\"><intent-filter><action android:name=\"cn.jpush.android.ui.PushActivity\" /><category android:name=\"android.intent.category.DEFAULT\" /><category android:name=\"com.example.hello\" /></intent-filter></activity>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<activity android:exported=\"false\" android:name=\"cn.jpush.android.ui.PopWinActivity\" android:theme=\"@style/MyDialogStyle\"></activity>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<service android:enabled=\"true\" android:exported=\"false\" android:name=\"cn.jpush.android.service.DownloadService\"></service>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<service android:enabled=\"true\" android:exported=\"false\" android:name=\"cn.jpush.android.service.PushService\"><intent-filter><action android:name=\"cn.jpush.android.intent.REGISTER\" /><action android:name=\"cn.jpush.android.intent.REPORT\" /><action android:name=\"cn.jpush.android.intent.PushService\" /><action android:name=\"cn.jpush.android.intent.PUSH_TIME\" /></intent-filter></service>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<receiver android:enabled=\"true\" android:name=\"cn.jpush.android.service.PushReceiver\"><intent-filter android:priority=\"1000\"><action android:name=\"cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY\" /><category android:name=\"com.example.hello\" /></intent-filter><intent-filter><action android:name=\"android.intent.action.USER_PRESENT\" /><action android:name=\"android.net.conn.CONNECTIVITY_CHANGE\" /></intent-filter><intent-filter><action android:name=\"android.intent.action.PACKAGE_ADDED\" /><action android:name=\"android.intent.action.PACKAGE_REMOVED\" /></intent-filter></receiver>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<service android:enabled=\"true\" android:exported=\"true\" android:name=\"cn.jpush.android.service.DaemonService\"><intent-filter><action android:name=\"cn.jpush.android.intent.DaemonService\" /><category android:name=\"com.example.hello\" /></intent-filter></service>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<receiver android:enabled=\"true\" android:name=\"cn.jpush.phonegap.MyReceiver\"><intent-filter android:priority=\"1000\"><action android:name=\"cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY\" /><category android:name=\"com.example.hello\" /></intent-filter><intent-filter><action android:name=\"cn.jpush.android.intent.REGISTRATION\" /><action android:name=\"cn.jpush.android.intent.UNREGISTRATION\" /><action android:name=\"cn.jpush.android.intent.MESSAGE_RECEIVED\" /><action android:name=\"cn.jpush.android.intent.NOTIFICATION_RECEIVED\" /><action android:name=\"cn.jpush.android.intent.NOTIFICATION_OPENED\" /><action android:name=\"cn.jpush.android.intent.ACTION_RICHPUSH_CALLBACK\" /><category android:name=\"com.example.hello\" /></intent-filter></receiver>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<receiver android:name=\"cn.jpush.android.service.AlarmReceiver\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<meta-data android:name=\"JPUSH_CHANNEL\" android:value=\"developer-default\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<meta-data android:name=\"JPUSH_APPKEY\" android:value=\"your_jpush_appkey\" />",
+                            "count": 1
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "installed_plugins": {
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.example.hello"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.example.hello"
+        },
+        "cordova-plugin-x-toast": {
+            "PACKAGE_NAME": "com.example.hello"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.example.hello"
+        },
+        "jpush-phonegap-plugin": {
+            "APP_KEY": "your_jpush_appkey",
+            "PACKAGE_NAME": "com.example.hello"
+        }
+    },
+    "dependent_plugins": {},
+    "modules": [
+        {
+            "id": "cordova-plugin-splashscreen.SplashScreen",
+            "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
+            "pluginId": "cordova-plugin-splashscreen",
+            "clobbers": [
+                "navigator.splashscreen"
+            ]
+        },
+        {
+            "id": "cordova-plugin-x-toast.Toast",
+            "file": "plugins/cordova-plugin-x-toast/www/Toast.js",
+            "pluginId": "cordova-plugin-x-toast",
+            "clobbers": [
+                "window.plugins.toast"
+            ]
+        },
+        {
+            "id": "cordova-plugin-x-toast.tests",
+            "file": "plugins/cordova-plugin-x-toast/test/tests.js",
+            "pluginId": "cordova-plugin-x-toast"
+        },
+        {
+            "id": "cordova-plugin-device.device",
+            "file": "plugins/cordova-plugin-device/www/device.js",
+            "pluginId": "cordova-plugin-device",
+            "clobbers": [
+                "device"
+            ]
+        },
+        {
+            "id": "jpush-phonegap-plugin.JPushPlugin",
+            "file": "plugins/jpush-phonegap-plugin/www/JPushPlugin.js",
+            "pluginId": "jpush-phonegap-plugin",
+            "clobbers": [
+                "JPush"
+            ]
+        }
+    ],
+    "plugin_metadata": {
+        "cordova-plugin-whitelist": "1.3.1",
+        "cordova-plugin-splashscreen": "4.0.1",
+        "cordova-plugin-x-toast": "2.5.2",
+        "cordova-plugin-device": "1.1.4",
+        "jpush-phonegap-plugin": "3.0.3"
+    }
+}

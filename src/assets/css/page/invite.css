@@ -1,0 +1,39 @@
+.invite{
+	background: white;
+}
+.invite .invite-tis{
+	padding: 10px;
+	font-size: 14px;
+}
+.invite .invite-tis p{
+     padding-left: 10px;
+    border-left: 3px solid #b4b4b4;
+    background: #f1f1f1;
+    color: #FE5100;
+}
+.clickhere{
+	padding: 10px 10px;
+
+}
+.mint-field .mint-cell-title {
+	width: 170px;
+	padding-right: 10px;
+}
+.mint-field.setcode{
+	position: relative;
+}
+.mint-field  .setcode-btn{
+margin-top: 8px;
+    margin-right: 5px;
+}
+.setcode .mint-field-core{
+	padding-right: 35px;
+}
+.settextarea .mint-cell-title{
+	width: 80px;
+}
+.settextarea textarea{
+	word-wrap:break-word; 
+white-space:normal; 
+word-break:break-all;
+}

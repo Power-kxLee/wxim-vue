@@ -1,0 +1,220 @@
+/*App首页头部css*/
+
+
+.head-img{
+	width: 100%;
+    color: #FFF;
+    position: relative;
+    height: 125px;
+}
+.head-img .head-id-pic{
+	    height: 125px;
+    width: 100%;
+    position: absolute;
+    overflow: hidden;
+}
+.head-img .head-id-pic img{
+    width: 100%;
+    height: 100%;
+}
+.head-info{
+	margin: 0 15px 15px 15px;
+    position: relative;
+    position: relative;
+    z-index: 20;
+}
+.head-info .my-img{
+	 width: 60px;
+    height: 60px;
+    border-radius: 4em;
+    border: .125em solid #bca1ad;
+    box-shadow: inset 0 1px 8px rgba(0,0,0,0.2);
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+.head-info .my-img img{
+	width: 100%;
+	height: 100%;
+}
+.head-img .my-person-info {
+    display: inline-block;
+    vertical-align: middle;
+}
+.head-img .my-person-info .my-jd-head-name {
+    font-size: 17px;
+    line-height: 17px;
+    margin-bottom: 6px;
+}
+.head-img .my-person-info p {
+    color: #fff;
+}
+.head-img .my-person-info .my-jd-head-type {
+       font-size: 13px;
+    line-height: 13px;
+    padding-top: 21px;
+}
+.head-img .my-person-info p {
+    color: #fff;
+}
+.head-meassage {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.head-meassage span {
+    display: inline-block;
+    vertical-align: top;
+    line-height: 18px;
+}
+.head-meassage-name {
+    font-size: 11px;
+    color: #e3e5e9;
+}
+.head-setting{
+    position: relative;
+    text-align: right;
+    padding: 5px 0;
+    padding-top: 15px;
+}
+.head-setting a{
+    color: white;
+}
+.head-setting .indexicon{
+    font-size: 26px;
+    
+}
+
+.head-setting .head-setting-ri span{
+    vertical-align: top;
+    line-height: 26px;
+}
+.head-setting .head-message{
+    margin-left: 20px;
+    margin-right: 10px;
+}
+
+/*内容列表页*/
+.app-index-content{
+    overflow: hidden;
+}
+.app-common-moduel{
+    background: white;
+    clear: both;
+    margin-top: 10px;
+}
+.app-common-moduel:last-child{
+    margin-bottom: 10px;
+}
+.ulist-banner{
+    line-height: 44px;
+}
+
+.ulist-banner .mi-cel{
+    font-size: 12px;
+    color: #848689;
+}
+.ulist-banner .mi-cel .icon-right{
+      font-size: 12px;
+    color: #848689;
+    position: relative;
+    top: 1px;
+}
+.ulist-page{
+    display: flex;
+        padding-top: 17px;
+    padding-bottom: 6px;
+}
+.ulist-page a{
+        display: block;
+    flex: 1;
+    width: 1%;
+    color: #232326;
+    text-align: center;
+    position: relative;
+}
+.ulist-page a .indexicon{
+    font-size: 20px;
+    position: relative;
+}
+.ulist-page a .page-nam{
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+font-size: 11px;
+}
+.ulist-page a .page-img{
+    margin-bottom: 5px;
+}
+.ulist-page .mint-badge{
+    position: absolute;
+    top: -9px;
+    right: -14px;
+}
+
+.module-list .module-list-end .indexicon{
+        font-size: 22px;
+    position: relative;
+    top: 3px;
+}
+.icon-message{
+    position: relative;
+}
+/*Icon样式*/
+.icon-calendar{
+    color: #ffc800;
+    font-size: 22px;
+}
+.icon-moneybag{
+    color: #ff7e45;
+    font-size: 22px;
+}
+.icon-friendadd{
+    color: #7790fe;
+}
+.icon-like{
+    color: #f2c71c;
+}
+.icon-form{
+    color: #c568f5;
+}
+.icon-addressbook{
+    color: #ff774f;
+}
+.icon-password{
+    color: #fa3c3c;
+}
+.icon-profile{
+    color: #00c670;
+}
+.icon-new{
+    color: #3ac2db;
+}
+.icon-like{
+    position: relative;
+}
+
+/*覆盖MINT官方的css的样式*/
+.ulist-banner .mint-cell-text{
+        font-size: 14px;
+    vertical-align: top;
+    position: relative;
+    top: 1px;
+    line-height: 22px;
+}
+.ulist-banner .mint-cell-value.is-link {
+    font-size: 12px;
+}
+.mint-cell-allow-right::after{
+    width: 10px;
+    height: 10px;
+}
+.ulist-banner .mint-cell-wrapper{
+    background: none;
+}
+.icon-message .mint-badge {
+    position: absolute;
+    top: -11px;
+    right: -10px;
+}

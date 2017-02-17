@@ -1,0 +1,78 @@
+
+@font-face {font-family: "indexicon";
+  src: 
+  url('./iconfont.ttf?t=1479546982810') format('truetype');
+}
+
+.indexicon {
+  font-family:"indexicon" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+.icon-locationfill:before { content: "\e650"; }
+
+.icon-location:before { content: "\e651"; }
+
+.icon-unfold:before { content: "\e661"; }
+
+.icon-likefill:before { content: "\e668"; }
+
+.icon-like:before { content: "\e669"; }
+
+.icon-deliver:before { content: "\e671"; }
+
+.icon-evaluate:before { content: "\e672"; }
+
+.icon-pay:before { content: "\e673"; }
+
+.icon-send:before { content: "\e675"; }
+
+.icon-shop:before { content: "\e676"; }
+
+.icon-back:before { content: "\e679"; }
+
+.icon-settings:before { content: "\e68a"; }
+
+.icon-form:before { content: "\e699"; }
+
+.icon-right:before { content: "\e6a3"; }
+
+.icon-profile:before { content: "\e6b7"; }
+
+.icon-message:before { content: "\e6bc"; }
+
+.icon-addressbook:before { content: "\e6bd"; }
+
+.icon-vip:before { content: "\e6c3"; }
+
+.icon-password:before { content: "\e62f"; }
+
+.icon-friendaddfill:before { content: "\e6c9"; }
+
+.icon-friendadd:before { content: "\e6ca"; }
+
+.icon-fold:before { content: "\e6de"; }
+
+.icon-recharge:before { content: "\e6ed"; }
+
+.icon-friendfavor:before { content: "\e6f1"; }
+
+.icon-new:before { content: "\e71e"; }
+
+.icon-commandfill:before { content: "\e73e"; }
+
+.icon-command:before { content: "\e73f"; }
+
+.icon-calendar:before { content: "\e74a"; }
+
+.icon-goodsfavor:before { content: "\e794"; }
+
+.icon-goodsnew:before { content: "\e7c0"; }
+
+.icon-moneybag:before { content: "\e7d1"; }
+

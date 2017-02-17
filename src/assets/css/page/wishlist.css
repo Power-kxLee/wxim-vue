@@ -1,0 +1,42 @@
+body{
+	background: white;
+}
+.wishlist-vue{
+	
+	font-size: 14px;
+}
+.wishlist-vue .wl-images{
+	width: 100px;
+	height: 100px;
+	overflow: hidden;
+	margin-right: 10px;
+}
+.wishlist-vue .wl-images img{
+	width: 100%;
+}
+.wishlist-vue .page-loadmore-list > li{
+	border-bottom: 1px solid #e6e6e6;
+	position: relative;
+}
+.wishlist-vue .page-loadmore-list > li >.delete-icon{
+	position: absolute;
+	bottom: 4px;
+	right: 10px;
+	width: 25px;
+	height: 25px;
+	background: url(../../image/delete-icon.png) no-repeat;
+	background-size:auto 100%;
+}
+.wishlist-vue .wl-cont-temp{
+	padding: 10px 0;
+	position: relative;
+}
+.wishlist-vue .wl-price{
+	font-size: 18px;
+	color: #ff5000;
+	position: absolute;
+	bottom: 5px;
+}
+.wishlist-vue .wl-price b{
+	font-size: 12px;
+}
