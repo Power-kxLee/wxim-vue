@@ -17,6 +17,9 @@
     <feature name="JPushPlugin">
         <param name="android-package" value="cn.jpush.phonegap.JPushPlugin" />
     </feature>
+    <feature name="LocalNotification">
+        <param name="android-package" value="de.appplant.cordova.plugin.localnotification.LocalNotification" />
+    </feature>
     <name>lee的app</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.

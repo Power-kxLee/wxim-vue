@@ -19,10 +19,16 @@
         "jpush-phonegap-plugin": {
             "APP_KEY": "your_jpush_appkey",
             "PACKAGE_NAME": "com.example.hello"
+        },
+        "de.appplant.cordova.plugin.local-notification": {
+            "PACKAGE_NAME": "com.example.hello"
         }
     },
     "dependent_plugins": {
         "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.example.hello"
+        },
+        "cordova-plugin-app-event": {
             "PACKAGE_NAME": "com.example.hello"
         }
     }
