@@ -30,14 +30,6 @@ module.exports = [
         ]
     },
     {
-        "id": "jpush-phonegap-plugin.JPushPlugin",
-        "file": "plugins/jpush-phonegap-plugin/www/JPushPlugin.js",
-        "pluginId": "jpush-phonegap-plugin",
-        "clobbers": [
-            "JPush"
-        ]
-    },
-    {
         "id": "de.appplant.cordova.plugin.local-notification.LocalNotification",
         "file": "plugins/de.appplant.cordova.plugin.local-notification/www/local-notification.js",
         "pluginId": "de.appplant.cordova.plugin.local-notification",
@@ -72,7 +64,6 @@ module.exports.metadata =
     "cordova-plugin-splashscreen": "4.0.1",
     "cordova-plugin-x-toast": "2.5.2",
     "cordova-plugin-device": "1.1.4",
-    "jpush-phonegap-plugin": "3.0.3",
     "cordova-plugin-app-event": "1.2.0",
     "de.appplant.cordova.plugin.local-notification": "0.8.4"
 };

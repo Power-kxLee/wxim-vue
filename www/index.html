@@ -58,12 +58,14 @@
             navigator.app.exitApp();  
         } 
 	    
-
+        
+        //本地推送
         cordova.plugins.notification.local.schedule({
             title:'惊人！如此的厉害！！',
             text: '欢迎你来到我的app,随便看随便看',
-            icon:"file://dist/icon.png"
-        });
+            icon:'icon',
+            smallIcon:  'file://small.png'
+        }); 
         cordova.plugins.notification.local.on("click", function (notification) {
             alert("竟然你想看看,那就赶紧来吧")
             console.log(notification)

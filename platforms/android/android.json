@@ -25,10 +25,6 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"JPushPlugin\"><param name=\"android-package\" value=\"cn.jpush.phonegap.JPushPlugin\" /></feature>",
-                            "count": 1
-                        },
-                        {
                             "xml": "<feature name=\"LocalNotification\"><param name=\"android-package\" value=\"de.appplant.cordova.plugin.localnotification.LocalNotification\" /></feature>",
                             "count": 1
                         }
@@ -43,47 +39,7 @@
                             "count": 1
                         },
                         {
-                            "xml": "<uses-permission android:name=\"android.permission.RECEIVE_USER_PRESENT\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<uses-permission android:name=\"android.permission.INTERNET\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<uses-permission android:name=\"android.permission.WAKE_LOCK\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\" />",
-                            "count": 1
-                        },
-                        {
                             "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
-                            "count": 2
-                        },
-                        {
-                            "xml": "<uses-permission android:name=\"android.permission.READ_EXTERNAL_STORAGE\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<uses-permission android:name=\"android.permission.VIBRATE\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<uses-permission android:name=\"android.permission.SYSTEM_ALERT_WINDOW\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\" />",
                             "count": 1
                         },
                         {
@@ -101,18 +57,6 @@
                             "count": 1
                         },
                         {
-                            "xml": "<activity android:exported=\"false\" android:name=\"cn.jpush.android.ui.PopWinActivity\" android:theme=\"@style/MyDialogStyle\"></activity>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<service android:enabled=\"true\" android:exported=\"false\" android:name=\"cn.jpush.android.service.DownloadService\"></service>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<service android:enabled=\"true\" android:exported=\"false\" android:name=\"cn.jpush.android.service.PushService\"><intent-filter><action android:name=\"cn.jpush.android.intent.REGISTER\" /><action android:name=\"cn.jpush.android.intent.REPORT\" /><action android:name=\"cn.jpush.android.intent.PushService\" /><action android:name=\"cn.jpush.android.intent.PUSH_TIME\" /></intent-filter></service>",
-                            "count": 1
-                        },
-                        {
                             "xml": "<receiver android:enabled=\"true\" android:name=\"cn.jpush.android.service.PushReceiver\"><intent-filter android:priority=\"1000\"><action android:name=\"cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY\" /><category android:name=\"com.example.hello\" /></intent-filter><intent-filter><action android:name=\"android.intent.action.USER_PRESENT\" /><action android:name=\"android.net.conn.CONNECTIVITY_CHANGE\" /></intent-filter><intent-filter><action android:name=\"android.intent.action.PACKAGE_ADDED\" /><action android:name=\"android.intent.action.PACKAGE_REMOVED\" /></intent-filter></receiver>",
                             "count": 1
                         },
@@ -122,14 +66,6 @@
                         },
                         {
                             "xml": "<receiver android:enabled=\"true\" android:name=\"cn.jpush.phonegap.MyReceiver\"><intent-filter android:priority=\"1000\"><action android:name=\"cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY\" /><category android:name=\"com.example.hello\" /></intent-filter><intent-filter><action android:name=\"cn.jpush.android.intent.REGISTRATION\" /><action android:name=\"cn.jpush.android.intent.UNREGISTRATION\" /><action android:name=\"cn.jpush.android.intent.MESSAGE_RECEIVED\" /><action android:name=\"cn.jpush.android.intent.NOTIFICATION_RECEIVED\" /><action android:name=\"cn.jpush.android.intent.NOTIFICATION_OPENED\" /><action android:name=\"cn.jpush.android.intent.ACTION_RICHPUSH_CALLBACK\" /><category android:name=\"com.example.hello\" /></intent-filter></receiver>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<receiver android:name=\"cn.jpush.android.service.AlarmReceiver\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<meta-data android:name=\"JPUSH_CHANNEL\" android:value=\"developer-default\" />",
                             "count": 1
                         },
                         {
@@ -182,10 +118,6 @@
         "cordova-plugin-device": {
             "PACKAGE_NAME": "com.example.hello"
         },
-        "jpush-phonegap-plugin": {
-            "APP_KEY": "your_jpush_appkey",
-            "PACKAGE_NAME": "com.example.hello"
-        },
         "cordova-plugin-app-event": {
             "PACKAGE_NAME": "com.example.hello"
         },
@@ -225,14 +157,6 @@
             ]
         },
         {
-            "id": "jpush-phonegap-plugin.JPushPlugin",
-            "file": "plugins/jpush-phonegap-plugin/www/JPushPlugin.js",
-            "pluginId": "jpush-phonegap-plugin",
-            "clobbers": [
-                "JPush"
-            ]
-        },
-        {
             "id": "de.appplant.cordova.plugin.local-notification.LocalNotification",
             "file": "plugins/de.appplant.cordova.plugin.local-notification/www/local-notification.js",
             "pluginId": "de.appplant.cordova.plugin.local-notification",
@@ -265,7 +189,6 @@
         "cordova-plugin-splashscreen": "4.0.1",
         "cordova-plugin-x-toast": "2.5.2",
         "cordova-plugin-device": "1.1.4",
-        "jpush-phonegap-plugin": "3.0.3",
         "cordova-plugin-app-event": "1.2.0",
         "de.appplant.cordova.plugin.local-notification": "0.8.4"
     }

@@ -16,10 +16,6 @@
         "cordova-plugin-x-toast": {
             "PACKAGE_NAME": "com.example.hello"
         },
-        "jpush-phonegap-plugin": {
-            "APP_KEY": "your_jpush_appkey",
-            "PACKAGE_NAME": "com.example.hello"
-        },
         "de.appplant.cordova.plugin.local-notification": {
             "PACKAGE_NAME": "com.example.hello"
         }
