@@ -24,6 +24,10 @@
 	// 设备API可以使用了
 	
 	function onDeviceReady() {
+        var userImgKey = 'userksy';
+        var storage = window.localStorage;
+
+
 
   		document.addEventListener("backbutton", onBackKeyDown, false);    
 
@@ -71,6 +75,12 @@
             console.log(notification)
         })
 
+
+       
+        if(!!storage.getItem(userImgKey)){
+            document.querySelectorAll(".my-img img")[0].src = storage.getItem(userImgKey)
+        }
+
         document.querySelectorAll(".my-img")[0].addEventListener("click",loadImage);
 
          function loadImage() {
@@ -91,6 +101,7 @@
             console.log(imageURI)
             //var src = "data:image/jpeg;base64," + imageURI;
             document.querySelectorAll(".my-img img")[0].src =imageURI;
+            storage.setItem(userImgKey,imageURI)
         }
         function onLoadImageFail(message) {
             navigator.notification.alert("error：" + message, null, "");
