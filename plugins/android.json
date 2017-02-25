@@ -18,6 +18,15 @@
         },
         "de.appplant.cordova.plugin.local-notification": {
             "PACKAGE_NAME": "com.example.hello"
+        },
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "com.example.hello"
+        },
+        "cordova-plugin-dialogs": {
+            "PACKAGE_NAME": "com.example.hello"
+        },
+        "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "com.example.hello"
         }
     },
     "dependent_plugins": {
@@ -25,6 +34,12 @@
             "PACKAGE_NAME": "com.example.hello"
         },
         "cordova-plugin-app-event": {
+            "PACKAGE_NAME": "com.example.hello"
+        },
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "com.example.hello"
+        },
+        "cordova-plugin-file": {
             "PACKAGE_NAME": "com.example.hello"
         }
     }

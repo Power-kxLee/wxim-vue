@@ -69,7 +69,42 @@
         cordova.plugins.notification.local.on("click", function (notification) {
             alert("竟然你想看看,那就赶紧来吧")
             console.log(notification)
-        });
+        })
+
+        document.querySelectorAll(".my-img")[0].addEventListener("click",loadImage);
+
+         function loadImage() {
+            //alert(Camera.DestinationType)
+            navigator.camera.getPicture(onLoadImageSuccess, onLoadImageFail, {
+                quality:88,//保存图像的质量，范围0-100
+                destinationType: Camera.DestinationType.FILE_URL, ////返回值格式:DATA_URL=0,返回作为base64编码字符串；FILE_URL=1，返回图像的URL；NATIVE_RUL=2，返回图像本机URL
+                sourceType:Camera.PictureSourceType.PHOTOLIBRARY,//图片来源 CAMERA 为相机 ,PHOTOLIBRARY 为相册 SAVEDPHOTOALBUM也是相册 (应该是ios和安卓的区别)
+                encodingType:Camera.EncodingType.JPEG ,//获取到的图片的编码是系统默认的 有JPEG和 PNG可选
+                targetWidth:120, //缩放图像的宽度（像素）
+                targetHeight:120, //缩放图像的高度（像素）
+                saveToPhotoAlbum:true, //拍摄的照片是否保存在系统相册
+                correctOrientation:true //设置摄像机拍摄的图像是否为正确的方向（也就是横向拍摄 竖向拍摄之类）
+        
+            });
+        }
+        function onLoadImageSuccess(imageURI) {
+            console.log(imageURI)
+            //var src = "data:image/jpeg;base64," + imageURI;
+            document.querySelectorAll(".my-img img")[0].src =imageURI;
+        }
+        function onLoadImageFail(message) {
+            navigator.notification.alert("error：" + message, null, "");
+        }
+
+       
+        function loadImageLocal() {
+            //获取本地图片并显示在屏幕
+        };
+        function loadImageUpload() {
+            //拍照上传并显示在屏幕
+        };
+
+     
 	}
     </script>
 

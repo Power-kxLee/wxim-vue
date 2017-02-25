@@ -19,11 +19,14 @@
     <platform name="android">
         <allow-intent href="market:*" />
     </platform>
-    <preference name="ShowSplashScreenSpinner" value="false"/>
+    <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="SplashShowOnlyFirstTime" value="false" />
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
-    <engine name="android" spec="~6.0.0" />
+    <engine name="android" spec="~6.1.2" />
+    <plugin name="cordova-plugin-camera" spec="~2.1.1" />
+    <plugin name="cordova-plugin-dialogs" spec="~1.2.1" />
+    <plugin name="cordova-plugin-file-transfer" spec="~1.5.1" />
 </widget>
