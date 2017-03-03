@@ -47,6 +47,10 @@
                         {
                             "xml": "<feature name=\"FileTransfer\"><param name=\"android-package\" value=\"org.apache.cordova.filetransfer.FileTransfer\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"FileOpener2\"><param name=\"android-package\" value=\"io.github.pwlin.cordova.plugins.fileopener2.FileOpener2\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -119,12 +123,20 @@
                         {
                             "xml": "<activity android:exported=\"false\" android:launchMode=\"singleInstance\" android:name=\"de.appplant.cordova.plugin.notification.ClickActivity\" android:theme=\"@android:style/Theme.NoDisplay\" />",
                             "count": 1
+                        },
+                        {
+                            "xml": "<provider android:authorities=\"com.example.hello.opener.provider\" android:exported=\"false\" android:grantUriPermissions=\"true\" android:name=\"io.github.pwlin.cordova.plugins.fileopener2.FileProvider\"><meta-data android:name=\"android.support.FILE_PROVIDER_PATHS\" android:resource=\"@xml/opener_paths\" /></provider>",
+                            "count": 1
                         }
                     ],
                     "/*": [
                         {
                             "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
                             "count": 3
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.READ_EXTERNAL_STORAGE\" />",
+                            "count": 1
                         }
                     ]
                 }
@@ -163,6 +175,9 @@
             "PACKAGE_NAME": "com.example.hello"
         },
         "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "com.example.hello"
+        },
+        "cordova-plugin-file-opener2": {
             "PACKAGE_NAME": "com.example.hello"
         }
     },
@@ -460,6 +475,14 @@
             "clobbers": [
                 "window.FileTransfer"
             ]
+        },
+        {
+            "id": "cordova-plugin-file-opener2.FileOpener2",
+            "file": "plugins/cordova-plugin-file-opener2/www/plugins.FileOpener2.js",
+            "pluginId": "cordova-plugin-file-opener2",
+            "clobbers": [
+                "cordova.plugins.fileOpener2"
+            ]
         }
     ],
     "plugin_metadata": {
@@ -473,6 +496,7 @@
         "cordova-plugin-dialogs": "1.2.1",
         "cordova-plugin-compat": "1.1.0",
         "cordova-plugin-file": "4.3.1",
-        "cordova-plugin-file-transfer": "1.5.1"
+        "cordova-plugin-file-transfer": "1.5.1",
+        "cordova-plugin-file-opener2": "2.0.8"
     }
 }

@@ -5,7 +5,7 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('vue-webpack:server');
+var debug = require('debug')('node-elmont:server');
 var http = require('http');
 
 /**

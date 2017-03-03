@@ -7,6 +7,10 @@
 
   </head>
   <body onload="onLoad()">
+    <div id='addxizz'>
+        下载
+    </div>
+    <img id='imageElement' src="" alt="">
     <div id="app">
         
     </div>
@@ -107,14 +111,64 @@
             navigator.notification.alert("error：" + message, null, "");
         }
 
-       
-        function loadImageLocal() {
-            //获取本地图片并显示在屏幕
-        };
-        function loadImageUpload() {
-            //拍照上传并显示在屏幕
-        };
 
+        //var uri = encodeURI("http://a578242325.gicp.net:37009/leedeapp.apk");
+        //downloadImage();
+        function downloadImage(){
+
+            window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
+
+                console.log('打开系统文件: ' + fs.name);
+              //  console.log("fs.root.toURL()",fs.root.toURL())
+                var url = 'http://cordova.apache.org/static/img/cordova_bot.png';
+
+
+                //download(fs.root,url)
+                fs.root.getFile('newPersistentFile.png', { create: true, exclusive: false }, function (fileEntry) {
+                        console.log("是否是个文件？" + fileEntry.isFile.toString());
+                        console.log("这个文件的路径是", fileEntry.toURL())
+                        console.log("fileEntry",fileEntry)
+
+                        download(fileEntry,url)
+
+                }, function(){
+                    alert("失败")
+                });
+
+            }, function(){
+                alert("失败1")
+            });
+        }
+
+        download(cordova.file.externalDataDirectory+"cordova_bot.apk",encodeURI('http://a578242325.gicp.net:37009/leedeapp.apk'))
+        function download(fileEntry,uri){
+
+            var fileTransfer = new FileTransfer();
+            //var fileURL = fileEntry.toURL();
+            var fileURL = fileEntry;
+           
+            fileTransfer.download(
+                uri,
+                fileURL,
+                function (entry) {
+                    alert("Successful download...");
+                    console.log("download complete: " + entry.toURL());
+                  
+                },
+                function (error) {
+                    console.log("download error source " + error.source);
+                    console.log("download error target " + error.target);
+                    console.log("upload error code" + error.code);
+                },
+                true, // or, pass false
+                {
+                    /*headers: {
+                        "Authorization": "Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA=="
+                    }*/
+                }
+            );
+
+        }
      
 	}
     </script>

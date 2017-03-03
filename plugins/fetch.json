@@ -66,7 +66,7 @@
     "cordova-plugin-file-transfer": {
         "source": {
             "type": "registry",
-            "id": "cordova-plugin-file-transfer@~1.5.0"
+            "id": "cordova-plugin-file-transfer@~1.5.1"
         },
         "is_top_level": true,
         "variables": {}
@@ -74,9 +74,9 @@
     "cordova-plugin-file": {
         "source": {
             "type": "registry",
-            "id": "cordova-plugin-file"
+            "id": "cordova-plugin-file@~4.3.1"
         },
-        "is_top_level": false,
+        "is_top_level": true,
         "variables": {}
     },
     "cordova-plugin-compat": {
@@ -85,6 +85,14 @@
             "id": "cordova-plugin-compat"
         },
         "is_top_level": false,
+        "variables": {}
+    },
+    "cordova-plugin-file-opener2": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-file-opener2"
+        },
+        "is_top_level": true,
         "variables": {}
     }
 }
