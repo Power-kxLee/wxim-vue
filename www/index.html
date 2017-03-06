@@ -8,7 +8,10 @@
   </head>
   <body onload="onLoad()">
     <div id='addxizz'>
-        下载
+        打开app
+    </div>
+    <div id='xiazai'>
+        xiazai
     </div>
     <img id='imageElement' src="" alt="">
     <div id="app">
@@ -40,13 +43,13 @@
 			console.log(AppStore.state.pageName,AppStore.state)			
         	if(AppStore.state.pageName == "index"){
 
-	        	 window.plugins.toast.showWithOptions({
+	        	window.plugins.toast.showWithOptions({
 
-				      message: "在点击一次退出啊",
-				       duration: "short",
-				      position: "bottom",
-				      addPixelsY: -200  
-				    });
+                    message: "在点击一次退出啊",
+                    duration: "short",
+                    position: "bottom",
+                    addPixelsY: -200  
+				});
 	        	//window.plugins.toast.showShortBottom('再点击一次退出!');  
 	        	document.removeEventListener("backbutton", onBackKeyDown, false); //注销返回键  
 				document.addEventListener("backbutton", exitApp, false);//绑定退出事件
@@ -139,27 +142,91 @@
                 alert("失败1")
             });
         }
+        function onConfirm(buttonIndex) {
+            if(buttonIndex == 1){
+                download(cordova.file.externalDataDirectory+"cordova_bot.apk",encodeURI('http://a578242325.gicp.net:37009/leedeapp.apk'))
+            }
+        }
 
-        download(cordova.file.externalDataDirectory+"cordova_bot.apk",encodeURI('http://a578242325.gicp.net:37009/leedeapp.apk'))
+        document.getElementById("xiazai").addEventListener("click",function(){
+
+           navigator.notification.confirm(
+                '有版本更新\n更新了好多内容\n例如 ...', 
+                 onConfirm,            
+                '检查更新',           
+                ['更新','暂时不更新']    
+            );
+        });
+
+
+
+        document.getElementById("addxizz").addEventListener("click",function(){
+
+            var apkurl = "file:///storage/emulated/0/Android/data/com.example.hello/files/cordova_bot.apk";
+
+            resolveLocalFileSystemURL(apkurl, function(entry) {
+                console.log('cdvfile URI: ' + entry.toInternalURL());
+                console.log('toURL URI: ' + entry.toURL());
+
+            getapp(entry.toInternalURL(),'application/vnd.android.package-archive')
+            });    
+            
+
+
+        });
+        
+        function getapp(filePath,fileMIMEType){
+            cordova.plugins.fileOpener2.open(
+                filePath, 
+                fileMIMEType, 
+                { 
+                    error : function(e) { 
+                        console.log(e,"失败")
+                    },
+                    success : function () {
+                        console.log('file opened successfully');                
+                    }
+                }
+            );
+        }
+
+
+
         function download(fileEntry,uri){
 
             var fileTransfer = new FileTransfer();
-            //var fileURL = fileEntry.toURL();
             var fileURL = fileEntry;
-           
+            console.log("开始请求下载")
+            fileTransfer.onprogress = showUploadingProgress;  
+            navigator.notification.progressStart("提醒", "当前下载进度");  
+
             fileTransfer.download(
                 uri,
                 fileURL,
                 function (entry) {
-                    alert("Successful download...");
+                    navigator.notification.progressStop();  
+                    console.log("Successful download...",entry);
                     console.log("download complete: " + entry.toURL());
-                  
+                    cordova.plugins.fileOpener2.open(
+                        entry.toURL(), 
+                        'application/vnd.android.package-archive', 
+                        { 
+                            error : function(e) { 
+                                console.log(e,"失败")
+                            },
+                            success : function () {
+                                console.log('file opened successfully');                
+                            }
+                        }
+                    );
                 },
                 function (error) {
                     console.log("download error source " + error.source);
                     console.log("download error target " + error.target);
                     console.log("upload error code" + error.code);
-                },
+                    navigator.notification.progressStop("");  
+                    alert("下载错误,错误代码"+error.code+",请联系管理员")
+                },  
                 true, // or, pass false
                 {
                     /*headers: {
@@ -169,6 +236,14 @@
             );
 
         }
+
+
+        //下载进度条
+        function showUploadingProgress(progressEvt) {  
+            if (progressEvt.lengthComputable) {  
+                navigator.notification.progressValue(Math.round((progressEvt.loaded / progressEvt.total) * 100));  
+            }  
+        }  
      
 	}
     </script>
