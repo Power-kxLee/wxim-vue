@@ -33,6 +33,9 @@
         },
         "cordova-plugin-file-opener2": {
             "PACKAGE_NAME": "com.example.hello"
+        },
+        "cordova-plugin-app-version": {
+            "PACKAGE_NAME": "com.example.hello"
         }
     },
     "dependent_plugins": {

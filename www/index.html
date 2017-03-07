@@ -7,12 +7,6 @@
 
   </head>
   <body onload="onLoad()">
-    <div id='addxizz'>
-        打开app
-    </div>
-    <div id='xiazai'>
-        xiazai
-    </div>
     <img id='imageElement' src="" alt="">
     <div id="app">
         
@@ -31,8 +25,9 @@
 	// 设备API可以使用了
 	
 	function onDeviceReady() {
-        var userImgKey = 'userksy';
         var storage = window.localStorage;
+        var storageUserImgKey = 'userksy'; //存储用户图片路径
+        var storageAppV = 'appviversions'; //记录app版本号
 
 
 
@@ -83,9 +78,12 @@
         })
 
 
-       
-        if(!!storage.getItem(userImgKey)){
-            document.querySelectorAll(".my-img img")[0].src = storage.getItem(userImgKey)
+
+
+
+
+        if(!!storage.getItem(storageUserImgKey)){
+            document.querySelectorAll(".my-img img")[0].src = storage.getItem(storageUserImgKey)
         }
 
         document.querySelectorAll(".my-img")[0].addEventListener("click",loadImage);
@@ -108,15 +106,13 @@
             console.log(imageURI)
             //var src = "data:image/jpeg;base64," + imageURI;
             document.querySelectorAll(".my-img img")[0].src =imageURI;
-            storage.setItem(userImgKey,imageURI)
+            storage.setItem(storageUserImgKey,imageURI)
         }
         function onLoadImageFail(message) {
             navigator.notification.alert("error：" + message, null, "");
         }
 
 
-        //var uri = encodeURI("http://a578242325.gicp.net:37009/leedeapp.apk");
-        //downloadImage();
         function downloadImage(){
 
             window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
@@ -142,39 +138,54 @@
                 alert("失败1")
             });
         }
+        /**
+         * [点击检查更新]
+         * @return {[type]}  [null]
+         */
+        appVue.$http.get('http://a578242325.gicp.net:37009/checkupdates',{
+            number:3000
+        }).then(function(response){
+
+            //检查当前app版本
+             cordova.getAppVersion.getVersionNumber(function (version) {
+                console.log("版本号是",version);
+                //比较最新版本
+                if(version < response.body.version ){
+                    //提示更新
+                    navigator.notification.confirm(
+                        '有版本更新\n更新了好多内容\n例如 ...', 
+                         onConfirm,            
+                        '检查更新',           
+                        ['更新','暂时不更新']    
+                    );
+                }
+            });
+            console.log("成功",response.body.version )
+
+        },function(){
+             console.log("失败")
+        })
+            
+
+
+        /**
+         * [onConfirm 点击更新执行的函数]
+         * @param  {[type]} buttonIndex [1是更新 2是不更新]
+         * @return {[type]}             [null]
+         */
         function onConfirm(buttonIndex) {
             if(buttonIndex == 1){
                 download(cordova.file.externalDataDirectory+"cordova_bot.apk",encodeURI('http://a578242325.gicp.net:37009/leedeapp.apk'))
             }
         }
 
-        document.getElementById("xiazai").addEventListener("click",function(){
 
-           navigator.notification.confirm(
-                '有版本更新\n更新了好多内容\n例如 ...', 
-                 onConfirm,            
-                '检查更新',           
-                ['更新','暂时不更新']    
-            );
-        });
-
-
-
-        document.getElementById("addxizz").addEventListener("click",function(){
-
-            var apkurl = "file:///storage/emulated/0/Android/data/com.example.hello/files/cordova_bot.apk";
-
-            resolveLocalFileSystemURL(apkurl, function(entry) {
-                console.log('cdvfile URI: ' + entry.toInternalURL());
-                console.log('toURL URI: ' + entry.toURL());
-
-            getapp(entry.toInternalURL(),'application/vnd.android.package-archive')
-            });    
-            
-
-
-        });
-        
+        /**
+         * [getapp 打开文件]
+         * @param  {[type]} filePath     [文件路径]
+         * @param  {[type]} fileMIMEType [MIMA参数]
+         * @return {[type]}              [null]
+         */
         function getapp(filePath,fileMIMEType){
             cordova.plugins.fileOpener2.open(
                 filePath, 
@@ -191,7 +202,12 @@
         }
 
 
-
+        /**
+         * [download 下载文件]
+         * @param  {[type]} fileEntry [本地储存路径]
+         * @param  {[type]} uri       [下载链接]
+         * @return {[type]}           [null]
+         */
         function download(fileEntry,uri){
 
             var fileTransfer = new FileTransfer();
@@ -207,6 +223,7 @@
                     navigator.notification.progressStop();  
                     console.log("Successful download...",entry);
                     console.log("download complete: " + entry.toURL());
+                    alert("好吧,其实更新了也没东西,我就是做功能测试,不要点击安装哦。。")
                     cordova.plugins.fileOpener2.open(
                         entry.toURL(), 
                         'application/vnd.android.package-archive', 
@@ -227,7 +244,7 @@
                     navigator.notification.progressStop("");  
                     alert("下载错误,错误代码"+error.code+",请联系管理员")
                 },  
-                true, // or, pass false
+                false, // or, pass false
                 {
                     /*headers: {
                         "Authorization": "Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA=="
@@ -245,6 +262,13 @@
             }  
         }  
      
+
+
+        
+
+
+
+
 	}
     </script>
 

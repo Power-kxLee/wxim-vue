@@ -16,13 +16,16 @@ module.exports = function(app) {
 
 	
 		res.render('index', { 
-	    	title: 'Express'
+	    	title: 'Express111111'
 
 	    });
 	
 	});
 
-	
+	app.get("/checkupdates" , function (req , res) {
+		var newVersion = "1.1.0";
 
+		res.send({version:newVersion});
+	});
 
 };
