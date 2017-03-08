@@ -261,9 +261,36 @@
                 navigator.notification.progressValue(Math.round((progressEvt.loaded / progressEvt.total) * 100));  
             }  
         }  
-     
+        
+        var BDmap = {
+            ak : "zYezC609to7ASqOQGoEl175QwcaenZK1", //百度ak
+            location:"", //坐标
+            output:"json", //返回的格式
+        }
+        var BDurl = "http://api.map.baidu.com/geocoder/v2/?"
+        navigator.geolocation.getCurrentPosition(function(position){
+            
+            
+            var coords = position.coords.longitude+","+position.coords.latitude;
+
+            appVue.$http.get('http://api.map.baidu.com/geoconv/v1/?coords='+coords+'&from=1&to=5&ak='+BDmap.ak+'').then(function(data){
+
+                var location = data.body.result[0].y+","+data.body.result[0].x;
+
+                console.log("坐标转化",location)
+
+                appVue.$http.get('http://api.map.baidu.com/geocoder/v2/?output='+BDmap.output+'&location='+location+'&ak='+BDmap.ak+'').then(function(data){
+                    console.log("地址是",data)
+                    console.log("你的地址在",data.body.result.formatted_address + data.body.result.sematic_description)
+                });
+            });
 
 
+
+            
+        }, function(){
+            alert('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
+        });
         
 
 

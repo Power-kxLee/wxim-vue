@@ -55,6 +55,10 @@
                         {
                             "xml": "<feature name=\"AppVersion\"><param name=\"android-package\" value=\"uk.co.whiteoctober.cordova.AppVersion\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Geolocation\"><param name=\"android-package\" value=\"org.apache.cordova.geolocation.Geolocation\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -141,6 +145,18 @@
                         {
                             "xml": "<uses-permission android:name=\"android.permission.READ_EXTERNAL_STORAGE\" />",
                             "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-feature android:name=\"android.hardware.location.gps\" />",
+                            "count": 1
                         }
                     ]
                 }
@@ -185,6 +201,9 @@
             "PACKAGE_NAME": "com.example.hello"
         },
         "cordova-plugin-app-version": {
+            "PACKAGE_NAME": "com.example.hello"
+        },
+        "cordova-plugin-geolocation": {
             "PACKAGE_NAME": "com.example.hello"
         }
     },
@@ -498,6 +517,20 @@
             "clobbers": [
                 "cordova.getAppVersion"
             ]
+        },
+        {
+            "id": "cordova-plugin-geolocation.geolocation",
+            "file": "plugins/cordova-plugin-geolocation/www/android/geolocation.js",
+            "pluginId": "cordova-plugin-geolocation",
+            "clobbers": [
+                "navigator.geolocation"
+            ]
+        },
+        {
+            "id": "cordova-plugin-geolocation.PositionError",
+            "file": "plugins/cordova-plugin-geolocation/www/PositionError.js",
+            "pluginId": "cordova-plugin-geolocation",
+            "runs": true
         }
     ],
     "plugin_metadata": {
@@ -513,6 +546,7 @@
         "cordova-plugin-file": "4.3.1",
         "cordova-plugin-file-transfer": "1.5.1",
         "cordova-plugin-file-opener2": "2.0.8",
-        "cordova-plugin-app-version": "0.1.9"
+        "cordova-plugin-app-version": "0.1.9",
+        "cordova-plugin-geolocation": "2.4.1"
     }
 }
