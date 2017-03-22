@@ -189,7 +189,6 @@
 <script type="text/babel">
   import '../../../assets/font/index/iconfont.css';
   import '../../../assets/css/page/index.css';
-  
   export default {
     components: {
     },

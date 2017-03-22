@@ -39,6 +39,21 @@
         },
         "cordova-plugin-geolocation": {
             "PACKAGE_NAME": "com.example.hello"
+        },
+        "cordova-plugin-network-information": {
+            "PACKAGE_NAME": "com.example.hello"
+        },
+        "cordova-plugin-media-capture": {
+            "PACKAGE_NAME": "com.example.hello"
+        },
+        "cordova-plugin-media": {
+            "PACKAGE_NAME": "com.example.hello"
+        },
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "com.example.hello"
+        },
+        "cordova-plugin-nativeaudio": {
+            "PACKAGE_NAME": "com.example.hello"
         }
     },
     "dependent_plugins": {

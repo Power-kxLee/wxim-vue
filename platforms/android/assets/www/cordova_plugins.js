@@ -322,6 +322,115 @@ module.exports = [
         "file": "plugins/cordova-plugin-geolocation/www/PositionError.js",
         "pluginId": "cordova-plugin-geolocation",
         "runs": true
+    },
+    {
+        "id": "cordova-plugin-network-information.network",
+        "file": "plugins/cordova-plugin-network-information/www/network.js",
+        "pluginId": "cordova-plugin-network-information",
+        "clobbers": [
+            "navigator.connection",
+            "navigator.network.connection"
+        ]
+    },
+    {
+        "id": "cordova-plugin-network-information.Connection",
+        "file": "plugins/cordova-plugin-network-information/www/Connection.js",
+        "pluginId": "cordova-plugin-network-information",
+        "clobbers": [
+            "Connection"
+        ]
+    },
+    {
+        "id": "cordova-plugin-media-capture.CaptureAudioOptions",
+        "file": "plugins/cordova-plugin-media-capture/www/CaptureAudioOptions.js",
+        "pluginId": "cordova-plugin-media-capture",
+        "clobbers": [
+            "CaptureAudioOptions"
+        ]
+    },
+    {
+        "id": "cordova-plugin-media-capture.CaptureImageOptions",
+        "file": "plugins/cordova-plugin-media-capture/www/CaptureImageOptions.js",
+        "pluginId": "cordova-plugin-media-capture",
+        "clobbers": [
+            "CaptureImageOptions"
+        ]
+    },
+    {
+        "id": "cordova-plugin-media-capture.CaptureVideoOptions",
+        "file": "plugins/cordova-plugin-media-capture/www/CaptureVideoOptions.js",
+        "pluginId": "cordova-plugin-media-capture",
+        "clobbers": [
+            "CaptureVideoOptions"
+        ]
+    },
+    {
+        "id": "cordova-plugin-media-capture.CaptureError",
+        "file": "plugins/cordova-plugin-media-capture/www/CaptureError.js",
+        "pluginId": "cordova-plugin-media-capture",
+        "clobbers": [
+            "CaptureError"
+        ]
+    },
+    {
+        "id": "cordova-plugin-media-capture.MediaFileData",
+        "file": "plugins/cordova-plugin-media-capture/www/MediaFileData.js",
+        "pluginId": "cordova-plugin-media-capture",
+        "clobbers": [
+            "MediaFileData"
+        ]
+    },
+    {
+        "id": "cordova-plugin-media-capture.MediaFile",
+        "file": "plugins/cordova-plugin-media-capture/www/MediaFile.js",
+        "pluginId": "cordova-plugin-media-capture",
+        "clobbers": [
+            "MediaFile"
+        ]
+    },
+    {
+        "id": "cordova-plugin-media-capture.helpers",
+        "file": "plugins/cordova-plugin-media-capture/www/helpers.js",
+        "pluginId": "cordova-plugin-media-capture",
+        "runs": true
+    },
+    {
+        "id": "cordova-plugin-media-capture.capture",
+        "file": "plugins/cordova-plugin-media-capture/www/capture.js",
+        "pluginId": "cordova-plugin-media-capture",
+        "clobbers": [
+            "navigator.device.capture"
+        ]
+    },
+    {
+        "id": "cordova-plugin-media-capture.init",
+        "file": "plugins/cordova-plugin-media-capture/www/android/init.js",
+        "pluginId": "cordova-plugin-media-capture",
+        "runs": true
+    },
+    {
+        "id": "cordova-plugin-media.MediaError",
+        "file": "plugins/cordova-plugin-media/www/MediaError.js",
+        "pluginId": "cordova-plugin-media",
+        "clobbers": [
+            "window.MediaError"
+        ]
+    },
+    {
+        "id": "cordova-plugin-media.Media",
+        "file": "plugins/cordova-plugin-media/www/Media.js",
+        "pluginId": "cordova-plugin-media",
+        "clobbers": [
+            "window.Media"
+        ]
+    },
+    {
+        "id": "cordova-plugin-nativeaudio.nativeaudio",
+        "file": "plugins/cordova-plugin-nativeaudio/www/nativeaudio.js",
+        "pluginId": "cordova-plugin-nativeaudio",
+        "clobbers": [
+            "window.plugins.NativeAudio"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -340,7 +449,12 @@ module.exports.metadata =
     "cordova-plugin-file-transfer": "1.5.1",
     "cordova-plugin-file-opener2": "2.0.8",
     "cordova-plugin-app-version": "0.1.9",
-    "cordova-plugin-geolocation": "2.4.1"
+    "cordova-plugin-geolocation": "2.4.1",
+    "cordova-plugin-network-information": "1.3.2",
+    "cordova-plugin-media-capture": "1.4.2",
+    "cordova-plugin-media": "3.0.0",
+    "cordova-plugin-console": "1.0.6",
+    "cordova-plugin-nativeaudio": "3.0.9"
 };
 // BOTTOM OF METADATA
 });
