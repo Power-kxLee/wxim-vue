@@ -58,3 +58,11 @@ npm run build
 npm run cordova 
 ```
 
+##启动服务器
+
+运行 
+```
+npm run start
+```
+
+写了测试的接口,除非你的手机修改了host文件能访问本机,不然启动之后还需要映射外网,这里推荐个工具[花生壳](http://hsk.oray.com/download/),测试流量有1024m/月。
