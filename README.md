@@ -58,7 +58,7 @@ npm run build
 npm run cordova 
 ```
 
-##启动服务器
+## 启动服务器
 
 运行 
 ```
