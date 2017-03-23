@@ -1,5 +1,7 @@
 # vue2.0的入门项目,使用了cordova打包成androidAPP
 
+[![npm](https://img.shields.io/badge/npm-3.10.9-blue.svg)]() [![node](https://img.shields.io/badge/node-6.9.2-lightgrey.svg)]() [![vue](https://img.shields.io/badge/vue-2.0-brightgreen.svg)]() [![cordova](https://img.shields.io/badge/cordova-6.5.0-brightgreen.svg)]() 
+
 
 ## 安装
 ```
