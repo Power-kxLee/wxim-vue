@@ -1,8 +1,8 @@
 <template>
   <div id='app'>
-    {{appStart}}
-    <app-header  v-if='headeranimate' :titlename='title'></app-header>
-    <transition :name="transitionName"  >
+    <guiance-page v-if='pageinit' v-on:changenext='changenextchild'></guiance-page>
+    <app-header  v-if='headeranimate && !pageinit' :titlename='title'></app-header>
+    <transition :name="transitionName"  v-if='!pageinit'>
     <router-view class='appviews'  ></router-view>
     </transition>
 
@@ -15,25 +15,40 @@
   import './assets/css/common/HTML5-reset.css' //加载css reste表
   import 'mint-ui/lib/style.css' //加载mint依赖的css
   import appHeader from './view/common/app-header.vue';
+  import guiancePage from './view/page/guidancePage.vue';
   import store     from './vuex/store.js';
 
-
+  const apphao   = "1.186";
+  const appGuide = "appGuide"+apphao;
+  let letappGuide = localStorage.getItem(appGuide)
+  if(!letappGuide){
+    localStorage.setItem(appGuide,apphao)
+  }
   export default {
     data () {
       return {
-        transitionName: 'bounce-in'
+        transitionName: 'bounce-in',
+        apphao:apphao
       }
     },
     store,
     components:{
-      appHeader
+      appHeader,
+      guiancePage
     },
+    
     watch: {
       '$route' (to, from) {
 
         var direction = this.$store.state.direction;
         this.transitionName = direction == "reverse" ? 'bounce-out' : 'bounce-in';
        // console.log(this.transitionName)
+      }
+    },
+    methods:{
+      changenextchild(){
+        this.apphao = 0;
+        localStorage.setItem(appGuide,0)
       }
     },
     computed:{
@@ -49,6 +64,10 @@
       },
       title (){
         return this.componentName;
+      },
+      pageinit (){
+      
+        return letappGuide == this.apphao;
       }
     }
   };

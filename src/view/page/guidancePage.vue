@@ -1,6 +1,6 @@
 <template>
 	
-	<div class='guidance-page'>
+	<div class='guidance-page appviews'>
 
 		<div class="swiper-container">
 	        <div class="swiper-wrapper">
@@ -36,8 +36,8 @@
 	            		恭喜你,你离新的大门就差最后一步
 	            	</div>
 	            	<div class='ani slide-3-p2' swiper-animate-effect="rotateIn" swiper-animate-duration="0.8s" swiper-animate-delay="0.8s">
-	            		<router-link to="/"> 请用你的手指头 疯狂的点击这里</router-link>	
-	            	</div>
+	            		<span @click="changenext" >请用你的手指头 疯狂的点击这里</span>
+		            	</div>
 	            </div>
 
 	        </div>
@@ -201,6 +201,11 @@
 					A.swiperAnimate(swiper); //每个slide切换结束时也运行当前slide动画
 				} 
 			});
+		},
+		methods: {
+			changenext (){
+				this.$emit('changenext')
+			}
 		}
 	} 
 

@@ -33,11 +33,7 @@ history.setItem('/', 0);  //在创建一个'/' 并设置为0
 
 
 
-let apphao   = "1.180";
-let appGuide = "appGuide"+apphao;
-if(!localStorage.getItem(appGuide)){
-  localStorage.setItem(appGuide,apphao)
-}
+
 // 进入新路由的时候,做的一些操作
 const commit = store.commit ;
 
@@ -78,14 +74,6 @@ commit('update_direction', 'reverse')
 
 //成功进入新页面之后
 router.afterEach((to,from) => {
-
-  if( localStorage.getItem(appGuide) == apphao){
-    localStorage.setItem(appGuide,0)
-    router.replace("/guidancePage")
-  }
- 
- // console.log(to)
- // console.log(from)
   window.scrollTo(0,0);
 });
 //保存路由,方便后面调用
@@ -96,6 +84,9 @@ sync(store, router);
 
 window.appVue = new Vue({
   el     : '#app',
+  data   :{
+    aaaa : 11
+  },
   render : h => h(App),
   router
 });

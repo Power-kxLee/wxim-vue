@@ -74,6 +74,7 @@ ol = '#source-map'
     })
   ])
 }else{
+  console.log("生成环境更改path")
   //生产环境的时候,修改publicPath
   module.exports.output.publicPath = '/www/dist/'
 }
