@@ -38,7 +38,7 @@
 				</div>
 
 				<div class="button">
-					<button type="submit" class="login-btn register-btn" id="button">注册</button>
+					<button @click='regfn' type="submit" class="login-btn register-btn" id="button">跳过</button>
 				</div>
 			</div>
 		</div>
@@ -53,6 +53,7 @@
 	import '../../assets/css/page/loginRegister.css';
 	import '../../assets/plugin/particles/particles.min.js';
 	import particles_background from '../../assets/plugin/particles/background.js';
+	import { Toast } from 'mint-ui';
 	export default {
 		name: 'login',
 		data() {
@@ -64,9 +65,24 @@
 			}
 		},
 		created (){
-			this.$nextTick(function(){
+			this.$nextTick(() => {
+
 				particlesJS('register-box',particles_background);
-			})
+			});
+		},
+		methods:{
+
+			regfn(){
+				let time = 4000;
+				Toast({
+				  message: '厉害了,你居然是隐藏的VIP会员,因此你不需要注册啦,默认打开管理员权限O(∩_∩)O',
+				  duration: time
+				});
+				setTimeout(() => {
+					router.push("/")
+				},time);
+				this.$store.commit("checkLoginStart",true);
+			}
 		}
 		
 	}

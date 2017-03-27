@@ -56,7 +56,7 @@
 				</div>
 
 				<div class="button">
-					<button @click='loginfun' type="button" class="login-btn register-btn" id="login-button">登录</button>
+					<button @click='loginfun' type="button" class="login-btn register-btn" id="login-button">跳过</button>
 				</div>
 
 				<div class="remember clearfix">
@@ -78,7 +78,7 @@
 	import '../../assets/css/page/loginRegister.css';
 	import '../../assets/plugin/particles/particles.min.js';
 	import particles_background from '../../assets/plugin/particles/background.js';
-	
+	import { Toast } from 'mint-ui';
 
 	export default {
 		name: 'login',
@@ -97,10 +97,19 @@
 		},
 		methods: {
 			loginfun (){
-				console.log(this.formdata)
-				this.$http.post(this.$store.state.postUrl+"/user/login",this.formdata).then(function(data){
-					console.log(data)
+				let time = 4000;
+				Toast({
+				  message: '厉害了,你居然是隐藏的VIP会员,因此你不需要登录啦,默认打开管理员权限O(∩_∩)O',
+				  duration: time
 				});
+				setTimeout(() => {
+					router.push("/")
+				},time);
+
+				this.$store.commit("checkLoginStart",true);
+				/*this.$http.post(this.$store.state.postUrl+"/user/login",this.formdata).then(function(data){
+					console.log(data)
+				});*/
 			}
 		}
 		

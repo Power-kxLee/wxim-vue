@@ -1,14 +1,16 @@
-# vue2.0的入门项目,使用了cordova打包成androidAPP
+# 从零构建vue2开发环境到入门,实现cordov打包APP
 
 [![npm](https://img.shields.io/badge/npm-3.10.9-blue.svg)]() [![node](https://img.shields.io/badge/node-6.9.2-lightgrey.svg)]() [![vue](https://img.shields.io/badge/vue-2.0-brightgreen.svg)]() [![cordova](https://img.shields.io/badge/cordova-6.5.0-brightgreen.svg)]() 
 
 
 ## 安装
 ```
-git clone git@github.com:Power-kxLee/Lee-s-app.git
+git clone git@github.com:Power-kxLee/vue2-cordova-demo.git
 
-cd Lee-s-app
+cd vue2-cordova-demo
 
+npm install
+或
 cnpm install
 ```
 
@@ -19,8 +21,46 @@ cnpm install
 # 开发模式
 npm run dev
 
-# 编译文件
-npm run build
+# 客户端运行
+http://localhost:8080/#/
+```
+
+## 源码说明
+### 目录说明
+```
+.
+|-- bin                              // 启动node服务器配置
+|-- hooks                            // Cordova执行命令时运行的特殊脚本
+|-- models                           // 数据库模型
+|-- platforms                        // Cordova构建平台
+|-- plugins                          // Cordova插件
+|-- public                           // node静态文件目录
+|-- routes                           // node路由文件	
+|-- src                              // 项目源文件	
+|   |-- assets                       // 源文件静态资源
+|   |-- assets                       // vue组件
+|   |-- vuex                         // vuex配置
+|   |-- App.vue                      // 模版载体
+|   |-- main.js                      // 入口文件
+|   |-- route.js                     // vue-router路由文件
+|-- unpackage                        // 解压包	
+|-- views                            // node视图文件	
+|-- wwww                             // webpack编译源文件后存放位置	
+|-- .babelrc                         // ES6语法编译配置
+|-- .gitattributes                   // 设置项目主语言
+|-- .gitignore                       // git忽略提交
+|-- .project                         // java工程文件
+|-- README.md                        // 项目说明
+|-- app.js                           // node入口文件
+|-- config.xml                       // cordova配置文件
+|-- index.html                       // vue开发模式运行主页面
+|-- info.txt                         // cordovr配置
+|-- manifest.json                    // cordovr配置
+|-- package.json                     // 配置项目相关信息
+|-- postcss.config.js                // postcss配置
+|-- webpack.config.js                // webpack打包配置
+.
+
 ```
 
 ## 打包androidAPP

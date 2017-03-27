@@ -32,18 +32,21 @@ console.log("history.getItem('count')",history.getItem('count'))
 history.setItem('/', 0);  //在创建一个'/' 并设置为0
 
 
-
+console.log("store.state",store.state.loginstart)
 
 // 进入新路由的时候,做的一些操作
 const commit = store.commit ;
 
 router.beforeEach((to, from, next) => {
-  
-
-      console.log("正常路由",to.path)
+      
       const toIndex = history.getItem(to.path); //进入哪个路由
       const fromIndex = history.getItem(from.path); //从哪个路由进来的
       
+
+      if(!store.state.loginstart){
+        commit("checkLoginStart",true)
+        return next("/login");
+      }
       //如果这个路由是访问过的
       if(toIndex){
         // 如果这个路由已经访问过,并是进来的路由的子路由 或者 
@@ -58,14 +61,15 @@ router.beforeEach((to, from, next) => {
         }
 
       }else{ //理由没有访问过的话
-        ++historyCount;  //把初定的路由层级标识 往上+1 
+        ++historyCount;  //hfc 往上+1 
         commit('update_direction', 'forward'); //通过vuex的update_direction方法更新路由进入的效果
         to.path !== '/' && history.setItem(to.path, historyCount); //如果进来的路由不是首页,那么通过history方法.以路由路径为key,和路层级标识为value保存起来
       }
 
       commit("makePage",to.name);
 
-     next();//执行完毕,可以进入下一个钩子
+      next();//执行完毕,可以进入下一个钩子
+      
     
 });
 

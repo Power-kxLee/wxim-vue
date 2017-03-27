@@ -1,4 +1,6 @@
-
+.appviews{
+	min-height: 100%;
+}
 .loginandreg input:focus{
 	outline: none;
 }

@@ -18,7 +18,7 @@
   import guiancePage from './view/page/guidancePage.vue';
   import store     from './vuex/store.js';
 
-  const apphao   = "1.186";
+  const apphao   = "1.188";
   const appGuide = "appGuide"+apphao;
   let letappGuide = localStorage.getItem(appGuide)
   if(!letappGuide){

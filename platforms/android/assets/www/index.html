@@ -15,17 +15,6 @@
     </style>
   </head>
   <body onload="onLoad()">
-    
-        <div id='canvas'>长按我VBA</div>
-    
-    <div><input type="button" onclick="startRecord(this)" value="开始录音" /></div>
-    <div><input type="button" onclick="stopRecord(this)" value="停止录音" /></div>
-    <div><input type="button" onclick="play(this)" value="播放" /></div>
-    <div><input type="button" onclick="stop(this)" value="停止" /></div>
-    <div><input type="button" onclick="upload(this)" value="上传录音"/></div>
-    <div><input type="button" onclick="getvideomsg(this)" value="获取录音信息" /></div>
-    <div><input type="button" onclick="playservice(this)" value="playservice" /></div>
-    <div id="messagetip"></div>
     <div id="app">
         
     </div>
@@ -39,7 +28,6 @@
 
 	    document.addEventListener("deviceready", onDeviceReady, false);
 
-        var canvas = document.getElementById("canvas");
         function touchStart(event) {
             console.log("长按语音中")
         }

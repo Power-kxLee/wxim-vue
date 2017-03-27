@@ -11,6 +11,7 @@ const state = {
   direction: 'forward', //作为进入新页面还是返回新页面 做依据
   router:{},
   pageName:"index",
+  loginstart : false,
   postUrl : "http://127.0.0.1:3000" //接口请求的所在域名
 }
 export default new Vuex.Store({
@@ -43,8 +44,8 @@ export default new Vuex.Store({
     makePage ( state , status){
     	state.pageName = status;
     },
-    asdasdas ( state , status){
-      state.ininState = status;
+    checkLoginStart (state , status){
+      state.loginstart  = status
     }
 
     
