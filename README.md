@@ -3,10 +3,10 @@
 [![npm](https://img.shields.io/badge/npm-3.10.9-blue.svg)]() [![node](https://img.shields.io/badge/node-6.9.2-lightgrey.svg)]() [![vue](https://img.shields.io/badge/vue-2.0-brightgreen.svg)]() [![cordova](https://img.shields.io/badge/cordova-6.5.0-brightgreen.svg)]() 
 
 
-[![事例图片](https://lh3.googleusercontent.com/IUrsBtXGKn_eZZnyQeSNgDx-g_Sl6jyW1JDltMK9zuSdEkJvkr9aS06-2AvMGlKcyXAa_kZiUHQmI50XEbCYo1PQBoxI9H-MNQ1zAw_VPRO3FEVmvu8korFfVgoNX6hIxkZLNp4TAvUZpoQYZL-0c95sz5Y8ULKFL0N0eoX-fW68AGIknn22-L9p0K1pyWtN0I819ZymDnvc0ZNO76Kw6DQcMoONpGGKhfJP7cdqwk6x719XBh6nITLnUkvIiKlhzAub8XiytrUXsVgz0e3tVWwXNZARYkw8tksoo8ztfCIK3LkYL7rsSyCMgkYd1_7y1x9imWB44NwzXcKpbtVbKzju96cfjihMwf1uxnY_J16hPHl90Em-4R-NXw65AITSohxHOBXd7Ei0l-zTfnfYzdNK-RRQxPrKP3dpZ0NG-dBonsO8owgBv8nzcK7xRxb6xYOFe3r8PEqxCFghX37rnR3URiCCgzmdeySV-8HPbDE9nUaLjfbjvtJcjG9Qt1BKevRk2oiYeBB8Ak4nQ87UpsDBMKSCB9wFY6NSco65vvu02kOxtirwTqwBYSYFX2tH_yLjJr211aDsyB5Ro1VnqJiMao3RyJNdjbZ8IjteWNK0pKw=w396-h702-no)]()
+[![事例图片](https://github.com/Power-kxLee/vue2-cordova-demo/blob/master/demo.gif)]()
 
 ## 安装
-```
+``` 
 git clone git@github.com:Power-kxLee/vue2-cordova-demo.git
 
 cd vue2-cordova-demo
