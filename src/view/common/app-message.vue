@@ -59,7 +59,7 @@
 			</div>
 		</div>
 		<footer>
-			<form action="http://www.tt-elmontyouthsoccer.com/mobile-user-doaddcontent" method="post">
+			<form action="" method="post">
 				<div class="usergoban">
 					<input type="hidden" name="pmid" value="2711">
 					<input type="hidden" name="touid" value="1">

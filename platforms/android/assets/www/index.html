@@ -19,7 +19,6 @@
         
     </div>
     <script src="./dist/build.js"></script>
-    <script type="text/javascript" src='cordova.js'></script>
      
     <script type="text/javascript">
     
@@ -36,8 +35,8 @@
             console.log('释放发送语音');
         }
 
-        canvas.addEventListener("touchstart", touchStart, false);
-        canvas.addEventListener("touchend", touchEnd, false);
+        //canvas.addEventListener("touchstart", touchStart, false);
+        //canvas.addEventListener("touchend", touchEnd, false);
 	}
 
 	// 设备API可以使用了
@@ -81,241 +80,10 @@
         }  
         function exitApp(){  
             navigator.app.exitApp();  
-        } 
-        /**
-         * [notification 本地消息推送]
-         */
-        function notification(){
-
-            //本地推送
-            cordova.plugins.notification.local.schedule({
-                title:'惊人！如此的厉害！！',
-                text: '欢迎你来到我的app,随便看随便看',
-                icon:'icon',
-                smallIcon:  'file://small.png'
-            }); 
-            cordova.plugins.notification.local.on("click", function (notification) {
-                alert("竟然你想看看,那就赶紧来吧")
-                console.log(notification)
-            })
         }
+        
 
-        /**
-         * [pushimg 打开相册]
-         */
-        function pushimg(){
-
-            if(!!storage.getItem(storageUserImgKey)){
-                document.querySelectorAll(".my-img img")[0].src = storage.getItem(storageUserImgKey)
-            }
-
-            document.querySelectorAll(".my-img")[0].addEventListener("click",loadImage);
-
-             function loadImage() {
-                //alert(Camera.DestinationType)
-                navigator.camera.getPicture(onLoadImageSuccess, onLoadImageFail, {
-                    quality:88,//保存图像的质量，范围0-100
-                    destinationType: Camera.DestinationType.FILE_URL, ////返回值格式:DATA_URL=0,返回作为base64编码字符串；FILE_URL=1，返回图像的URL；NATIVE_RUL=2，返回图像本机URL
-                    sourceType:Camera.PictureSourceType.PHOTOLIBRARY,//图片来源 CAMERA 为相机 ,PHOTOLIBRARY 为相册 SAVEDPHOTOALBUM也是相册 (应该是ios和安卓的区别)
-                    encodingType:Camera.EncodingType.JPEG ,//获取到的图片的编码是系统默认的 有JPEG和 PNG可选
-                    targetWidth:120, //缩放图像的宽度（像素）
-                    targetHeight:120, //缩放图像的高度（像素）
-                    saveToPhotoAlbum:true, //拍摄的照片是否保存在系统相册
-                    correctOrientation:true //设置摄像机拍摄的图像是否为正确的方向（也就是横向拍摄 竖向拍摄之类）
-            
-                });
-            }
-            function onLoadImageSuccess(imageURI) {
-                console.log(imageURI)
-                //var src = "data:image/jpeg;base64," + imageURI;
-                document.querySelectorAll(".my-img img")[0].src =imageURI;
-                storage.setItem(storageUserImgKey,imageURI)
-            }
-            function onLoadImageFail(message) {
-                navigator.notification.alert("error：" + message, null, "");
-            }
-        }
-        /**
-         * [检查更新]
-         */
-        function checkupdate(){
-
-            appVue.$http.get('http://a578242325.gicp.net:37009/checkupdates',{
-                number:3000
-            }).then(function(response){
-
-                //检查当前app版本
-                 cordova.getAppVersion.getVersionNumber(function (version) {
-                    console.log("版本号是",version);
-                    //比较最新版本
-                    if(version < response.body.version ){
-                        //提示更新
-                        navigator.notification.confirm(
-                            '有版本更新\n更新了好多内容\n例如 ...', 
-                             onConfirm,            
-                            '检查更新',           
-                            ['更新','暂时不更新']    
-                        );
-                    }
-                });
-                console.log("成功",response.body.version )
-
-            },function(){
-                 console.log("失败")
-            })
-
-            /**
-             * [onConfirm 点击更新执行的函数]
-             * @param  {[type]} buttonIndex [1是更新 2是不更新]
-             * @return {[type]}             [null]
-             */
-            function onConfirm(buttonIndex) {
-                if(buttonIndex == 1){
-                    download(cordova.file.externalDataDirectory+"cordova_bot.apk",encodeURI('http://a578242325.gicp.net:37009/leedeapp.apk'))
-                }
-            }
-            /**
-             * [getapp 打开文件]
-             * @param  {[type]} filePath     [文件路径]
-             * @param  {[type]} fileMIMEType [MIMA参数]
-             * @return {[type]}              [null]
-             */
-            function getapp(filePath,fileMIMEType){
-                cordova.plugins.fileOpener2.open(
-                    filePath, 
-                    fileMIMEType, 
-                    { 
-                        error : function(e) { 
-                            console.log(e,"失败")
-                        },
-                        success : function () {
-                            console.log('file opened successfully');                
-                        }
-                    }
-                );
-            }
-            /**
-             * [download 下载文件]
-             * @param  {[type]} fileEntry [本地储存路径]
-             * @param  {[type]} uri       [下载链接]
-             * @return {[type]}           [null]
-             */
-            function download(fileEntry,uri){
-
-                var fileTransfer = new FileTransfer();
-                var fileURL = fileEntry;
-                console.log("开始请求下载")
-                fileTransfer.onprogress = showUploadingProgress;  
-                navigator.notification.progressStart("提醒", "当前下载进度");  
-
-                fileTransfer.download(
-                    uri,
-                    fileURL,
-                    function (entry) {
-                        navigator.notification.progressStop();  
-                        console.log("Successful download...",entry);
-                        console.log("download complete: " + entry.toURL());
-                        alert("好吧,其实更新了也没东西,我就是做功能测试,不要点击安装哦。。")
-                        cordova.plugins.fileOpener2.open(
-                            entry.toURL(), 
-                            'application/vnd.android.package-archive', 
-                            { 
-                                error : function(e) { 
-                                    console.log(e,"失败")
-                                },
-                                success : function () {
-                                    console.log('file opened successfully');                
-                                }
-                            }
-                        );
-                    },
-                    function (error) {
-                        console.log("download error source " + error.source);
-                        console.log("download error target " + error.target);
-                        console.log("upload error code" + error.code);
-                        navigator.notification.progressStop("");  
-                        alert("下载错误,错误代码"+error.code+",请联系管理员")
-                    },  
-                    false, // or, pass false
-                    {
-                        /*headers: {
-                            "Authorization": "Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA=="
-                        }*/
-                    }
-                );
-
-            }
-
-
-            //下载进度条
-            function showUploadingProgress(progressEvt) {  
-                if (progressEvt.lengthComputable) {  
-                    navigator.notification.progressValue(Math.round((progressEvt.loaded / progressEvt.total) * 100));  
-                }  
-            }  
-        }
-            
-        /**
-         * [getlocation 获取当前地址]
-         */
-        function getlocation(){
-
-            var BDmap = {
-                ak : "zYezC609to7ASqOQGoEl175QwcaenZK1", //百度ak
-                location:"", //坐标
-                output:"json", //返回的格式
-            }
-            var BDurl = "http://api.map.baidu.com/geocoder/v2/?"
-            navigator.geolocation.getCurrentPosition(function(position){
-                
-                
-                var coords = position.coords.longitude+","+position.coords.latitude;
-
-                appVue.$http.get('http://api.map.baidu.com/geoconv/v1/?coords='+coords+'&from=1&to=5&ak='+BDmap.ak+'').then(function(data){
-
-                    var location = data.body.result[0].y+","+data.body.result[0].x;
-
-                    console.log("坐标转化",location)
-
-                    appVue.$http.get('http://api.map.baidu.com/geocoder/v2/?output='+BDmap.output+'&location='+location+'&ak='+BDmap.ak+'').then(function(data){
-                        console.log("地址是",data)
-                        console.log("你的地址在",data.body.result.formatted_address + data.body.result.sematic_description)
-                    });
-            
-
-                
-                }, function(){
-                    alert('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
-                });
-            });
-        }
-
-        /**
-         * [checkConnection 检查网络状态]
-         * @return {[string]} [返回网络状态]
-         */
-        function checkConnection() {
-            var networkState = navigator.connection.type;
-
-            var states = {};
-            states[Connection.UNKNOWN]  = '未知网络连接';
-            states[Connection.ETHERNET] = '以太网连接';
-            states[Connection.WIFI]     = 'WIFI连接';
-            states[Connection.CELL_2G]  = '2G网络连接';
-            states[Connection.CELL_3G]  = '3G网络连接';
-            states[Connection.CELL_4G]  = '4G网络连接';
-            states[Connection.CELL]     = '电池通用连接';
-            states[Connection.NONE]     = '没有网络';
-
-            return states[networkState];
-        }
-
-        document.addEventListener("offline", onOffline, false);
-
-        function onOffline() {
-           alert("没有网络,舍不得上网就别打开我的app 谢谢")
-        }
-
+          
 
 
 
@@ -332,7 +100,7 @@
         });
         
     }
-    function startRecord(e) {
+            function startRecord(e) {
                 media.startRecord();
                 msgTip("开始录音")
             }
@@ -404,15 +172,8 @@
             function msgTip(msg) {
                 document.querySelector("#messagetip").innerHTML = "<div>" + msg + "</div>";
             }
-            setInterval(function () {
+        
 
-                media.getCurrentPosition(function(d){
-                        console.log("成功",d)
-
-                    },function(e){
-                        console.log("失败",e)
-                    });
-            },3000);
     </script>
 
 

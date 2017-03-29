@@ -4,7 +4,7 @@
 		<div id="login-box" class='commonbox'></div>
 		<div class="cent-box">
 			<div class="cent-box-header">
-				<h1 class="main-title ">知乎</h1>
+				<h1 class="main-title "></h1>
 				<h2 class="sub-title">生活热爱分享 - Thousands Find</h2>
 			</div>
 

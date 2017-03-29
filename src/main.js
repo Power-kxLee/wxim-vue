@@ -8,6 +8,9 @@ import FastClick   from 'fastclick' //消除点击延迟
 
 import App         from './App.vue' //加载路由中间模版
 import routes      from './route.js' //加载路由器模版
+import Cordova     from '../platforms/android/assets/www/cordova.js'
+
+
 
 FastClick.attach(document.body)
 
@@ -32,46 +35,58 @@ console.log("history.getItem('count')",history.getItem('count'))
 history.setItem('/', 0);  //在创建一个'/' 并设置为0
 
 
-console.log("store.state",store.state.loginstart)
+
+
 
 // 进入新路由的时候,做的一些操作
 const commit = store.commit ;
+const pagingfn = (to, from) => {
+  const toIndex = history.getItem(to.path); //进入哪个路由
+  const fromIndex = history.getItem(from.path); //从哪个路由进来的
+  if(toIndex){
+                
+      // 如果这个路由已经访问过,并是进来的路由的子路由 或者 
+      if (toIndex > fromIndex || !fromIndex) {
+        //那么就把页面的访问效果设置成forward,进入的效果
+        commit('update_direction', 'forward')
 
+      } else {
+        //否则就是返回的效果
+
+        commit('update_direction', 'reverse')
+      }
+
+    }else{ //理由没有访问过的话
+      ++historyCount;  //hfc 往上+1 
+      commit('update_direction', 'forward'); //通过vuex的update_direction方法更新路由进入的效果
+      to.path !== '/' && history.setItem(to.path, historyCount); //如果进来的路由不是首页,那么通过history方法.以路由路径为key,和路层级标识为value保存起来
+    }
+
+    commit("makePage",to.name);
+}
 router.beforeEach((to, from, next) => {
-      
-      const toIndex = history.getItem(to.path); //进入哪个路由
-      const fromIndex = history.getItem(from.path); //从哪个路由进来的
-      
+      console.log("to",to.path,to,to.matched.some(record => record.meta.requireAuth))
 
-      if(!store.state.loginstart){
-        commit("checkLoginStart",true)
-        return next("/login");
-      }
-      //如果这个路由是访问过的
-      if(toIndex){
-        // 如果这个路由已经访问过,并是进来的路由的子路由 或者 
-        if (toIndex > fromIndex || !fromIndex) {
-          //那么就把页面的访问效果设置成forward,进入的效果
-          commit('update_direction', 'forward')
+      if (to.matched.some(record => record.meta.requireAuth)) {  // 判断该路由是否需要登录权限
 
-        } else {
-          //否则就是返回的效果
+        if (store.state.loginstart) {  // 通过vuex state获取当前的token是否存在
+            pagingfn(to, from);
+            next();
+        }else {
+          commit("checkLoginStart",true)
 
-          commit('update_direction', 'reverse')
+          return next({
+              path: '/login'
+          })
         }
-
-      }else{ //理由没有访问过的话
-        ++historyCount;  //hfc 往上+1 
-        commit('update_direction', 'forward'); //通过vuex的update_direction方法更新路由进入的效果
-        to.path !== '/' && history.setItem(to.path, historyCount); //如果进来的路由不是首页,那么通过history方法.以路由路径为key,和路层级标识为value保存起来
+      }else{
+        pagingfn(to, from);
+        next();
       }
-
-      commit("makePage",to.name);
-
-      next();//执行完毕,可以进入下一个钩子
-      
     
 });
+
+
 
 
 commit('update_direction', 'reverse')
@@ -88,9 +103,6 @@ sync(store, router);
 
 window.appVue = new Vue({
   el     : '#app',
-  data   :{
-    aaaa : 11
-  },
   render : h => h(App),
   router
 });

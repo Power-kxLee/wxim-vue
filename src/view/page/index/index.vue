@@ -19,8 +19,8 @@
        
       </div>
       <div class='head-info' @click='save'>
-          <span class='my-img'>
-              <img src="../../../assets/image/6135373832343233323531343739313739383233333937_big.jpg" >
+          <span class='my-img' @click='uploadimg'>
+              <img :src="defimg" >
           </span>
           <div class="my-person-info">
             <p class="my-jd-head-name">a578242325</p> 
@@ -189,21 +189,54 @@
 <script type="text/babel">
   import '../../../assets/font/index/iconfont.css';
   import '../../../assets/css/page/index.css';
+  if(!!window.localStorage.getItem("userksy")){
+  }
+  const loadImage = () => {
+    console.log(111111111111)
+    //alert(Camera.DestinationType)
+    navigator.camera.getPicture(onLoadImageSuccess, onLoadImageFail, {
+        quality:88,//保存图像的质量，范围0-100
+        destinationType: Camera.DestinationType.FILE_URL, ////返回值格式:DATA_URL=0,返回作为base64编码字符串；FILE_URL=1，返回图像的URL；NATIVE_RUL=2，返回图像本机URL
+        sourceType:Camera.PictureSourceType.PHOTOLIBRARY,//图片来源 CAMERA 为相机 ,PHOTOLIBRARY 为相册 SAVEDPHOTOALBUM也是相册 (应该是ios和安卓的区别)
+        encodingType:Camera.EncodingType.JPEG ,//获取到的图片的编码是系统默认的 有JPEG和 PNG可选
+        targetWidth:120, //缩放图像的宽度（像素）
+        targetHeight:120, //缩放图像的高度（像素）
+        saveToPhotoAlbum:true, //拍摄的照片是否保存在系统相册
+        correctOrientation:true //设置摄像机拍摄的图像是否为正确的方向（也就是横向拍摄 竖向拍摄之类）
+
+    });
+  }
+  const onLoadImageSuccess = (imageURI) => {
+      console.log(imageURI)
+      //var src = "data:image/jpeg;base64," + imageURI;
+      document.querySelectorAll(".my-img img")[0].src =imageURI;
+      storage.setItem(storageUserImgKey,imageURI)
+  }
+  const onLoadImageFail = (message) => {
+      navigator.notification.alert("error：" + message, null, "");
+  }
   export default {
     components: {
     },
     data() {
     	return {
-	        
+	        defimg : "../../../assets/image/6135373832343233323531343739313739383233333937_big.jpg",
 	    };
     },
     methods:{
       save () {
-        console.log(this.$store.state.count)
-        this.$http.post("/create").then(function(ret){
+        /*this.$http.post("/create").then(function(ret){
           console.log(ret)
-        })
+        })*/
+      },
+      uploadimg (){
+        loadImage();
       }
+    },
+
+    mounted (){
+        
     }
   };
+
 </script>
