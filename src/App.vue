@@ -1,6 +1,7 @@
 <template>
   <div id='app'>
     <guiance-page v-if='pageinit' v-on:changenext='changenextchild'></guiance-page>
+
     <app-header  v-if='headeranimate && !pageinit' :titlename='title'></app-header>
     <transition :name="transitionName"  v-if='!pageinit'>
     <router-view class='appviews'  ></router-view>
@@ -92,7 +93,7 @@
        * @return {[type]}           [null]
        */
       const download = (fileEntry,uri) =>{
-
+          
           var fileTransfer = new FileTransfer();
           var fileURL = fileEntry;
           console.log("开始请求下载")
@@ -225,7 +226,24 @@
   const onOffline = () => {
      alert("没有网络,舍不得上网就别打开我的app 谢谢")
   }
+  const cordovainit = () => {
+    if(!cordova.plugins){
+      throw "你没有打包,那当然不能使用cordova啦~~不用管我";
+      return false;
+    }
 
+    document.addEventListener("deviceready", (d) => {
+
+        console.log("cordova加载完成")
+        localts(); //推送消息
+        checkupdate(this); //检查更新
+        getlocation(this); //获取地址
+
+        alert("你当前的网络是"+checkConnection())
+        document.addEventListener("offline", onOffline, false);
+
+    }, false);
+  }
   export default {
     data () {
       return {
@@ -250,23 +268,7 @@
       changenextchild(){
         this.apphao = 0;
         localStorage.setItem(appGuide,0);
-
-        document.addEventListener("deviceready", () => {
-
-            console.log("cordova加载完成")
-            localts(); //推送消息
-            checkupdate(this); //检查更新
-            getlocation(this); //获取地址
-
-            alert("你当前的网络是"+checkConnection())
-            
-            
-
-            document.addEventListener("offline", onOffline, false);
-
-          }, false);
-
-
+        cordovainit();
       }
     },
     computed:{
@@ -284,29 +286,16 @@
         return this.componentName;
       },
       pageinit (){
-        //this.apphao = true
+        //console.log("letappGuide",letappGuide)
         return letappGuide == this.apphao;
-        //return this.apphao ;
       }
     },
     mounted (){
-      if(!pageinit){
+      //初始的时候,如果是引导页面,则不执行cordova的插件
+      !this.pageinit && cordovainit();
 
-        document.addEventListener("deviceready", () => {
-
-            console.log("cordova加载完成")
-            localts(); //推送消息
-            checkupdate(this); //检查更新
-            getlocation(this); //获取地址
-
-            alert("你当前的网络是"+checkConnection())
-            
-            
-
-            document.addEventListener("offline", onOffline, false);
-
-          }, false);
-      }
+        
+      
     }
   };
 </script>
@@ -333,16 +322,16 @@
 }
 
 .bounce-out-enter-active {
-  animation: boun-in-left .5s;
+  animation: boun-in-left .4s;
 }
 .bounce-out-leave-active { 
-  animation: boun-out-right .5s;
+  animation: boun-out-right .4s;
 }
 .bounce-in-enter-active {
-animation: boun-in-right .5s;
+animation: boun-in-right .4s;
 }
 .bounce-in-leave-active {
-  animation: boun-out-left .5s;
+  animation: boun-out-left .4s;
 }
 @keyframes boun-in-left {
   0% {

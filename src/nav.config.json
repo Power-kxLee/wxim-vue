@@ -49,7 +49,7 @@
 			{
 				"path": "/message",
 				"name": "Message Center",
-				"component" : "/Message/index.vue",
+				"component" : "/message/index.vue",
 				"meta":{
 					"requireAuth": true,
 					"showHeader": true
@@ -58,7 +58,7 @@
 			{
 				"path": "/message/more",
 				"name": "Message More",
-				"component" : "/Message/more.vue",
+				"component" : "/message/more.vue",
 				"meta":{
 					"requireAuth": true,
 					"showHeader": true

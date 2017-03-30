@@ -27,7 +27,7 @@
 								</div>
 								<div class="msg-content-arrow"></div>
 							</div>
-							<div class="msg-content-time">10-13 01:57</div>
+							<div class="msg-conte	nt-time">10-13 01:57</div>
 						</div>
 						<div class="mui-item-clear"></div>
 					</div>
@@ -54,38 +54,12 @@
 						<div class="mui-item-clear"></div>
 					</div>
 				</div>
-
+				
+				<m-voice></m-voice>
 				
 			</div>
 		</div>
-		<footer>
-			<form action="" method="post">
-				<div class="usergoban">
-					<input type="hidden" name="pmid" value="2711">
-					<input type="hidden" name="touid" value="1">
-					<input type="hidden" name="is_comment" value="0">
-					<div class="footer-left">
-						<div class="mifileinput">
-							<span class="mifileinput-z"> <span class="pmicon icon-tupian"></span> </span>
-							<input type="file" id="filebtn" name="productpic[]">
-						</div>
-					</div>
-					<div class="footer-center">
-						<textarea verify="" name="content" id="msg-text" type="text" class="input-text"></textarea>
-					</div>
-					<label for="" class="footer-right">
-						<mt-button plain size="small" type="primary" class='util-btn'>
-						Send
-						</mt-button>
-					</label>
-				</div>
-				<div class="addnewform-img">
-						<ul>
-							
-						</ul>
-				</div>
-			</form>
-		</footer>
+		
 	<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
 
 	    <!-- Background of PhotoSwipe. 
@@ -160,12 +134,15 @@
 	import '../../assets/plugin/photoSwipe/default-skin/default-skin.css'; 
 	import '../../assets/css/common/message.css'; 
 	import initPhotoSwipeFromDOM from '../../assets/js/initPhotoSwipeFromDOM.js'; 
-
+	import mVoice from "./app-message-voice.vue"
 
 	export default {
 		mounted (){
 			//初始化缩略图放大
 		    initPhotoSwipeFromDOM('.my-gallery');
+		},
+		components : {
+			mVoice
 		}
 		
 	}

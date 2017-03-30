@@ -89,7 +89,7 @@
 					<footer class='c-footer'>
 						<mt-tab-container class="page-tabbar-tab-container" >
 					        <mt-tab-container-item >
-					          <mt-cell v-for="n in 5" title="tab-container 1"></mt-cell>
+					          <mt-cell v-for="n in 5" :key="n" title="tab-container 1"></mt-cell>
 					        </mt-tab-container-item>
 					      
 					   </mt-tab-container>

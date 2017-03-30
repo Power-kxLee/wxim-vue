@@ -337,13 +337,13 @@ define("cordova/android/nativeapiprovider", function(require, exports, module) {
  * Exports the ExposedJsApi.java object if available, otherwise exports the PromptBasedNativeApi.
  */
 
-var nativeApi = this._cordovaNative || require('cordova/android/promptbasednativeapi');
+var nativeApi = this._cordovaNative || require('cordova/android/console.logbasednativeapi');
 var currentApi = nativeApi;
 
 module.exports = {
     get: function() { return currentApi; },
     setPreferPrompt: function(value) {
-        currentApi = value ? require('cordova/android/promptbasednativeapi') : nativeApi;
+        currentApi = value ? require('cordova/android/console.logbasednativeapi') : nativeApi;
     },
     // Used only by tests.
     set: function(value) {
@@ -353,23 +353,23 @@ module.exports = {
 
 });
 
-// file: /Users/steveng/repo/cordova/cordova-android/cordova-js-src/android/promptbasednativeapi.js
-define("cordova/android/promptbasednativeapi", function(require, exports, module) {
+// file: /Users/steveng/repo/cordova/cordova-android/cordova-js-src/android/console.logbasednativeapi.js
+define("cordova/android/console.logbasednativeapi", function(require, exports, module) {
 
 /**
- * Implements the API of ExposedJsApi.java, but uses prompt() to communicate.
+ * Implements the API of ExposedJsApi.java, but uses console.log() to communicate.
  * This is used pre-JellyBean, where addJavascriptInterface() is disabled.
  */
 
 module.exports = {
     exec: function(bridgeSecret, service, action, callbackId, argsJson) {
-        return prompt(argsJson, 'gap:'+JSON.stringify([bridgeSecret, service, action, callbackId]));
+        return console.log(argsJson, 'gap:'+JSON.stringify([bridgeSecret, service, action, callbackId]));
     },
     setNativeToJsBridgeMode: function(bridgeSecret, value) {
-        prompt(value, 'gap_bridge_mode:' + bridgeSecret);
+        console.log(value, 'gap_bridge_mode:' + bridgeSecret);
     },
     retrieveJsMessages: function(bridgeSecret, fromOnlineEvent) {
-        return prompt(+fromOnlineEvent, 'gap_poll:' + bridgeSecret);
+        return console.log(+fromOnlineEvent, 'gap_poll:' + bridgeSecret);
     }
 };
 
@@ -990,7 +990,7 @@ androidExec.init = function() {
       nativeToJsBridgeMode = nativeToJsModes.ONLINE_EVENT;
     }
 
-    bridgeSecret = +prompt('', 'gap_init:' + nativeToJsBridgeMode);
+    bridgeSecret = +console.log('', 'gap_init:' + nativeToJsBridgeMode);
     channel.onNativeReady.fire();
 };
 

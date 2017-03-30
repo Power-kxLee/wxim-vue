@@ -65,7 +65,7 @@ const pagingfn = (to, from) => {
     commit("makePage",to.name);
 }
 router.beforeEach((to, from, next) => {
-      console.log("to",to.path,to,to.matched.some(record => record.meta.requireAuth))
+      //console.log("to",to.path,to,to.matched.some(record => record.meta.requireAuth))
 
       if (to.matched.some(record => record.meta.requireAuth)) {  // 判断该路由是否需要登录权限
 
@@ -78,6 +78,7 @@ router.beforeEach((to, from, next) => {
           return next({
               path: '/login'
           })
+          //next();
         }
       }else{
         pagingfn(to, from);
