@@ -75,10 +75,10 @@ router.beforeEach((to, from, next) => {
         }else {
           commit("checkLoginStart",true)
 
-          return next({
+          /*return next({
               path: '/login'
-          })
-          //next();
+          })*/
+          next();
         }
       }else{
         pagingfn(to, from);

@@ -1,5 +1,6 @@
 <template>
 	<div>
+		
 		<app-message></app-message>
 	</div>
 </template>

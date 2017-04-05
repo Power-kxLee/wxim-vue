@@ -1,62 +1,4 @@
 
-.app-message footer {
-    position: fixed;
-    width: 100%;
-    border-top: solid 1px #bbb;
-    left: 0;
-    bottom: 0;
-    padding: 0
-}
-
-.app-message .footer-left {
-    position: absolute;
-    width: 40px;
-    height: 50px;
-    left: 0;
-    bottom: 0;
-    text-align: center;
-    vertical-align: middle;
-    line-height: 100%;
-    padding: 12px 4px
-}
-
-.app-message .footer-right {
-    position: absolute;
-    width: 72px;
-    height: 50px;
-    right: 0;
-    bottom: 0;
-    text-align: center;
-    vertical-align: middle;
-    line-height: 100%;
-    padding: 10px 5px;
-    display: inline-block
-}
-
-.app-message .footer-center {
-    height: 100%
-}
-
-.app-message .footer-center [class*=input] {
-    width: 100%;
-    border-radius: 5px
-}
-
-.app-message .footer-center .input-text {
-    background: #fff;
-    border: solid 1px #ddd;
-    padding: 10px!important;
-    overflow: hidden;
-    height: 37px;
-    margin-top: 10px;
-    resize:none;
-    outline: none;
-}
-
-.app-message .footer-center .input-sound {
-    background-color: #eee
-}
-
 .app-message .mui-content {
     height: 100%;
     padding: 44px 0 50px 0;
@@ -157,25 +99,7 @@
     border-color: #2AC845
 }
 
-.app-message footer .mui-icon {
-    color: #000
-}
 
-.app-message footer .mui-icon:active {
-    color: #007AFF!important
-}
-
-.app-message footer .mui-icon-paperplane:before {
-    content: "发送"
-}
-
-.app-message footer .mui-icon-paperplane {
-    font-size: 16px;
-    word-break: keep-all;
-    line-height: 100%;
-    padding-top: 6px;
-    color: rgba(0,135,250,1)
-}
 
 .app-message #msg-sound {
     -webkit-user-select: none!important;
@@ -300,43 +224,6 @@
     background-color: darkred
 }
 
-.app-message .footer-left .mifileinput {
-    position: relative
-}
-
-.app-message .footer-left .mifileinput input {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0
-}
-
-.app-message .footer-left .mifileinput-z {
-    display: block;
-    text-align: center;
-    width: 100%
-}
-
-.app-message .footer-left .mifileinput .icon-tupian {
-    font-size: 28px;
-    display: block;
-    width: 28px;
-    line-height: 28px;
-    margin: 0 auto
-}
-
-.app-message footer .usergoban {
-    position: relative;
-    width: 100%;
-    min-height: 50px;
-    overflow: hidden;
-    padding: 0 50px;
-    background-color: #fafafa;
-    padding-left: 40px;
-    padding-right: 73px
-}
 
 .app-message .addnewform-img {
     background: white;

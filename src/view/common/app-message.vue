@@ -1,5 +1,6 @@
 <template>
 	<div class='app-message'>
+		
 		<!-- Root element of PhotoSwipe. Must have class pswp. -->
 		
 		<div class="mui-content">

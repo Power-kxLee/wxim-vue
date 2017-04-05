@@ -67,7 +67,6 @@ export default function (gallerySelector){
 
         // find root element of slide
         var clickedListItem = closest(eTarget, function(el) {
-        	console.log('closest返回',eTarget)
             return (el.tagName && el.tagName.toUpperCase() === 'FIGURE');
         });
 

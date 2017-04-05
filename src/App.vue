@@ -299,74 +299,74 @@
     }
   };
 </script>
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;  
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-	padding: 0px;
-	margin:0px;
-  
-}
+<style type="text/css" scoped>
+  #app {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;  
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #2c3e50;
+  	padding: 0px;
+  	margin:0px;
+    
+  }
 
 
-.appviews{
-  position: absolute;
-  left: 0px;
-  width: 100%;
+  .appviews{
+    position: absolute;
+    left: 0px;
+    width: 100%;
 
-}
-.notindex{
-  top:40px;
-}
+  }
+  .notindex{
+    top:40px;
+  }
 
-.bounce-out-enter-active {
-  animation: boun-in-left .4s;
-}
-.bounce-out-leave-active { 
-  animation: boun-out-right .4s;
-}
-.bounce-in-enter-active {
-animation: boun-in-right .4s;
-}
-.bounce-in-leave-active {
-  animation: boun-out-left .4s;
-}
-@keyframes boun-in-left {
-  0% {
-    transform: translate3d(-100%, 0, 0);
+  .bounce-out-enter-active {
+    animation: boun-in-left .4s;
   }
- 
-  100% {
-    transform: translate3d(0, 0, 0);
+  .bounce-out-leave-active { 
+    animation: boun-out-right .4s;
   }
-}
-@keyframes boun-out-left {
-   0% {
-    transform: translate3d(0, 0, 0);
+  .bounce-in-enter-active {
+  animation: boun-in-right .4s;
   }
- 
-  100% {
-    transform: translate3d(-100%, 0, 0);
+  .bounce-in-leave-active {
+    animation: boun-out-left .4s;
   }
-}
-@keyframes boun-in-right {
-  0% {
-    transform: translate3d(100%, 0, 0);
+  @keyframes boun-in-left {
+    0% {
+      transform: translate3d(-100%, 0, 0);
+    }
+   
+    100% {
+      transform: translate3d(0, 0, 0);
+    }
   }
- 
-  100% {
-    transform: translate3d(0, 0, 0);
+  @keyframes boun-out-left {
+     0% {
+      transform: translate3d(0, 0, 0);
+    }
+   
+    100% {
+      transform: translate3d(-100%, 0, 0);
+    }
   }
-}
-@keyframes boun-out-right {
-   0% {
-    transform: translate3d(0, 0, 0);
+  @keyframes boun-in-right {
+    0% {
+      transform: translate3d(100%, 0, 0);
+    }
+   
+    100% {
+      transform: translate3d(0, 0, 0);
+    }
   }
- 
-  100% {
-    transform: translate3d(100%, 0, 0);
+  @keyframes boun-out-right {
+     0% {
+      transform: translate3d(0, 0, 0);
+    }
+   
+    100% {
+      transform: translate3d(100%, 0, 0);
+    }
   }
-}
 </style>

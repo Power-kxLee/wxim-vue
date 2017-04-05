@@ -192,7 +192,6 @@
   if(!!window.localStorage.getItem("userksy")){
   }
   const loadImage = () => {
-    console.log(111111111111)
     //alert(Camera.DestinationType)
     navigator.camera.getPicture(onLoadImageSuccess, onLoadImageFail, {
         quality:88,//保存图像的质量，范围0-100

@@ -1,0 +1,21 @@
+
+@font-face {font-family: "iconfont";
+  src: url('iconfont.ttf?t=1491017620421') format('truetype'); 
+}
+
+.messagtc .iconfont {
+  font-family:"iconfont" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.messagtc .icon-maikefeng:before { content: "\e60d"; }
+.messagtc .icon-jiahao:before { content: "\e602"; }
+
+.messagtc .icon-biaoqing:before { content: "\e63f"; }
+
+.messagtc .icon-yuyin:before { content: "\e73d"; }
+
+.messagtc .icon-jianpan:before { content: "\e613"; }
+
