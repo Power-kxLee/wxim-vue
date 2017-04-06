@@ -9,8 +9,8 @@
 					</div>
 				</div>
 				<div class="footer-center">
-                    <div v-if='talk' class='taptalk' @touchstart="touchstart" @touchend="touchend">
-                        <span >按住 说话</span>
+                    <div v-if='talk' class='taptalk' :class="{ talkmodule : talkmodule }" @touchstart="touchstart" @touchend="touchend">
+                        <span >{{talkname}}</span>
                     </div>
                     <div v-else class='textin'>
                         
@@ -33,18 +33,46 @@
 			</div>
 		
 		</form>
-        <div class='speakframe'>
-            
+        <div class='speakframe ' v-show='talkmodule'>
+            <div class='flex-def talkdef'>
+                <template v-if="!talkcancel">
+                    <div class='speakicon'>
+                        <span class='iconfont icon-maikefeng'></span>
+                    </div>
+                    <div class='speakanimate'>
+                        <ul>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </template>
+                <template v-else>
+                    <div class='flex talkcancelbox'>
+                        
+                        <span class='iconfont icon-fanhui'></span>
+                    </div>
+                </template>
+            </div>
+            <h4 :class='{talkcancelname:talkcancel}'>{{talkmodulename}}</h4>
         </div>
 	</footer>
 </template>
 
 <script type="text/javascript">
+   
 	export default{
         data (){
             return {
                 inputshow:false,
-                talk : false
+                talk : false,
+                talkmodule : true,
+                talkcancel : false,
+                touchY : 0 ,
+                touchclientY:0,
             }
         },
         methods:{
@@ -68,12 +96,42 @@
                     }
                 })
             },
-            touchstart (){
-                console.log("长按")
+            touchstart (event){
+                this.talkmodule = true;
+                console.log("长按",event.touches[0].clientX,event.touches[0].clientY)
+                this.touchY = event.touches[0].clientY;
+                document.addEventListener('touchmove',this.touchmovefn, false);
             },
             touchend(){
+                this.talkmodule = false;
+                console.log(document.removeEventListener)
+                document.removeEventListener('touchmove',this.touchmovefn, false); 
                 console.log("松开")
-            }                                                                                                                                                                                                                                                                                                                                   
+            },
+            touchmovefn (event){
+                event.stopPropagation();
+                if(this.touchY - event.touches[0].clientY  > 100 ){
+                    this.touchclientY = event.touches[0].clientY;
+                    this.talkcancel = true;
+                }else if(this.touchclientY < event.touches[0].clientY){ //向下滑动
+                    this.talkcancel = false;
+                }
+                //console.log("启动touchmove事件",event.touches[0].clientX,event.touches[0].clientY)
+            }
+        },
+        computed : {
+            talkname (){
+                if(this.talkcancel){
+                    return "松开手指,取消发送"
+                }else{
+
+                    return !this.talkmodule ? "按住 说话" : "松开 发送";
+                }
+                 
+            },
+            talkmodulename (){
+                return !this.talkcancel ? "手指上滑 取消发送" : "松开手指,取消发送";
+            }
         }
 	}
 

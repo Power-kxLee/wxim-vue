@@ -157,3 +157,107 @@
         height: 100%;
         line-height: 34px;
     }
+    .messagtc .taptalk.talkmodule span{
+        background: #E2E2E2;
+        color: #7F7F7F;
+    }
+    .messagtc .speakframe{
+        background: rgba(0, 0, 0, 0.48);
+        border-radius: 10px;
+        padding: 20px 20px;
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        color: white;
+    }
+    .messagtc .speakframe li{
+        height: 0;
+        border-top: 11px solid white;
+        border-right: 4px solid transparent;
+        padding-bottom: 6px;
+        animation:yinbo .1s linear 0s 2; 
+        animation-fill-mode : forwards;
+        opacity: 0
+
+    }
+
+    .messagtc .speakframe .icon-maikefeng{
+        color: white;
+        font-size: 90px !important;
+    }
+    .messagtc .speakframe  .speakanimate{
+           width: 60px;
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+        
+    }
+
+    .messagtc .speakframe li:nth-child(1){
+        width: 100%;
+    }
+    .messagtc .speakframe li:nth-child(2){
+        width: 87.5%;
+        
+    }
+    .messagtc .speakframe li:nth-child(3){
+        width: 75%;
+    }
+    .messagtc .speakframe li:nth-child(4){
+        width: 62.5%;
+    }
+    .messagtc .speakframe li:nth-child(5){
+        width: 50%;
+    }
+    .messagtc .speakframe li:nth-child(6){
+        width: 37.5%;
+    }
+    .messagtc .speakframe li:nth-child(7){
+        width: 25%;
+    }
+    .messagtc .speakframe li:nth-child(8){
+        width: 12.5%;
+        margin-bottom: 0px;
+    }
+
+    .messagtc .speakframe  h4{
+        text-align: center;
+        margin-top: 10px;
+            font-size: 14px;
+    padding: 10px 0;
+    }
+    .messagtc .speakframe  h4.talkcancelname{
+        background: rgba(144, 46, 44, 0.83);
+    }
+     .messagtc .speakframe .talkdef {
+        width: 150px;
+        position: relative;
+    }
+    .messagtc .speakframe  .talkcancelbox{
+        width: 100%;
+    }
+    .messagtc .speakframe  .talkcancelbox .icon-fanhui{
+        color: white;
+        font-size: 94px!important;
+    }
+
+
+    @keyframes yinbo
+    {
+        0%   {
+           opacity: 0
+        }
+        100% {
+            opacity: 1
+        }
+    }
+
+    @keyframes myfirst
+    {
+        0%   {background:red;}
+        25%  {background:yellow;}
+        50%  {background:blue;}
+        100% {background:green;}
+    }

@@ -10,7 +10,8 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.messagtc .icon-maikefeng:before { content: "\e60d"; }
+.messagtc .icon-fanhui:before { content: "\e632"; }
+.messagtc .icon-maikefeng:before {  content: "\e63b"; }
 .messagtc .icon-jiahao:before { content: "\e602"; }
 
 .messagtc .icon-biaoqing:before { content: "\e63f"; }
