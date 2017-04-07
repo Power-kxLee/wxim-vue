@@ -25,6 +25,7 @@
     "require": "^2.4.20",
     "sequelize": "^3.24.6",
     "serve-favicon": "~2.3.0",
+    "socket.io": "^1.7.3",
     "vue": "^2.2.6",
     "vue-resource": "^1.0.3",
     "vue-router": "^2.3.0",

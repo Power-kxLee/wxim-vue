@@ -1,4 +1,4 @@
-  .fade-enter-active, .fade-leave-active {
+   .fade-enter-active, .fade-leave-active {
       transition: opacity .2s
     }
     .fade-enter, .fade-leave-to   {
@@ -12,6 +12,13 @@
         bottom: 0;
         padding: 0;
         background: #F4F4F4;
+        moz-user-select: -moz-none;
+        -moz-user-select: none;
+        -o-user-select:none;
+        -khtml-user-select:none;
+        -webkit-user-select:none;
+        -ms-user-select:none;
+        user-select:none;
     }
     .messagtc .ms-send{
         color: white;
@@ -177,10 +184,14 @@
         border-top: 11px solid white;
         border-right: 4px solid transparent;
         padding-bottom: 6px;
-        animation:yinbo .1s linear 0s 2; 
-        animation-fill-mode : forwards;
+        
         opacity: 0
 
+    }
+
+    .yinboan {
+        animation:yinbo .5s; 
+        animation-fill-mode : forwards;
     }
 
     .messagtc .speakframe .icon-maikefeng{
@@ -189,27 +200,28 @@
     }
     .messagtc .speakframe  .speakanimate{
            width: 60px;
-    position: absolute;
-    right: 0px;
-    bottom: 0px;
         
     }
 
     .messagtc .speakframe li:nth-child(1){
         width: 100%;
+        animation-delay:3s;
     }
     .messagtc .speakframe li:nth-child(2){
         width: 87.5%;
-        
+        animation-delay:2.5s;
     }
     .messagtc .speakframe li:nth-child(3){
         width: 75%;
+        animation-delay:2s;
     }
     .messagtc .speakframe li:nth-child(4){
         width: 62.5%;
+        animation-delay:1.5s;
     }
     .messagtc .speakframe li:nth-child(5){
         width: 50%;
+        animation-delay:1s;
     }
     .messagtc .speakframe li:nth-child(6){
         width: 37.5%;
@@ -247,10 +259,13 @@
     @keyframes yinbo
     {
         0%   {
-           opacity: 0
+           opacity: 1
         }
-        100% {
-            opacity: 1
+        50%{
+            opacity: 0
+        }
+        100%{
+            opacity: 1;
         }
     }
 

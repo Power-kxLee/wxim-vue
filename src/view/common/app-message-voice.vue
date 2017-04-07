@@ -63,13 +63,25 @@
 </template>
 
 <script type="text/javascript">
-   
+    
+    const $ = (obj) =>{
+
+        const addClass = (classname) => {
+            for (let i = 0 ; i < obj.length ; i++){
+                obj[i].className = classname;
+            }
+        }
+
+        return {
+            addClass
+        }
+    }
 	export default{
         data (){
             return {
                 inputshow:false,
                 talk : false,
-                talkmodule : true,
+                talkmodule : false,
                 talkcancel : false,
                 touchY : 0 ,
                 touchclientY:0,
@@ -98,6 +110,7 @@
             },
             touchstart (event){
                 this.talkmodule = true;
+
                 console.log("长按",event.touches[0].clientX,event.touches[0].clientY)
                 this.touchY = event.touches[0].clientY;
                 document.addEventListener('touchmove',this.touchmovefn, false);
@@ -109,6 +122,7 @@
                 console.log("松开")
             },
             touchmovefn (event){
+
                 event.stopPropagation();
                 if(this.touchY - event.touches[0].clientY  > 100 ){
                     this.touchclientY = event.touches[0].clientY;
@@ -117,6 +131,25 @@
                     this.talkcancel = false;
                 }
                 //console.log("启动touchmove事件",event.touches[0].clientX,event.touches[0].clientY)
+            },
+            talkTool (){
+                let talkli = document.querySelector(".speakanimate").getElementsByTagName("li");
+                let talkliLength = talkli.length ;
+                
+                $(talkli).addClass("yinboan");
+
+                talkli[0].addEventListener("webkitAnimationEnd",function(){
+                    //console.log("第一个结束")
+                    for (let i = 0 ; i < talkliLength ; i++){
+                        if(i != talkliLength-1){
+                            talkli[i].className = talkli[i].className.replace("yinboan", '');
+                        }
+                        
+                    }
+                    setTimeout(()=>{
+                        $(talkli).addClass("yinboan");
+                    })
+                });
             }
         },
         computed : {
@@ -132,10 +165,20 @@
             talkmodulename (){
                 return !this.talkcancel ? "手指上滑 取消发送" : "松开手指,取消发送";
             }
+        },
+        mounted (){
+        },
+        updated(){
+            if(this.talkmodule && !this.talkcancel){
+                this.talkTool();
+            }
         }
-	}
+	};
+    
 
-</script>
+   
+
+    </script>
 <style type="text/css" scoped src='../../assets/font/message/more/iconfont.css'></style>
 <style type="text/css" scoped src='../../assets/css/common/talk-tools.css'></style>
 
