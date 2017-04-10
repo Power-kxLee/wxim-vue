@@ -7,7 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('node-elmont:server');
 var http = require('http');
-
+var socket = require('../socket/socket');
 /**
  * Get port from environment and store in Express.
  */
@@ -15,24 +15,35 @@ var http = require('http');
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
+
 /**
  * Create HTTP server.
  */
 
 var server = http.createServer(app);
+/**
+ * 创建io
+ */
+
+var io = require('socket.io').listen(server);
+
+
+socket(io);
+
 
 /**
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
+server.listen(port, function() {
+  console.log('Express服务器监听端口 ' + port + ", http://127.0.0.1:"+port);
+});
 server.on('error', onError);
 server.on('listening', onListening);
 
 /**
  * Normalize a port into a number, string, or false.
  */
-
 function normalizePort(val) {
   var port = parseInt(val, 10);
 

@@ -7,8 +7,9 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var socket = require('./socket/socket');
 var app = express();
-var server = require('http').createServer(app);
-var io = require('socket.io')(server);
+//var http = require('http');
+/*var server = require('http').createServer(app);
+var io = require('socket.io').listen(server);*/
 
 //设置'/views' 为存放视图(模版)文件目录,__dirname是全局变量, 存储当前执行脚本所在的目录
 app.set('views', path.join(__dirname, '/views'));
@@ -24,12 +25,11 @@ app.use(cookieParser());//加载解析cookie中间件
 app.use(express.static(path.join(__dirname, 'public')));//设置public文件夹存放静态文件目录
 
 
-
 routes(app);
-socket(io);
-/*app.listen(app.get('port'), function() {
-  console.log('Express server listening on port ' + app.get('port'));
-});*/
+//socket(io);
+
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

@@ -26,7 +26,7 @@
                         <span v-if='!inputshow' class='iconfont icon-jiahao'></span>
                         </transition>
                         <transition name="fade">
-    				    <button  v-if='inputshow'  class='ms-send' type='button'>发送</button>
+    				    <button @click='sendio'  v-if='inputshow'  class='ms-send' type='button'>发送</button>
                         </transition>
                     </div>
                 </div>
@@ -63,6 +63,9 @@
 </template>
 
 <script type="text/javascript">
+    import io from "../../socket-client";
+
+
     
     const $ = (obj) =>{
 
@@ -79,6 +82,7 @@
 	export default{
         data (){
             return {
+                socketIo : null,
                 inputshow:false,
                 talk : false,
                 talkmodule : false,
@@ -88,6 +92,12 @@
             }
         },
         methods:{
+            sendio (){
+                console.log(document.getElementById("msg-text").value)
+                this.socketIo.emit("event",document.getElementById("msg-text").value);
+                document.getElementById("msg-text").value = "";
+                this.inputshow  = false;
+            },
             showheight(event){
                 event.target.style.height = event.target.scrollHeight + "px";
                 if(event.target.value.length < 1){
@@ -122,7 +132,7 @@
                 console.log("松开")
             },
             touchmovefn (event){
-
+                
                 event.stopPropagation();
                 if(this.touchY - event.touches[0].clientY  > 100 ){
                     this.touchclientY = event.touches[0].clientY;
@@ -166,7 +176,20 @@
                 return !this.talkcancel ? "手指上滑 取消发送" : "松开手指,取消发送";
             }
         },
+        created(){
+            this.socketIo = io.io.connect(io.url);
+
+            this.socketIo.on("event", (msg) => {
+                let gallery = document.querySelector(".my-gallery");
+                let div = document.createElement("div");
+                div.innerHTML = msg;
+                gallery.insertBefore(div,gallery.childNodes[0])
+                console.log(document.querySelector(".appviews") )
+                console.log("有最新的消息",msg)
+            });
+        },
         mounted (){
+
         },
         updated(){
             if(this.talkmodule && !this.talkcancel){

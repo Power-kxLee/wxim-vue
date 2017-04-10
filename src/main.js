@@ -10,8 +10,7 @@ import App         from './App.vue' //加载路由中间模版
 import routes      from './route.js' //加载路由器模版
 import Cordova     from '../platforms/android/assets/www/cordova.js'
 
-/*import io  from 'socket.io';
-    console.log("io",io)*/
+
 
 FastClick.attach(document.body)
 
