@@ -188,6 +188,16 @@
         opacity: 0
 
     }
+    .messagtc .textin {
+        width: 100%;
+    }
+    .messagtc .textareafield{
+    border-bottom: 1px solid #d8d8d8;
+    outline: none;
+    min-height: 30px;
+    padding-top: 8px;
+    margin-top: 7px;
+    }
 
     .yinboan {
         animation:yinbo .5s; 

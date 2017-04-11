@@ -1,3 +1,5 @@
+<!--  -->
+
 <template>
 	<footer class='messagtc'>
 		<form action="" method="post">
@@ -13,11 +15,12 @@
                         <span >{{talkname}}</span>
                     </div>
                     <div v-else class='textin'>
-                        
-					   <textarea row='1' cols="30" verify="" name="content" id="msg-text" type="text" class="input-text textareafield" @input='showheight'></textarea>
+                        <div id='textareafield' class="textareafield" @input='textinfn'  contenteditable="true" ></div>
+					   <input type="hidden" :value='textareval'>
+                      
                     </div>
 				</div>
-                <div class='footer-bq'>
+                <div class='footer-bq'> 
                     <span class='iconfont icon-biaoqing'></span>
                 </div>
                 <div class='footer-jia' >
@@ -63,7 +66,7 @@
 </template>
 
 <script type="text/javascript">
-    import io from "../../socket-client";
+    
 
 
     
@@ -82,30 +85,26 @@
 	export default{
         data (){
             return {
-                socketIo : null,
-                inputshow:false,
-                talk : false,
-                talkmodule : false,
-                talkcancel : false,
-                touchY : 0 ,
-                touchclientY:0,
+                socketIo     : null,
+                inputshow    : false,
+                talk         : false,
+                talkmodule   : false,
+                talkcancel   : false,
+                touchY       : 0,
+                touchclientY : 0,
+                textareval   : ""
             }
         },
         methods:{
-            sendio (){
-                console.log(document.getElementById("msg-text").value)
-                this.socketIo.emit("event",document.getElementById("msg-text").value);
-                document.getElementById("msg-text").value = "";
-                this.inputshow  = false;
+            textinfn (event){
+                let inhtml = event.target.innerHTML;
+                this.inputshow = inhtml.length < 1 ? false : true;
+                this.textareval = event.target.innerHTML;
             },
-            showheight(event){
-                event.target.style.height = event.target.scrollHeight + "px";
-                if(event.target.value.length < 1){
-                    this.inputshow = false;
-                    event.target.style.height = "25px";
-                }else{
-                    this.inputshow = true;
-                }
+            sendio (){
+                this.$emit("sendfn",document.getElementById("textareafield").innerHTML);
+                document.getElementById("textareafield").innerHTML = "";
+                this.inputshow  = false;
             },
             taptalk (){
                 this.talk = this.talk ? false : true;
@@ -177,19 +176,11 @@
             }
         },
         created(){
-            this.socketIo = io.io.connect(io.url);
-
-            this.socketIo.on("event", (msg) => {
-                let gallery = document.querySelector(".my-gallery");
-                let div = document.createElement("div");
-                div.innerHTML = msg;
-                gallery.insertBefore(div,gallery.childNodes[0])
-                console.log(document.querySelector(".appviews") )
-                console.log("有最新的消息",msg)
-            });
+            
         },
         mounted (){
-
+            let textareafield = document.querySelector(".textareafield");
+            textareafield.style.width = textareafield.offsetWidth+"px";
         },
         updated(){
             if(this.talkmodule && !this.talkcancel){

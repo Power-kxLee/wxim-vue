@@ -56,7 +56,7 @@
 					</div>
 				</div>
 				
-				<m-voice></m-voice>
+				<m-voice v-on:sendfn = "sendfn"></m-voice>
 				
 			</div>
 		</div>
@@ -136,15 +136,39 @@
 	import '../../assets/css/common/message.css'; 
 	import initPhotoSwipeFromDOM from '../../assets/js/initPhotoSwipeFromDOM.js'; 
 	import mVoice from "./app-message-voice.vue"
+	import io from "../../socket-client";
 
 	export default {
+		data (){
+			return {
+				socketIo : null
+			}
+		},
+		components : {
+			mVoice
+		},
+		methods : {
+			sendfn (text){
+				this.socketIo.emit("event",text)
+				console.log()
+			}
+		},
 		mounted (){
 			//初始化缩略图放大
 		    initPhotoSwipeFromDOM('.my-gallery');
 		},
-		components : {
-			mVoice
-		}
+        created(){
+            this.socketIo = io.io.connect(io.url);
+            
+            this.socketIo.on("event", (msg) => {
+                let gallery = document.querySelector(".my-gallery");
+                let div = document.createElement("div");
+                div.innerHTML = msg;
+                gallery.insertBefore(div,gallery.childNodes[0])
+                console.log(document.querySelector(".appviews") )
+                console.log("有最新的消息",msg)
+            }); 
+        },
 		
 	}
 </script>

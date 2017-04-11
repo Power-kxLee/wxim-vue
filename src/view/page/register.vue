@@ -18,27 +18,29 @@
 
 				<div class="login form">
 					<div class="group">
+						<form action="" method='post'>
 						<div class="group-ipt email">
-							<input type="email" name="email" id="email" class="ipt" placeholder="邮箱地址" required>
+							<input type="email" v-model="formdata.email" id="email" class="ipt" placeholder="邮箱地址" required>
 						</div>
 						<div class="group-ipt user">
-							<input type="text" name="user" id="user" class="ipt" placeholder="选择一个用户名" required>
+							<input type="text" v-model="formdata.username" id="user" class="ipt" placeholder="选择一个用户名" required>
 						</div>
 						<div class="group-ipt password">
-							<input type="password" name="password" id="password" class="ipt" placeholder="设置登录密码" required>
+							<input type="password" v-model="formdata.password" id="password" class="ipt" placeholder="设置登录密码" required>
 						</div>
 						<div class="group-ipt password1">
-							<input type="password" name="password1" id="password1" class="ipt" placeholder="重复密码" required>
+							<input type="password" v-model="formdata.password1" id="password1" class="ipt" placeholder="重复密码" required>
 						</div>
-						<div class="group-ipt verify">
+						<!-- <div class="group-ipt verify">
 							<input type="text" name="verify" id="verify" class="ipt" placeholder="输入验证码" required>
 							<img src="http://zrong.me/home/index/imgcode?id=" class="imgcode">
-						</div>
+						</div> -->
+						</form>
 					</div>
 				</div>
 
 				<div class="button">
-					<button @click='regfn' type="submit" class="login-btn register-btn" id="button">跳过</button>
+					<button @click='regfn' type="button" class="login-btn register-btn" id="button">跳过</button>
 				</div>
 			</div>
 		</div>
@@ -61,7 +63,8 @@
 				phone:"10086",
 				verify:"006",
 				isverify:true,
-				routeback:""
+				routeback:"",
+				formdata : {}
 			}
 		},
 		created (){
@@ -73,15 +76,13 @@
 		methods:{
 
 			regfn(){
-				let time = 4000;
-				Toast({
-				  message: '厉害了,你居然是隐藏的VIP会员,因此你不需要注册啦,默认打开管理员权限O(∩_∩)O',
-				  duration: time
-				});
-				setTimeout(() => {
-					router.push("/")
-				},time);
-				this.$store.commit("checkLoginStart",true);
+				console.log("this.formdata",this.formdata)
+				this.$http.post("http://127.0.0.1:3000/reg",this.formdata).then( (data) =>{
+					console.log("成功",data)
+				},(error) =>{
+					console.log("error",error)
+				} );
+				/*this.$store.commit("checkLoginStart",true);*/
 			}
 		}
 		
