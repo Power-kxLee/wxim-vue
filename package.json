@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --inline --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
-    "start": "node ./bin/www",
+    "start": "supervisor -i public,node_modules ./bin/www",
     "buildcordova": "npm run build && cordova prepare && cordova run android",
     "cordova": " cordova prepare && cordova run android"
   },

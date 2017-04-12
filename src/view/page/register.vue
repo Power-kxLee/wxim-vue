@@ -56,6 +56,7 @@
 	import '../../assets/plugin/particles/particles.min.js';
 	import particles_background from '../../assets/plugin/particles/background.js';
 	import { Toast } from 'mint-ui';
+	let storage = window.localStorage;
 	export default {
 		name: 'login',
 		data() {
@@ -77,8 +78,14 @@
 
 			regfn(){
 				console.log("this.formdata",this.formdata)
+				
 				this.$http.post("http://127.0.0.1:3000/reg",this.formdata).then( (data) =>{
 					console.log("成功",data)
+					console.log(thisollstore.state.loginstart )
+					if(data.state == 'success'){
+						this.$store.commit("checkLoginStart",true);
+						storage.setItem("checkLoginStart",true);
+					}
 				},(error) =>{
 					console.log("error",error)
 				} );

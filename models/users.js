@@ -1,23 +1,32 @@
 const User = require("../lib/user.js");
 
 module.exports = {
-	create (){
-		var user = new User({
-	        username : 'Tracy McGrady',                 //用户账号
-	        userpwd: 'abcd',                            //密码
-	        userage: 37,                                //年龄
-	        logindate : new Date()                      //最近登录时间
-	    });
+	create (data,success,error){
+		let user = null;
+		User.findOne({"email":data.email},function(err,person){
+			if(err) { //失败
+				return error(err);
+			}
+			
+			if(!!person && person.email == data.email ){
+				return error("该用户邮箱已经存在"); //存在重复邮箱
 
-	    user.save(function (err, res) {
+			}else{
+				//成功 把数据写入数据库
+				user = new User(data);
+				//执行回调
+			    user.save(function (err, res) {
+			        if (err) {
+			            return error(err);
+			        }
+			        else {
+			            return success(res);
+			        }
 
-	        if (err) {
-	            console.log("Error:" + err);
-	        }
-	        else {
-	            console.log("创建成功:" + res);
-	        }
+			    });
+			}
+		});
 
-	    });
+
 	}
 } 

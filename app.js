@@ -21,8 +21,10 @@ app.use(bodyParser.json());//加载解析json中间件
 app.use(bodyParser.urlencoded({ extended: false }));//加载解析urlencoded请求体中间件
 app.use(cookieParser());//加载解析cookie中间件
 app.use(express.static(path.join(__dirname, 'public')));//设置public文件夹存放静态文件目录
-//app.use(formidable());
-
+/*app.use(formidable({
+  keepExtensions: true
+}));
+*/
 routes(app);
 
 
