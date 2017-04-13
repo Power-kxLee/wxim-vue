@@ -3,7 +3,9 @@ import MintUI      from 'mint-ui' //加载mint-ui框架
 import VueRouter   from 'vue-router' //加载vue路由
 import VueResource from 'vue-resource'  //加载vue的http请求的
 import { sync }    from 'vuex-router-sync'
-import store       from './vuex/store'// 初始vuex
+import store       from './vuex'// 初始vuex
+import * as types from './vuex/mutation-types'
+
 import FastClick   from 'fastclick' //消除点击延迟
 
 import App         from './App.vue' //加载路由中间模版
@@ -41,28 +43,28 @@ history.setItem('/', 0);  //在创建一个'/' 并设置为0
 // 进入新路由的时候,做的一些操作
 const commit = store.commit ;
 const pagingfn = (to, from) => {
-  const toIndex = history.getItem(to.path); //进入哪个路由
-  const fromIndex = history.getItem(from.path); //从哪个路由进来的
+const toIndex = history.getItem(to.path); //进入哪个路由
+const fromIndex = history.getItem(from.path); //从哪个路由进来的
   if(toIndex){
                 
       // 如果这个路由已经访问过,并是进来的路由的子路由 或者 
       if (toIndex > fromIndex || !fromIndex) {
         //那么就把页面的访问效果设置成forward,进入的效果
-        commit('update_direction', 'forward')
+        commit(types.UPDATE_DIRECTION, 'forward')
 
       } else {
         //否则就是返回的效果
 
-        commit('update_direction', 'reverse')
+        commit(types.UPDATE_DIRECTION, 'reverse')
       }
 
     }else{ //理由没有访问过的话
       ++historyCount;  //hfc 往上+1 
-      commit('update_direction', 'forward'); //通过vuex的update_direction方法更新路由进入的效果
+      commit(types.UPDATE_DIRECTION, 'forward'); //通过vuex的update_direction方法更新路由进入的效果
       to.path !== '/' && history.setItem(to.path, historyCount); //如果进来的路由不是首页,那么通过history方法.以路由路径为key,和路层级标识为value保存起来
     }
 
-    commit("makePage",to.name);
+    commit(types.MAKE_PAGE,to.name);
 }
 router.beforeEach((to, from, next) => {
       //console.log("to",to.path,to,to.matched.some(record => record.meta.requireAuth))
@@ -73,7 +75,7 @@ router.beforeEach((to, from, next) => {
             pagingfn(to, from);
             next();
         }else {
-          commit("checkLoginStart",true)
+          commit(types.CHECK_LOGIN_STATUS,true)
 
           /*return next({
               path: '/login'
@@ -89,15 +91,14 @@ router.beforeEach((to, from, next) => {
 
 
 
-
-commit('update_direction', 'reverse')
+commit(types.UPDATE_DIRECTION, 'reverse')
 
 //成功进入新页面之后
 router.afterEach((to,from) => {
   window.scrollTo(0,0);
 });
 //保存路由,方便后面调用
-commit("saveRouter",router);
+commit(types.SAVE_ROUTER,router);
 
 
 sync(store, router);

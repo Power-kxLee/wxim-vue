@@ -17,7 +17,7 @@
   import 'mint-ui/lib/style.css' //加载mint依赖的css
   import appHeader from './view/common/app-header.vue';
   import guiancePage from './view/page/guidancePage.vue';
-  import store     from './vuex/store.js';
+  import store     from './vuex';
   const apphao   = "1.191";
   const appGuide = "appGuidennumber"+apphao;
   let letappGuide = localStorage.getItem(appGuide)
@@ -38,7 +38,7 @@
 
           //检查当前app版本
            cordova.getAppVersion.getVersionNumber(function (version) {
-              console.log("版本号是",version);
+              //console.log("版本号是",version);
               //比较最新版本
               if(version < response.body.version ){
                   //提示更新
@@ -50,10 +50,10 @@
                   );
               }
           });
-          console.log("成功",response.body.version )
+          //console.log("成功",response.body.version )
 
       },function(){
-           console.log("失败")
+           //console.log("失败")
       })
 
       /**
@@ -78,10 +78,10 @@
               fileMIMEType, 
               { 
                   error : function(e) { 
-                      console.log(e,"失败")
+                      //console.log(e,"失败")
                   },
                   success : function () {
-                      console.log('file opened successfully');                
+                      //console.log('file opened successfully');                
                   }
               }
           );
@@ -96,7 +96,7 @@
           
           var fileTransfer = new FileTransfer();
           var fileURL = fileEntry;
-          console.log("开始请求下载")
+          //console.log("开始请求下载")
           fileTransfer.onprogress = showUploadingProgress;  
           navigator.notification.progressStart("提醒", "当前下载进度");  
 
@@ -105,26 +105,26 @@
               fileURL,
               function (entry) {
                   navigator.notification.progressStop();  
-                  console.log("Successful download...",entry);
-                  console.log("download complete: " + entry.toURL());
+                  //console.log("Successful download...",entry);
+                  //console.log("download complete: " + entry.toURL());
                   alert("好吧,其实更新了也没东西,我就是做功能测试,不要点击安装哦。。")
                   cordova.plugins.fileOpener2.open(
                       entry.toURL(), 
                       'application/vnd.android.package-archive', 
                       { 
                           error : function(e) { 
-                              console.log(e,"失败")
+                              //console.log(e,"失败")
                           },
                           success : function () {
-                              console.log('file opened successfully');                
+                              //console.log('file opened successfully');                
                           }
                       }
                   );
               },
               function (error) {
-                  console.log("download error source " + error.source);
-                  console.log("download error target " + error.target);
-                  console.log("upload error code" + error.code);
+                  //console.log("download error source " + error.source);
+                  //console.log("download error target " + error.target);
+                  //console.log("upload error code" + error.code);
                   navigator.notification.progressStop("");  
                   alert("下载错误,错误代码"+error.code+",请联系管理员")
               },  
@@ -161,17 +161,17 @@
           
           
           var coords = position.coords.longitude+","+position.coords.latitude;
-          console.log("coords",coords)
+          //console.log("coords",coords)
           appVue.$http.get('http://api.map.baidu.com/geoconv/v1/?coords='+coords+'&from=1&to=5&ak='+BDmap.ak+'').then(function(data){
 
               var location = data.body.result[0].y+","+data.body.result[0].x;
 
-              console.log("坐标转化",location)
+              //console.log("坐标转化",location)
 
               appVue.$http.get('http://api.map.baidu.com/geocoder/v2/?output='+BDmap.output+'&location='+location+'&ak='+BDmap.ak+'').then(function(data){
-                  console.log("地址是",data)
+                  //console.log("地址是",data)
                   alert("你的地址在"+data.body.result.formatted_address + data.body.result.sematic_description)
-                  console.log("你的地址在",data.body.result.formatted_address + data.body.result.sematic_description)
+                  //console.log("你的地址在",data.body.result.formatted_address + data.body.result.sematic_description)
               });
       
 
@@ -196,7 +196,7 @@
     }); 
     cordova.plugins.notification.local.on("click", function (notification) {
         alert("竟然你想看看,那就赶紧来吧")
-        console.log(notification)
+        //console.log(notification)
     });
   }
 
@@ -234,7 +234,7 @@
 
     document.addEventListener("deviceready", (d) => {
 
-        console.log("cordova加载完成")
+        //console.log("cordova加载完成")
         localts(); //推送消息
         checkupdate(this); //检查更新
         getlocation(this); //获取地址
@@ -275,7 +275,7 @@
       componentName (){
 
         const $route = this.$route;
-        console.log($route)
+        //console.log($route)
         return !!$route.name ? $route.name : $route.path;
       },
       headeranimate (){
@@ -286,16 +286,13 @@
         return this.componentName;
       },
       pageinit (){
-        //console.log("letappGuide",letappGuide)
+        ////console.log("letappGuide",letappGuide)
         return letappGuide == this.apphao;
       }
     },
     mounted (){
       //初始的时候,如果是引导页面,则不执行cordova的插件
       !this.pageinit && cordovainit();
-
-        
-      
     }
   };
 </script>
