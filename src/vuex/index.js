@@ -13,6 +13,7 @@ const state = {
   loginstart : false,
   postUrl : "http://127.0.0.1:3000" //接口请求的所在域名
 }
+const storage = window.localStorage;
 const mutations ={
    /**
      * [update_direction 判断打开页面的顺序 'forward'是进入,'reverse'是返回]
@@ -43,7 +44,12 @@ const mutations ={
       state.pageName = status;
     },
     [types.CHECK_LOGIN_STATUS] (state , status){
-      state.loginstart  = status
+      if( !storage.getItem(types.CHECK_LOGIN_STATUS) ){
+        storage.setItem(types.CHECK_LOGIN_STATUS,false);
+        return false;
+      }
+      
+      state.loginstart = storage.getItem(types.CHECK_LOGIN_STATUS) == "true" ? true : false ;
     }
 }
 export default new Vuex.Store({

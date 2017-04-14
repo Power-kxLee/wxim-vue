@@ -10,7 +10,8 @@ const checkRouter = (config) => {
         component : resolve => require([`./view/page${page.component}`], resolve),
         meta: {
           requireAuth : page.meta.requireAuth,
-          showHeader  : page.meta.showHeader
+          showHeader  : page.meta.showHeader ,
+          loginInCheckIndex  : !!page.meta.loginInCheckIndex ? true : false
         }
       })
     )

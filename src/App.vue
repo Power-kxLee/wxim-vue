@@ -1,13 +1,15 @@
 <template>
   <div id='app'>
+    <div class='logoubox' v-if='checklogin' >
+      <mt-button @click='logoufn' type="primary">退出登录</mt-button>
+    </div>
     <guiance-page v-if='pageinit' v-on:changenext='changenextchild'></guiance-page>
 
     <app-header  v-if='headeranimate && !pageinit' :titlename='title'></app-header>
     <transition :name="transitionName"  v-if='!pageinit'>
     <router-view class='appviews'  ></router-view>
     </transition>
-
-
+    
   </div>
 </template>
 
@@ -15,6 +17,7 @@
   import './assets/css/common/common.css' //加载公共css
   import './assets/css/common/HTML5-reset.css' //加载css reste表
   import 'mint-ui/lib/style.css' //加载mint依赖的css
+  import * as types from './vuex/mutation-types'
   import appHeader from './view/common/app-header.vue';
   import guiancePage from './view/page/guidancePage.vue';
   import store     from './vuex';
@@ -25,7 +28,7 @@
     localStorage.setItem(appGuide,apphao)
   }
 
-
+  
 
   /**
    * [检查更新]
@@ -269,6 +272,11 @@
         this.apphao = 0;
         localStorage.setItem(appGuide,0);
         cordovainit();
+      },
+      logoufn (){
+        console.log(types.CHECK_LOGIN_STATUS)
+        localStorage.setItem(types.CHECK_LOGIN_STATUS,false);
+        this.$store.commit(types.CHECK_LOGIN_STATUS);
       }
     },
     computed:{
@@ -288,6 +296,9 @@
       pageinit (){
         ////console.log("letappGuide",letappGuide)
         return letappGuide == this.apphao;
+      },
+      checklogin (){
+        return this.$store.state.loginstart == "true" ? true : false;
       }
     },
     mounted (){
@@ -297,6 +308,16 @@
   };
 </script>
 <style type="text/css" scoped>
+.logoubox{
+  text-align: center;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  padding: 10px 0;
+  background: rgba(0, 0, 0, 0.44);
+  width: 100%;
+  z-index: 9999;
+}
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;  
     -webkit-font-smoothing: antialiased;

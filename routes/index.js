@@ -10,7 +10,7 @@ module.exports = function(app) {
 	    var wherestr = {'username' : 'Tracy McGrady'};
 	    var updatestr = {'userpwd': 'zzzz'};
 	    console.log("更新")
-	    User.update(wherestr, updatestr, function(err, res){
+	    User.update(wherestr, updatestr, function(err, res){	
 	        if (err) {
 	            console.log("Error:" + err);
 	        }
@@ -19,7 +19,7 @@ module.exports = function(app) {
 	        }
 	    });
 	}
-
+	
 	app.all("*", function (req, res, next) {
 		res.header('Access-Control-Allow-Origin', '*'); //允许的域名
 		res.header("Access-Control-Allow-Headers","Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild"); //允许的header类型
@@ -33,13 +33,7 @@ module.exports = function(app) {
 		}
 	});
 
-	app.get('/', function (req, res) {
 
-		res.render('index', { 
-	    	title: 'Express111122211'
-
-	    });
-	});
 	
 	app.post('/reg',  (req, res) => {
 		let email = req.body.email;
@@ -102,9 +96,6 @@ module.exports = function(app) {
   			sendData.head = err;
   			res.send(sendData);
   		});
-
-		
-
 	});
 
 };

@@ -42,9 +42,16 @@ history.setItem('/', 0);  //在创建一个'/' 并设置为0
 
 // 进入新路由的时候,做的一些操作
 const commit = store.commit ;
+
+commit(types.CHECK_LOGIN_STATUS);
+
+
 const pagingfn = (to, from) => {
-const toIndex = history.getItem(to.path); //进入哪个路由
-const fromIndex = history.getItem(from.path); //从哪个路由进来的
+  const toIndex = history.getItem(to.path); //进入哪个路由
+  const fromIndex = history.getItem(from.path); //从哪个路由进来的
+
+  
+
   if(toIndex){
                 
       // 如果这个路由已经访问过,并是进来的路由的子路由 或者 
@@ -58,7 +65,7 @@ const fromIndex = history.getItem(from.path); //从哪个路由进来的
         commit(types.UPDATE_DIRECTION, 'reverse')
       }
 
-    }else{ //理由没有访问过的话
+    }else{ //路由没有访问过的话
       ++historyCount;  //hfc 往上+1 
       commit(types.UPDATE_DIRECTION, 'forward'); //通过vuex的update_direction方法更新路由进入的效果
       to.path !== '/' && history.setItem(to.path, historyCount); //如果进来的路由不是首页,那么通过history方法.以路由路径为key,和路层级标识为value保存起来
@@ -66,25 +73,34 @@ const fromIndex = history.getItem(from.path); //从哪个路由进来的
 
     commit(types.MAKE_PAGE,to.name);
 }
+
 router.beforeEach((to, from, next) => {
       //console.log("to",to.path,to,to.matched.some(record => record.meta.requireAuth))
-
+      //console.log(to.matched.some(record => record.meta.requireAuth))
       if (to.matched.some(record => record.meta.requireAuth)) {  // 判断该路由是否需要登录权限
 
         if (store.state.loginstart) {  // 通过vuex state获取当前的token是否存在
             pagingfn(to, from);
             next();
         }else {
-          commit(types.CHECK_LOGIN_STATUS,true)
-
-          /*return next({
+          return next({
               path: '/login'
-          })*/
-          next();
+          })
+          //next();
         }
       }else{
-        pagingfn(to, from);
-        next();
+        console.log("不用验证")
+        //如果已经登录了,那就不能够进入注册登录等页面
+        if(to.matched.some(record => record.meta.loginInCheckIndex) && store.state.loginstart){
+          console.log(from)
+          return next({
+              path: from.fullPath
+          })
+        }else{
+
+          pagingfn(to, from);
+          next();
+        }
       }
     
 });

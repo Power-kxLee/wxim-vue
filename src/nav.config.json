@@ -142,7 +142,8 @@
 				"component" : "/login.vue",
 				"meta":{
 					"requireAuth": false,
-					"showHeader": false
+					"showHeader": false,
+					"loginInCheckIndex" : true
 				}
 			},
 			{
@@ -151,7 +152,8 @@
 				"component" : "/register.vue",
 				"meta":{
 					"requireAuth": false,
-					"showHeader": false
+					"showHeader": false,
+					"loginInCheckIndex" : true
 				}
 			},
 			{
@@ -160,7 +162,8 @@
 				"component" : "/guidancePage.vue",
 				"meta":{
 					"requireAuth": false,
-					"showHeader": false
+					"showHeader": false,
+					"loginInCheckIndex" : true
 				}
 			}
 		]

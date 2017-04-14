@@ -55,8 +55,10 @@
 	import '../../assets/css/page/loginRegister.css';
 	import '../../assets/plugin/particles/particles.min.js';
 	import particles_background from '../../assets/plugin/particles/background.js';
+	import * as types from '../../vuex/mutation-types'
 	import { Toast } from 'mint-ui';
 	let storage = window.localStorage;
+	//storage.clear();
 	export default {
 		name: 'login',
 		data() {
@@ -80,11 +82,9 @@
 				console.log("this.formdata",this.formdata)
 				
 				this.$http.post("http://127.0.0.1:3000/reg",this.formdata).then( (data) =>{
-					console.log("成功",data)
-					console.log(thisollstore.state.loginstart )
-					if(data.state == 'success'){
-						this.$store.commit("checkLoginStart",true);
-						storage.setItem("checkLoginStart",true);
+					if(data.body.state == 'success'){
+						storage.setItem(types.CHECK_LOGIN_STATUS,true);
+						this.$store.commit(types.CHECK_LOGIN_STATUS);
 					}
 				},(error) =>{
 					console.log("error",error)
