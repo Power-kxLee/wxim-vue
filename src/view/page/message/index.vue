@@ -143,7 +143,7 @@ export default {
 	  	loadBottom(id) {
 		    setTimeout(() => {
 		      let lastValue = this.list[this.list.length - 1];
-		      if (lastValue < 40) {
+		      if (lastValue < 5) {
 		        for (let i = 1; i <= 10; i++) {
 		          this.list.push(lastValue + i);
 		        }
@@ -155,7 +155,7 @@ export default {
 	  	}
   	},
  	created() {
-      for (let i = 1; i <= 20; i++) {
+      for (let i = 1; i <= 5; i++) {
         this.list.push(i);
       }
     },

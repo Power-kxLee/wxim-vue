@@ -1,5 +1,6 @@
 module.exports = function(io){
 	io.on('connection', function(client){
+
 		console.log("有人链接io啦")
 		client.on('event', function(msg){
 			io.emit("event",msg);
@@ -8,5 +9,7 @@ module.exports = function(io){
 		client.on('disconnect', function(msg){
 			console.log("执行disconnect时间")
 		});
+
 	});
+	
 }

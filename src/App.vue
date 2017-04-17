@@ -313,14 +313,15 @@
 </script>
 <style type="text/css" scoped>
 .logoubox{
-  text-align: center;
-  position: fixed;
-  bottom: 0px;
-  left: 0px;
-  padding: 10px 0;
-  background: rgba(0, 0, 0, 0.44);
-  width: 100%;
-  z-index: 9999;
+    position: fixed;
+    top: 0px;
+    right: 100px;
+    z-index: 9999;
+    font-size: 12px;
+}
+.logoubox button{
+  font-size: 12px;
+  background: rebeccapurple;
 }
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;  
