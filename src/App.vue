@@ -274,7 +274,9 @@
         cordovainit();
       },
       logoufn (){
-        console.log(types.CHECK_LOGIN_STATUS)
+        this.$router.push({
+          path : "/"
+        });
         localStorage.setItem(types.CHECK_LOGIN_STATUS,false);
         this.$store.commit(types.CHECK_LOGIN_STATUS);
       }
@@ -298,7 +300,9 @@
         return letappGuide == this.apphao;
       },
       checklogin (){
-        return this.$store.state.loginstart == "true" ? true : false;
+        //console.log(this.$store.state.loginstart)
+
+        return this.$store.state.loginstart ;
       }
     },
     mounted (){

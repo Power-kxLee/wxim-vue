@@ -26,13 +26,12 @@
 							autocomplete="off" 
 							autocorrect="off" 
 							autocapitalize="off" 
-							type="text" 
-							name='username' 
+							type="text"  
 							id="email" 
 							class="ipt" 
 							placeholder="Email" 
 							required
-							v-model='formdata.username'
+							v-model='formdata.email'
 							>
 						</div>
 						<div class="group-ipt password">
@@ -56,7 +55,7 @@
 				</div>
 
 				<div class="button">
-					<button @click='loginfun' type="button" class="login-btn register-btn" id="login-button">跳过</button>
+					<button @click='loginfun' type="button" class="login-btn register-btn" id="login-button">登录</button>
 				</div>
 
 				<div class="remember clearfix">
@@ -78,38 +77,45 @@
 	import '../../assets/css/page/loginRegister.css';
 	import '../../assets/plugin/particles/particles.min.js';
 	import particles_background from '../../assets/plugin/particles/background.js';
-	import { Toast } from 'mint-ui';
+	import * as types from '../../vuex/mutation-types'
+	import { Indicator , MessageBox  } from 'mint-ui';
+	let storage = window.localStorage;
 
 	export default {
 		name: 'login',
 		data() {
 			return {
-				formdata :{
-					username:"",
-					password:""
-				}
+				formdata :{}
 			}
 		},
 		created (){
-			this.$nextTick(function(){
-					particlesJS('login-box',particles_background);
+			this.$nextTick( () => {
+				particlesJS('login-box',particles_background);
 			})
 		},
 		methods: {
 			loginfun (){
-				let time = 4000;
-				Toast({
-				  message: '厉害了,你居然是隐藏的VIP会员,因此你不需要登录啦,默认打开管理员权限O(∩_∩)O',
-				  duration: time
+				Indicator.open();
+				this.$ajax({
+					method : "post",
+					url:"http://127.0.0.1:3000/login",
+					data:this.formdata
+				}).then(data => {
+					Indicator.close();
+					
+					if(data.data.state == "success"){
+						
+						MessageBox.alert('登录成功', '牛逼了,登录成功了').then( btn => {
+							this.$router.push({ path: '/' });
+							storage.setItem(types.CHECK_LOGIN_STATUS,true);
+							this.$store.commit(types.CHECK_LOGIN_STATUS);
+						});
+					}else{
+						MessageBox.alert("登录失败",data.data.head);
+					}
+				}).catch(error =>{
+					Indicator.close();
 				});
-				setTimeout(() => {
-					router.push("/")
-				},time);
-
-				this.$store.commit("checkLoginStart",true);
-				/*this.$http.post(this.$store.state.postUrl+"/user/login",this.formdata).then(function(data){
-					console.log(data)
-				});*/
 			}
 		}
 		

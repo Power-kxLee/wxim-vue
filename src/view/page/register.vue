@@ -56,9 +56,10 @@
 	import '../../assets/plugin/particles/particles.min.js';
 	import particles_background from '../../assets/plugin/particles/background.js';
 	import * as types from '../../vuex/mutation-types'
-	import { Toast } from 'mint-ui';
+	import { Indicator , MessageBox  } from 'mint-ui';
 	let storage = window.localStorage;
 	//storage.clear();
+	
 	export default {
 		name: 'login',
 		data() {
@@ -76,20 +77,34 @@
 				particlesJS('register-box',particles_background);
 			});
 		},
+		mounted (){			
+		},
 		methods:{
 
 			regfn(){
-				console.log("this.formdata",this.formdata)
 				
-				this.$http.post("http://127.0.0.1:3000/reg",this.formdata).then( (data) =>{
-					if(data.body.state == 'success'){
+				Indicator.open();
+				this.$ajax({
+					method:"post",
+					url:"http://127.0.0.1:3000/reg",
+					data:this.formdata
+				}).then( (data)=>{
+					Indicator.close();
+					if(data.data.state == 'success'){
 						storage.setItem(types.CHECK_LOGIN_STATUS,true);
 						this.$store.commit(types.CHECK_LOGIN_STATUS);
+						MessageBox.alert('注册成功', '注册成功啦').then( btn => {
+							this.$router.push({ path: '/' })
+						});
+					}else{
+
+						MessageBox.alert(data.data.head,"注册失败");
 					}
-				},(error) =>{
-					console.log("error",error)
-				} );
-				/*this.$store.commit("checkLoginStart",true);*/
+				}).catch( (error) =>{
+					Indicator.close();
+					console.log("error",error);
+				});
+				
 			}
 		}
 		

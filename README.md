@@ -11,8 +11,7 @@ git clone git@github.com:Power-kxLee/vue2-cordova-demo.git
 
 cd vue2-cordova-demo
 
-npm install
-或
+# 百度下淘宝镜像,把cnpm装下.如果没有就用npm
 cnpm install
 ```
 
@@ -25,7 +24,35 @@ npm run dev
 
 # 客户端运行
 http://localhost:8080/#/
+
+# 编译
+npm run build
 ```
+
+## 服务器
+```
+# 运行node
+cnpm install -g supervisor
+
+npm run start
+```
+
+## 数据库
+
+使用mongodb,[下载地址](https://www.mongodb.com/download-center?jmp=nav#community) , 选择计算机类型进行下载安装
+
+在项目根目录(?随便在哪路径,最后能正确获取到就可以)下创建一个文件夹`data`,作为数据的存放.
+
+进入mongodb的根目录, 比如我的mongodb目录是: `D:\bin` , data目录是:`C:\Users\lee\OneDrive\appCordova\testapp\data`
+
+运行数据库
+```
+d: D:\bin
+
+mongod.exe --dbpath C:\Users\lee\OneDrive\appCordova\testapp\data
+```
+这样数据库就运行了. 项目已经用`mongoose`,配置好链接, 具体的操作,可以查询[API](http://www.nodeclass.com/api/mongoose.html)
+
 
 ## 源码说明
 ### 目录说明
@@ -33,14 +60,15 @@ http://localhost:8080/#/
 .
 |-- bin                              // 启动node服务器配置
 |-- hooks                            // Cordova执行命令时运行的特殊脚本
-|-- models                           // 数据库模型
+|-- lib                              // 数据库类型设计
+|-- models                           // 数据库模块
 |-- platforms                        // Cordova构建平台
 |-- plugins                          // Cordova插件
 |-- public                           // node静态文件目录
 |-- routes                           // node路由文件	
 |-- src                              // 项目源文件	
 |   |-- assets                       // 源文件静态资源
-|   |-- assets                       // vue组件
+|   |-- socket-client                // socket.io配置文件
 |   |-- vuex                         // vuex配置
 |   |-- App.vue                      // 模版载体
 |   |-- main.js                      // 入口文件

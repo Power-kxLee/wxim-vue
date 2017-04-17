@@ -10,6 +10,7 @@
     "cordova": " cordova prepare && cordova run android"
   },
   "dependencies": {
+    "axios": "^0.16.1",
     "body-parser": "~1.15.1",
     "config-lite": "^1.6.0",
     "connect-flash": "^0.1.1",

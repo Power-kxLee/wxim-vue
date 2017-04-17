@@ -74,3 +74,10 @@
 .appviews.index{
 	padding-top: 0px;
 }
+
+.mint-indicator{
+	position: relative;
+    top: 0px;
+    left: 0px;
+    z-index: 9999;
+}

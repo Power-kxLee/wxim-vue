@@ -1,16 +1,16 @@
-import Vue         from 'vue'  //加载vue
-import MintUI      from 'mint-ui' //加载mint-ui框架
-import VueRouter   from 'vue-router' //加载vue路由
-import VueResource from 'vue-resource'  //加载vue的http请求的
-import { sync }    from 'vuex-router-sync'
-import store       from './vuex'// 初始vuex
+import Vue        from 'vue'  //加载vue
+import MintUI     from 'mint-ui' //加载mint-ui框架
+import VueRouter  from 'vue-router' //加载vue路由
+import axios      from 'axios'  //加载http请求的
+import { sync }   from 'vuex-router-sync'
+import store      from './vuex'// 初始vuex
 import * as types from './vuex/mutation-types'
 
-import FastClick   from 'fastclick' //消除点击延迟
+import FastClick  from 'fastclick' //消除点击延迟
 
-import App         from './App.vue' //加载路由中间模版
-import routes      from './route.js' //加载路由器模版
-import Cordova     from '../platforms/android/assets/www/cordova.js'
+import App        from './App.vue' //加载路由中间模版
+import routes     from './route.js' //加载路由器模版
+import Cordova    from '../platforms/android/assets/www/cordova.js'
 
 
 
@@ -18,7 +18,8 @@ FastClick.attach(document.body)
 
 Vue.use(MintUI) //调用使用
 Vue.use(VueRouter)
-Vue.use(VueResource)
+
+Vue.prototype.$ajax = axios; //将axios改写为vue原型属性
 
 //保存路由
 window.router = new VueRouter({

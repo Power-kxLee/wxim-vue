@@ -6,19 +6,7 @@ module.exports = function(app) {
 	 * 插入
 	 */
 	
-	function update(){
-	    var wherestr = {'username' : 'Tracy McGrady'};
-	    var updatestr = {'userpwd': 'zzzz'};
-	    console.log("更新")
-	    User.update(wherestr, updatestr, function(err, res){	
-	        if (err) {
-	            console.log("Error:" + err);
-	        }
-	        else {
-	            console.log("Res:" + res);
-	        }
-	    });
-	}
+	const emailreg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
 	
 	app.all("*", function (req, res, next) {
 		res.header('Access-Control-Allow-Origin', '*'); //允许的域名
@@ -40,12 +28,12 @@ module.exports = function(app) {
 		let username = req.body.username;
 		let password = req.body.password;
 		let repassword = req.body.password1;
-		const emailreg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+		
 		let sendData = {}
 
 
 		try {
-			console.log("!emailreg.test(email)",!emailreg.test(email),email)
+			//console.log("!emailreg.test(email)",!emailreg.test(email),email)
 			if (!emailreg.test(email)) {
 
 			  throw  '邮箱不正确啊';
@@ -87,15 +75,49 @@ module.exports = function(app) {
   		};
 
   		Users.create(user,(data) => {
-  			sendData.state = "success";
-  			sendData.data = data;
-  			res.send(sendData);
-
+	  		res.send(data);
   		}, (err) => {
   			sendData.state = "error"
   			sendData.head = err;
   			res.send(sendData);
   		});
+	});
+
+	app.post("/login" , ( req , res ) =>{
+		let email = req.body.email;
+		let password = req.body.password;
+		let returnObj = {};
+		if (!emailreg.test(email)) {
+			returnObj.state = "error";
+			returnObj.head = "登录的邮箱格式还是错的,还登录个毛线";
+			return res.send(returnObj);
+
+		} 
+		
+		Users.query({email},(data) =>{
+
+			if(!data){
+				returnObj.state = "error";
+				returnObj.head = "账号不存在,登录失败";
+				return res.send(returnObj)
+			}
+			console.log(sha1(password) !== data.password , sha1(password) , data.password)
+			if( sha1(password) !== data.password){
+				returnObj.state = "error";
+				returnObj.head = "用户名或密码错误";
+				return res.send(returnObj);
+			}
+			returnObj.state = "success";
+			returnObj.head = "登录成功";
+			returnObj.data = data;
+			res.send(returnObj);
+			console.log("查询成功",data)
+		},(error) => {
+			returnObj.state = "error";
+			returnObj.data = error;
+			res.send(returnObj);
+			console.log("查询失败",error)
+		});
 	});
 
 };
