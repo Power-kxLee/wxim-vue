@@ -51,7 +51,7 @@ d: D:\bin
 
 mongod.exe --dbpath C:\Users\lee\OneDrive\appCordova\testapp\data
 ```
-这样数据库就运行了. 项目已经用`mongoose`,配置好链接, 具体的操作,可以查询[API](http://www.nodeclass.com/api/mongoose.html)
+这样数据库就运行了. 项目已经用`mongoose`,配置好连接, 具体的操作,可以查询[API](http://www.nodeclass.com/api/mongoose.html)
 
 
 ## 源码说明
