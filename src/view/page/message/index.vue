@@ -1,40 +1,17 @@
 <template>
   <div class='message-newbox'>
     <div class="nav">
-		<ul class='flex'>
-			<li class='flex-1' :class="checkedtab('tab-container1') " @click="clicktab('tab-container1')" >
-				<a href="javascript:;">
-					Theme
-					<mt-badge size="small" type='error'>30</mt-badge>
-				</a>
-			</li>
-			<li class='flex-1' :class="checkedtab('tab-container2') " @click="clicktab('tab-container2')" >
-				<a href="javascript:;">
-					Unread
-					<mt-badge size="small" type='error'>30</mt-badge>
-				</a>
-			</li>
-			<li class='flex-1' :class="checkedtab('tab-container3') " @click="clicktab('tab-container3')" >
-				<a href="javascript:;">
-					Flagged
-					<mt-badge size="small" type='error'>30</mt-badge>
-				</a>
-			</li>
-		</ul>
+		
      
     </div>
 
     <div class="page-tab-container">
-      <div class='page-js'>
-      	
-      	<p>聊天主题</p>
-      	<p>每一条都是新的主题,您可以点击进去查看详细的聊天记录</p>
-      </div>
-      <mt-tab-container class="page-tabbar-tab-container" v-model="active" swipeable>
+      
+      <mt-tab-container class="page-tabbar-tab-container" v-model="active" >
         <mt-tab-container-item id="tab-container1">
         <div class="page-loadmore">
 		    <div class="page-loadmore-wrapper" ref="wrapper" >
-		      <mt-loadmore :bottom-method="loadBottom" @bottom-status-change="handleBottomChange" :bottom-all-loaded="allLoaded" ref="loadmore">
+		      <mt-loadmore >
 		        <ul class="page-loadmore-list">
 		          <li v-for="item in list" class='pm-item-list' >
 		          	<div class='pm-item-divbox'>
@@ -91,30 +68,19 @@
 		    </div>
 		</div>
         </mt-tab-container-item>
-        <mt-tab-container-item id="tab-container2">
-          <mt-cell v-for="n in 5" :key='n' title="tab-container 2"></mt-cell>
-        </mt-tab-container-item>
-        <mt-tab-container-item id="tab-container3">
-          <mt-cell v-for="n in 7" :key='n' title="tab-container 3"></mt-cell>
-        </mt-tab-container-item>
+      
       </mt-tab-container>
     </div>
 
-	<div class='message-info flex-right'>
-		<router-link to='/message/more'>
-		<mt-button size="small" type="primary" >
-		新建聊天主题
-		<span class='messageicon icon-mark' slot='icon'></span>
-		</mt-button>
-		</router-link>
-	</div>
+	<create-im @crateRoom = "crateRoom"></create-im>
 
   </div>
 </template>
 
 <script>
-import '../../../assets/font/message/iconfont.css'
-import '../../../assets/css/page/message/index.css'
+import '../../../assets/font/message/iconfont.css';
+import '../../../assets/css/page/message/index.css';
+import createIm from './createIM.vue'
 export default {
   	data() {
 	    return {
@@ -125,7 +91,21 @@ export default {
 		    wrapperHeight: 0
 	    };
   	},
+  	components : {
+  		createIm
+  	},
  	methods:{
+ 		crateRoom (e,form){
+ 			this.$ajax({
+ 				method : "post",
+ 				data:form,
+ 				url:"http://127.0.0.1:3000/createim"
+ 			}).then(data =>{
+ 				console.log(data)
+ 			}).catch(err =>{
+ 				console.log(err)
+ 			});
+ 		},
 	  	checkedtab (cur){
 	  		if(this.active == cur){
 	  			return 'table-cur';
@@ -139,25 +119,14 @@ export default {
 	  	},
 	  	handleBottomChange(status) {
 	        this.bottomStatus = status;
-	    },
-	  	loadBottom(id) {
-		    setTimeout(() => {
-		      let lastValue = this.list[this.list.length - 1];
-		      if (lastValue < 5) {
-		        for (let i = 1; i <= 10; i++) {
-		          this.list.push(lastValue + i);
-		        }
-		      } else {
-		        this.allLoaded = true;
-		      }
-		      this.$refs.loadmore.onBottomLoaded(id);
-		    }, 1500);
-	  	}
+	    }
   	},
+
  	created() {
-      for (let i = 1; i <= 5; i++) {
-        this.list.push(i);
-      }
+      /*this.$ajax({
+      	method :"post",
+      	
+      })*/
     },
     mounted() {
       this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top;

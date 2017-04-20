@@ -1,4 +1,5 @@
 const Users = require("../models/users");
+const Myim = require("../models/myim");
 const sha1 = require("sha1");
 //Users.create();
 module.exports = function(app) {
@@ -21,8 +22,14 @@ module.exports = function(app) {
 		}
 	});
 
-
+	app.get('/getyixia',  (req, res) => {
+		res.send("傻逼跟无所畏惧,什么都不怕")
+	})
 	
+	/**
+	 * [注册接口]
+	 * @return {[object]}  [成功注册返回数据]
+	 */
 	app.post('/reg',  (req, res) => {
 		let email = req.body.email;
 		let username = req.body.username;
@@ -82,11 +89,16 @@ module.exports = function(app) {
   			res.send(sendData);
   		});
 	});
-
+	
+	/**
+	 * [登录接口]
+	 * @return {[object]}   [成功返回的数据]
+	 */
 	app.post("/login" , ( req , res ) =>{
 		let email = req.body.email;
 		let password = req.body.password;
 		let returnObj = {};
+		console.log("登录post过来了")
 		if (!emailreg.test(email)) {
 			returnObj.state = "error";
 			returnObj.head = "登录的邮箱格式还是错的,还登录个毛线";
@@ -101,7 +113,7 @@ module.exports = function(app) {
 				returnObj.head = "账号不存在,登录失败";
 				return res.send(returnObj)
 			}
-			console.log(sha1(password) !== data.password , sha1(password) , data.password)
+			//console.log(sha1(password) !== data.password , sha1(password) , data.password)
 			if( sha1(password) !== data.password){
 				returnObj.state = "error";
 				returnObj.head = "用户名或密码错误";
@@ -111,13 +123,54 @@ module.exports = function(app) {
 			returnObj.head = "登录成功";
 			returnObj.data = data;
 			res.send(returnObj);
-			console.log("查询成功",data)
+			//console.log("查询成功",data)
 		},(error) => {
 			returnObj.state = "error";
 			returnObj.data = error;
 			res.send(returnObj);
-			console.log("查询失败",error)
+			//console.log("查询失败",error)
 		});
 	});
 
+	app.post("/createim", (req,res) => {
+		const bodydata = req.body;
+		let deploy = {
+			code : 401
+		}
+		try {
+			if(bodydata.title.length < 1){
+				
+				throw "房间号没填写";
+				
+			}
+			if(!bodydata.creator){
+
+				throw "非正常用户";
+			}	
+		}catch(err){
+			deploy.code = 404;
+			deploy.mark = err;
+			return res.send(deploy);
+		}
+		let imdata = {
+			number  : bodydata.number,
+			title   : bodydata.title,
+			creator : bodydata.creator,
+			date    : bodydata.date,
+			heat    : bodydata.heat
+		}
+		Myim.create(imdata,(data) =>{
+			deploy.roomdata = data;
+			res.send(deploy);
+		},(err) =>{
+			deploy.code = 404;
+			deploy.errdata = err;
+			res.send(deploy);
+		})
+
+	});
+
+	app.post("/getroomim", (req,res) =>{
+
+	});
 };

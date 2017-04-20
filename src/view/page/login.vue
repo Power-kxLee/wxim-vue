@@ -101,14 +101,17 @@
 					url:"http://127.0.0.1:3000/login",
 					data:this.formdata
 				}).then(data => {
+					let obj = data.data.data;
 					Indicator.close();
-					
 					if(data.data.state == "success"){
 						
 						MessageBox.alert('登录成功', '牛逼了,登录成功了').then( btn => {
 							this.$router.push({ path: '/' });
 							storage.setItem(types.CHECK_LOGIN_STATUS,true);
-							this.$store.commit(types.CHECK_LOGIN_STATUS);
+							
+							this.$store.commit(types.CHECK_LOGIN_STATUS,{
+								obj
+							});
 						});
 					}else{
 						MessageBox.alert("登录失败",data.data.head);

@@ -48,6 +48,14 @@ const mutations ={
         storage.setItem(types.CHECK_LOGIN_STATUS,false);
         return false;
       }
+      if(!!status){
+        if(!!status.obj){
+
+          storage.setItem("USER_EMAIL",status.obj.email);
+          storage.setItem("USER_NAME",status.obj.username);
+          storage.setItem("_ID",status.obj._id);
+        }
+      }
       
       state.loginstart = storage.getItem(types.CHECK_LOGIN_STATUS) == "true" ? true : false ;
     }
