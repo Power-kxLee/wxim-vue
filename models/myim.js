@@ -5,12 +5,12 @@ module.exports = {
 	create (data,success,error){
 		let user = null;
 		let sendObj = {
-			state : 401
+			code : 401
 		}
 		this.query ({"number":data.number}, (person) =>{
 				console.log("查询是否有冲突房间号",person)
 				if(!!person ){
-					sendObj.state = 404;
+					sendObj.code = 404;
 					sendObj.mark = "这个房号被人抢注了,赶紧换一个吧";
 					return success(sendObj);
 				}
@@ -43,6 +43,14 @@ module.exports = {
 	 */
 	query (obj,success,error){
 		IM.findOne(obj,(err,person) => {
+			if(err) { //失败
+				return error(err);
+			}
+			success(person);
+		});
+	},
+	queryAll (success,error){
+		IM.find( (err,person) => {
 			if(err) { //失败
 				return error(err);
 			}

@@ -3,12 +3,12 @@
 	<div class='message-info '>
 		<header class='flex-right'>
 			
-			<mt-button size="small" type="primary" >
+			<mt-button size="small" type="primary" @click='showformfun'>
 				创建聊天房间
 				<span class='messageicon icon-mark' slot='icon'></span>
 			</mt-button>
 		</header>
-		<section class='createimform'>
+		<section class='createimform' v-if='showform'>
 			<article>
 				<input type="hidden" v-model='formdata.creator'>
 				<input type="hidden" v-model='formdata.date'>
@@ -87,20 +87,21 @@ const randoms = () => {
 export default {
   	data() {
 	    return {
-	    	sjnumber : "13212",
+	    	showform : false,
 	    	showclear : false,
 	    	formdata : {
 	    		title:"",
 	    		number:randoms(),
 	    		creator:storage.getItem("USER_EMAIL"),
-	    		date : new Date().getTime(),
+	    		date : "",
 	    		heat : 1,
 	    	}
 	    }
   	},
  	methods:{
 	  crateRoom (){
-	  	this.$emit("crateRoom",event,this.formdata)
+	  	this.formdata.date = parseInt(new Date().getTime() / 1000);
+	  	this.$emit("crateRoom",event,this.formdata);
 
 	  },
 	  randomHomeNum (){
@@ -108,6 +109,9 @@ export default {
 	  },
 	  clearfun (){
 	  	this.formdata.title = "";
+	  },
+	  showformfun(){
+	  	this.showform = this.showform ? false : true;
 	  }
   	},
  	created() {

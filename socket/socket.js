@@ -1,13 +1,58 @@
 module.exports = function(io){
+
+	let romInfo = {};
 	io.on('connection', function(socket){
-		console.log(socket.request.headers)
-		socket.on('event', function(msg){
-			io.emit("event",msg);
-			console.log("有人发送东西过来啦",msg)
+		let myEmail = "";
+		let myName = "";
+		let _id = "";
+		socket.on("join" , (msg) =>{
+			//console.log(msg)
+			_id = msg.number;
+			let jsonclose = true;
+			//当前房间不存在
+			if(!romInfo[_id]){
+				romInfo[_id] = [];
+			}
+			console.log("romInfo[_id]",romInfo[_id])
+			romInfo[_id].forEach( (elem,i) =>{
+				if(elem.useremail == msg.useremail){
+					jsonclose = false;
+					return false;
+				}
+			});
+			if(!jsonclose){
+				return false;
+			}
+
+			romInfo[_id].push({
+				useremail : myEmail = msg.useremail,
+				username  : myName  = msg.username
+			});
+
+			socket.join(_id);
+			io.to(_id).emit("newJoinUser",{
+				username  : msg.username,
+				headcount : romInfo[_id].length
+			});
 		});
+		socket.on("leave", () =>{
+			socket.emit("disconnect");
+		})
 		socket.on('disconnect', function(msg){
-			console.log("执行disconnect时间")
+			let index = -1;
+			romInfo[_id].forEach( (elem,i) =>{
+				if(elem.useremail == myEmail){
+					index = i;
+					return false;
+				}
+			});
+			if(index != -1){
+				romInfo[_id].splice(index, 1);
+			}
+			socket.leave(_id);
+			io.to(_id).emit('msg', myName);
 		});
+
 
 	});
 	

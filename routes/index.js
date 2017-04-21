@@ -160,6 +160,9 @@ module.exports = function(app) {
 			heat    : bodydata.heat
 		}
 		Myim.create(imdata,(data) =>{
+			if(data.code != 401){
+				deploy.code = 404;
+			}
 			deploy.roomdata = data;
 			res.send(deploy);
 		},(err) =>{
@@ -171,6 +174,23 @@ module.exports = function(app) {
 	});
 
 	app.post("/getroomim", (req,res) =>{
-
+		let deploy = {
+			code : 401
+		}
+		Myim.queryAll( data =>{
+			if(data.length < 1){
+				deploy.code = 403;
+				deploy.mark = "数据库没有查到数据啦";
+				return res.send(deploy);
+			}
+			deploy.imlistarry = data;
+			res.send(deploy);
+			console.log(data)
+		}, err =>{
+			deploy.code = 404;
+			deploy.mark = "直接报错啦";
+			deploy.errdata = err;
+			res.send(deploy);
+		});
 	});
 };

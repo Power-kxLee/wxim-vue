@@ -137,7 +137,6 @@
 	import initPhotoSwipeFromDOM from '../../assets/js/initPhotoSwipeFromDOM.js'; 
 	import mVoice from "./app-message-voice.vue"
 	import io from "../../socket-client";
-
 	export default {
 		data (){
 			return {
@@ -147,19 +146,46 @@
 		components : {
 			mVoice
 		},
+		watch: {
+	      '$route' (to, from) {
+	      	this.socketIo.on("leave");
+	      }
+	    },
 		methods : {
 			sendfn (text){
 				this.socketIo.emit("event",text)
 				console.log()
 			}
 		},
-		mounted (){
-			//初始化缩略图放大
-		    initPhotoSwipeFromDOM('.my-gallery');
-		},
+		
+
         created(){
+        	
+        	const number = this.$route.query.number
+        	const username = this.$route.query.username
+        	const useremail = this.$route.query.useremail
             this.socketIo = io.io.connect(io.url);
-            
+        	
+        	//非法进入聊天室,直接退出
+        	if(!number || !username || !useremail){
+        		this.$router.push({path:"/message"});
+        		return false;
+        	}
+        	
+        	//加入聊天室
+            this.socketIo.on("connect", () =>{
+            	this.socketIo.emit("join",{
+            		number ,
+            		username ,
+            		useremail
+            	})
+            });
+            this.socketIo.on("newJoinUser",(msg) =>{
+            	console.log("用户",msg.username,"加入了房间,当前人数是",msg.headcount)
+            });
+            this.socketIo.on("msg",(msg) =>{
+            	console.log("用户",msg.username,"退出了房间",msg.headcount)
+            });
             this.socketIo.on("event", (msg) => {
                 let gallery = document.querySelector(".my-gallery");
                 let div = document.createElement("div");
@@ -169,6 +195,11 @@
                 console.log("有最新的消息",msg)
             }); 
         },
+        mounted (){
+			
+			//初始化缩略图放大
+		    initPhotoSwipeFromDOM('.my-gallery');
+		}
 		
 	}
 </script>
