@@ -56,7 +56,7 @@
 					</div>
 				</div>
 				
-				<m-voice v-on:sendfn = "sendfn"></m-voice>
+				<m-voice @sendfn = "sendfn"></m-voice>
 				
 			</div>
 		</div>
@@ -131,16 +131,17 @@
 	</div>
 </template>
 <script type="text/javascript">
-	import '../../assets/plugin/photoSwipe/photoSwipe.css'; 
-	import '../../assets/plugin/photoSwipe/default-skin/default-skin.css'; 
-	import '../../assets/css/common/message.css'; 
-	import initPhotoSwipeFromDOM from '../../assets/js/initPhotoSwipeFromDOM.js'; 
+	import '../../../assets/plugin/photoSwipe/photoSwipe.css'; 
+	import '../../../assets/plugin/photoSwipe/default-skin/default-skin.css'; 
+	import '../../../assets/css/common/message.css'; 
+	import initPhotoSwipeFromDOM from '../../../assets/js/initPhotoSwipeFromDOM.js'; 
 	import mVoice from "./app-message-voice.vue"
-	import io from "../../socket-client";
+	import io from "../../../socket-client";
 	export default {
 		data (){
 			return {
-				socketIo : null
+				socketIo : null ,
+				MY_URL:this.$store.state.MY_URL
 			}
 		},
 		components : {
@@ -148,13 +149,24 @@
 		},
 		watch: {
 	      '$route' (to, from) {
-	      	this.socketIo.on("leave");
+	      	console.log("离开")
+	      	this.socketIo.emit("leave");
 	      }
 	    },
 		methods : {
-			sendfn (text){
-				this.socketIo.emit("event",text)
-				console.log()
+			sendfn (form){
+				console.log("this.data",this.data)
+				console.log(form)
+				this.$ajax({
+					method :"post",
+					data:form,
+					url:this.MY_URL+"/im/sendmessage"
+				}).then(options =>{
+
+				}).catch(err =>{
+
+				})
+				//this.socketIo.emit("event",text)
 			}
 		},
 		
@@ -162,7 +174,7 @@
         created(){
         	
         	const number = this.$route.query.number
-        	const username = this.$route.query.username
+        	const username = this.$route.query.username	
         	const useremail = this.$route.query.useremail
             this.socketIo = io.io.connect(io.url);
         	
@@ -183,8 +195,9 @@
             this.socketIo.on("newJoinUser",(msg) =>{
             	console.log("用户",msg.username,"加入了房间,当前人数是",msg.headcount)
             });
-            this.socketIo.on("msg",(msg) =>{
-            	console.log("用户",msg.username,"退出了房间",msg.headcount)
+            this.socketIo.on("msg",(msg,num) =>{
+
+            	console.log("用户",msg,"退出了房间,当前人数是",num)
             });
             this.socketIo.on("event", (msg) => {
                 let gallery = document.querySelector(".my-gallery");

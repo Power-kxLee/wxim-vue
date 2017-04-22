@@ -15,8 +15,8 @@
                         <span >{{talkname}}</span>
                     </div>
                     <div v-else class='textin'>
-                        <div id='textareafield' class="textareafield" @input='textinfn'  contenteditable="true" ></div>
-					   <input type="hidden" :value='textareval'>
+                        <div  id='textareafield' class="textareafield" @input='textinfn'  contenteditable="true" ></div>
+					   <input type="hidden" v-model='formdata.message'>
                       
                     </div>
 				</div>
@@ -68,7 +68,7 @@
 <script type="text/javascript">
     
 
-
+    const storage = window.localStorage;
     
     const $ = (obj) =>{
 
@@ -92,18 +92,29 @@
                 talkcancel   : false,
                 touchY       : 0,
                 touchclientY : 0,
-                textareval   : ""
+                textareval   : "",
+                formdata : {
+                    number : "",
+                    date : 0,
+                    useremail : "",
+                    message : "",
+                    identity : 0
+
+                }
             }
         },
         methods:{
             textinfn (event){
                 let inhtml = event.target.innerHTML;
                 this.inputshow = inhtml.length < 1 ? false : true;
-                this.textareval = event.target.innerHTML;
+                this.formdata.message = event.target.innerHTML;
             },
             sendio (){
-                this.$emit("sendfn",document.getElementById("textareafield").innerHTML);
-                document.getElementById("textareafield").innerHTML = "";
+                let text = document.getElementById("textareafield");
+                this.formdata.date = parseInt(new Date().getTime() / 1000);
+                //console.log("this.formdata",this.formdata)
+                this.$emit("sendfn",this.formdata);
+                text.innerHTML = "";
                 this.inputshow  = false;
             },
             taptalk (){
@@ -176,7 +187,8 @@
             }
         },
         created(){
-            
+            this.formdata.number = this.$route.query.number;
+            this.formdata.useremail = this.$route.query.useremail;
         },
         mounted (){
             let textareafield = document.querySelector(".textareafield");
@@ -193,6 +205,6 @@
    
 
     </script>
-<style type="text/css" scoped src='../../assets/font/message/more/iconfont.css'></style>
-<style type="text/css" scoped src='../../assets/css/common/talk-tools.css'></style>
+<style type="text/css" scoped src='../../../assets/font/message/more/iconfont.css'></style>
+<style type="text/css" scoped src='../../../assets/css/common/talk-tools.css'></style>
 

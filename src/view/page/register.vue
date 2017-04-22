@@ -86,7 +86,7 @@
 				Indicator.open();
 				this.$ajax({
 					method:"post",
-					url:"http://127.0.0.1:3000/reg",
+					url:"http://127.0.0.1:3000/user/reg",
 					data:this.formdata
 				}).then( (data)=>{
 					let obj = data.data.data;

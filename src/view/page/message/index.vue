@@ -74,6 +74,7 @@ const storage = window.localStorage;
 export default {
   	data() {
 	    return {
+	    	MY_URL:this.$store.state.MY_URL,
 	     	active: 'tab-container1',
 		   	list: [],
 		    allLoaded: false,
@@ -92,7 +93,7 @@ export default {
  			this.$ajax({
  				method : "post",
  				data:form,
- 				url:"http://127.0.0.1:3000/createim"
+ 				url:this.MY_URL+"/createim"
  			}).then(d =>{
  				if(d.data.code == 401){
  					this.list.push(d.data.roomdata.homedata)
@@ -126,7 +127,7 @@ export default {
       this.$ajax({
       	method :"post",
       	data : {},
-      	url :"http://127.0.0.1:3000/getroomim"
+      	url :this.MY_URL+"/getroomim"
       }).then( d =>{
       	if(d.data.code == 401){
 

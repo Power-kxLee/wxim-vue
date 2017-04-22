@@ -45,12 +45,13 @@ module.exports = function(io){
 					index = i;
 					return false;
 				}
-			});
+			}); 
 			if(index != -1){
 				romInfo[_id].splice(index, 1);
 			}
 			socket.leave(_id);
-			io.to(_id).emit('msg', myName);
+			console.log(myName)
+			io.to(_id).emit('msg', myName,romInfo[_id].length);
 		});
 
 

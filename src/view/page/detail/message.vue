@@ -4,7 +4,7 @@
 	</div>
 </template>
 <script type="text/javascript">
-	import appMessage from '../../common/app-message.vue'
+	import appMessage from '../message/app-message.vue'
 	export default{
 		components :{
 			appMessage

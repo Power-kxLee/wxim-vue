@@ -11,7 +11,7 @@ const state = {
   router:{},
   pageName:"index",
   loginstart : false,
-  postUrl : "http://127.0.0.1:3000" //接口请求的所在域名
+  MY_URL : "http://127.0.0.1:3000" //接口请求的所在域名
 }
 const storage = window.localStorage;
 const mutations ={
