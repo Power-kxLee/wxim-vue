@@ -97,6 +97,7 @@
                     number : "",
                     date : 0,
                     useremail : "",
+                    userename : "",
                     message : "",
                     identity : 0
 
@@ -189,6 +190,7 @@
         created(){
             this.formdata.number = this.$route.query.number;
             this.formdata.useremail = this.$route.query.useremail;
+            this.formdata.userename = this.$route.query.userename;
         },
         mounted (){
             let textareafield = document.querySelector(".textareafield");

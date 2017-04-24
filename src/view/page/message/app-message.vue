@@ -6,39 +6,12 @@
 		<div class="mui-content">
 			<div id="msg-list">
 				<div class="msg-list-height my-gallery" data-pswp-uid="1">
-					
-					<div v-for='n in 1' class="msg-item msg-item-self">
+					<div v-for='(value,i) in msgarry' class="msg-item " :class='[  useremail == value.useremail ? "msg-item-self" : ""]'>
 						<div class="nameandimg">
 							
 							<img class="msg-user" src="http://www.tt-elmontyouthsoccer.com/html/upload/headimg/58004f1c6a73b.jpg">
 							
-						   	<span class="msg-name">578242325@qq.com</span>
-						</div>
-						<div class="ms-content-warp">
-							
-							<div class="msg-content">
-
-								<div class="msg-content-inner">
-									<figure>
-							          <a data-size="670x712" href="http://www.tt-elmontyouthsoccer.com/html/upload/temp_img/201610/9854/57ff4c6e06795.jpg" >
-							          <img src="http://www.tt-elmontyouthsoccer.com/html/upload/item_img/201610/9854/1476349038507971124.jpg">
-							          </a>
-							        </figure>
-									<span>请问请问</span>
-								</div>
-								<div class="msg-content-arrow"></div>
-							</div>
-							<div class="msg-conte	nt-time">10-13 01:57</div>
-						</div>
-						<div class="mui-item-clear"></div>
-					</div>
-					
-					<div v-for='n in 1' class="msg-item ">
-						<div class="nameandimg">
-							
-							<img class="msg-user-img" src="http://www.tt-elmontyouthsoccer.com/images/megmjlogo.jpg">
-							
-						   	<span class="msg-name">admin</span>
+						   	<span class="msg-name">{{value.userename}}</span>
 						</div>
 						<div class="ms-content-warp">
 							
@@ -46,14 +19,16 @@
 
 								<div class="msg-content-inner">
 									
-									<span>ok testsasdas</span>
+									<span>{{value.message}}</span>
 								</div>
 								<div class="msg-content-arrow"></div>
 							</div>
-							<div class="msg-content-time">11-30 07:24</div>
+							<div class="msg-conte	nt-time">{{value.date | timestamp}}</div>
 						</div>
 						<div class="mui-item-clear"></div>
 					</div>
+					
+					
 				</div>
 				
 				<m-voice @sendfn = "sendfn"></m-voice>
@@ -140,6 +115,8 @@
 	export default {
 		data (){
 			return {
+				useremail : this.$route.query.useremail,
+				msgarry:[],
 				socketIo : null ,
 				MY_URL:this.$store.state.MY_URL
 			}
@@ -163,13 +140,17 @@
 					url:this.MY_URL+"/im/sendmessage"
 				}).then(options =>{
 					console.log(options)
+					this.socketIo.emit("sendmsg",form)
 				}).catch(err =>{
 
 				})
-				//this.socketIo.emit("event",text)
 			}
 		},
-		
+		filters : {
+	  		timestamp (value){
+	  			return timestampFormat(value);
+	  		}
+	  	},
 
         created(){
         	
@@ -184,6 +165,17 @@
         		return false;
         	}
         	
+        	this.$ajax({
+				method :"post",
+				data:{number:this.$route.query.number},
+				url:this.MY_URL+"/im/queryallmsg"
+			}).then(options =>{
+				console.log(options)
+				this.msgarry = options.data.msgarry
+			}).catch(err =>{
+
+			})
+
         	//加入聊天室
             this.socketIo.on("connect", () =>{
             	this.socketIo.emit("join",{
@@ -192,6 +184,9 @@
             		useremail
             	})
             });
+            this.socketIo.on("getmsg",(msg) => {
+            	this.msgarry.push(msg);
+            })
             this.socketIo.on("newJoinUser",(msg) =>{
             	console.log("用户",msg.username,"加入了房间,当前人数是",msg.headcount)
             });
@@ -215,4 +210,37 @@
 		}
 		
 	}
+	const timestampFormat = ( timestamp ) => {
+
+    const zeroize = ( num ) => {
+
+        return (String(num).length == 1 ? '0' : '') + num;
+    }
+ 
+    const curTimestamp = parseInt(new Date().getTime() / 1000); //当前时间戳
+    const timestampDiff = curTimestamp - timestamp; // 参数时间戳与当前时间戳相差秒数
+ 
+    const curDate = new Date( curTimestamp * 1000 ); // 当前时间日期对象
+    const tmDate = new Date( timestamp * 1000 );  // 参数时间戳转换成的日期对象
+ 
+    const Y = tmDate.getFullYear(), m = tmDate.getMonth() + 1, d = tmDate.getDate();
+    const H = tmDate.getHours(), i = tmDate.getMinutes(), s = tmDate.getSeconds();
+ 
+    if ( timestampDiff < 60 ) { // 一分钟以内
+        return "刚刚";
+    } else if( timestampDiff < 3600 ) { // 一小时前之内
+        return Math.floor( timestampDiff / 60 ) + "分钟前";
+    } else if ( curDate.getFullYear() == Y && curDate.getMonth()+1 == m && curDate.getDate() == d ) {
+        return '今天' + zeroize(H) + ':' + zeroize(i);
+    } else {
+        const newDate = new Date( (curTimestamp - 86400) * 1000 ); // 参数中的时间戳加一天转换成的日期对象
+        if ( newDate.getFullYear() == Y && newDate.getMonth()+1 == m && newDate.getDate() == d ) {
+            return '昨天' + zeroize(H) + ':' + zeroize(i);
+        } else if ( curDate.getFullYear() == Y ) {
+            return  zeroize(m) + '月' + zeroize(d) + '日 ' + zeroize(H) + ':' + zeroize(i);
+        } else {
+            return  Y + '年' + zeroize(m) + '月' + zeroize(d) + '日 ' + zeroize(H) + ':' + zeroize(i);
+        }
+    }
+}
 </script>

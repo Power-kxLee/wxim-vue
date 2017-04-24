@@ -80,6 +80,7 @@ module.exports = (app) =>{
 		let number = req.body.number;
 		let date = req.body.date;
 		let useremail = req.body.useremail; 
+		let username = req.body.username; 
 		let message = req.body.message; 
 		let identity = req.body.identity; 
 
@@ -87,6 +88,7 @@ module.exports = (app) =>{
 			number,
 			date,
 			useremail,
+			username,
 			message,
 			identity
 		}
@@ -102,5 +104,11 @@ module.exports = (app) =>{
 	});
 	app.post("/im/queryallmsg" , (req,res) =>{
 
+
+		Myim.queryAllMsg({number:req.body.number},sus =>{
+			res.send(sus);
+		},err =>{
+			re.send(err)
+		});
 	});
 }

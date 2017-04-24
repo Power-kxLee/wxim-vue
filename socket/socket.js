@@ -38,7 +38,7 @@ module.exports = function(io){
 		socket.on("leave", () =>{
 			socket.emit("disconnect");
 		})
-		socket.on('disconnect', function(msg){
+		socket.on('disconnect', (msg) => {
 			let index = -1;
 			romInfo[_id].forEach( (elem,i) =>{
 				if(elem.useremail == myEmail){
@@ -54,6 +54,9 @@ module.exports = function(io){
 			io.to(_id).emit('msg', myName,romInfo[_id].length);
 		});
 
+		socket.on("sendmsg", (msg) =>{
+			io.to(_id).emit('getmsg', msg);
+		});
 
 	});
 	

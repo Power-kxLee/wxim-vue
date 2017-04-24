@@ -85,6 +85,7 @@
 		name: 'login',
 		data() {
 			return {
+				MY_URL:this.$store.state.MY_URL,
 				formdata :{}
 			}
 		},
@@ -98,7 +99,7 @@
 				Indicator.open();
 				this.$ajax({
 					method : "post",
-					url:"http://127.0.0.1:3000/user/login",
+					url:this.MY_URL+"/user/login",
 					data:this.formdata
 				}).then(data => {
 					let obj = data.data.data;

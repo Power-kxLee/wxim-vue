@@ -86,7 +86,6 @@ module.exports = {
 	createMsgLog (form,success,error){
 		let code = 401;
 		let mark = "";
-		console.log("看看数据先",form)
 		if(!form.number){
 			code = 404;
 			mark = "房号都没有,查个毛线啊"
@@ -122,6 +121,7 @@ module.exports = {
 						user.msgarry.push({
 							date : form.date,
 							useremail : form.useremail,
+							username : form.username,
 							message : form.message,
 							identity : form.identity
 						});
@@ -149,7 +149,22 @@ module.exports = {
 	 * [queryAllMsg 查询当前房间的所有数据]
 	 * @return {[type]} [description]
 	 */
-	queryAllMsg (){
+	queryAllMsg (form,success,error){
+		let code = 401;
+		let mark = "";
+		if(!form.number){
+			code = 404;
+			mark = "房号都没有,查个毛线啊"
+			return error({code,mark})
+		}
+		this.queryRoomMsgLog({
+			"number":form.number	
+		}, data =>{
+			success(data);
+
+		}, err =>{
+			error(err);
+		});
 
 	}
 } 

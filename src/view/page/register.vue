@@ -68,6 +68,7 @@
 				verify:"006",
 				isverify:true,
 				routeback:"",
+				MY_URL:this.$store.state.MY_URL,
 				formdata : {}
 			}
 		},
@@ -86,7 +87,7 @@
 				Indicator.open();
 				this.$ajax({
 					method:"post",
-					url:"http://127.0.0.1:3000/user/reg",
+					url:this.MY_URL+"/user/reg",
 					data:this.formdata
 				}).then( (data)=>{
 					let obj = data.data.data;
