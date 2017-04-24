@@ -1,6 +1,11 @@
 const Myim = require("../models/myim");
 
 module.exports = (app) =>{
+	/**
+	 * [创建房间号]
+	 * @param  {[type]} "/createim" [请求接口]
+	 * @return {[type]}             [创建成功后返回当前房间的数据]
+	 */
 	app.post("/createim", (req,res) => {
 		const bodydata = req.body;
 		let deploy = {
@@ -41,7 +46,11 @@ module.exports = (app) =>{
 		})
 
 	});
-
+	/**
+	 * [查找所有房间数据]
+	 * @param  {[type]} "/getroomim" [请求的接口]
+	 * @return {[type]}              [返回房间列表数据]
+	 */
 	app.post("/getroomim", (req,res) =>{
 		let deploy = {
 			code : 401
@@ -62,11 +71,15 @@ module.exports = (app) =>{
 			res.send(deploy);
 		});
 	});
-
+	/**
+	 * [获取房间的聊天信息,并存入数据库]
+	 * @param  {[type]} "/im/sendmessage" [请求接口]
+	 * @return {[type]}                   [返回所有聊天信息]
+	 */
 	app.post("/im/sendmessage" , (req,res) =>{
 		let number = req.body.number;
 		let date = req.body.date;
-		let useremail = req.body.date; 
+		let useremail = req.body.useremail; 
 		let message = req.body.message; 
 		let identity = req.body.identity; 
 
@@ -78,10 +91,16 @@ module.exports = (app) =>{
 			identity
 		}
 
-		Myim.createMsgLog(immsg, success =>{
-			console.log("查询房间聊天记录结果")
+		Myim.createMsgLog(immsg, sus =>{
+			//console.log(success)
+			//console.log("查询房间聊天记录结果");
+			console.log("成功啦",sus)
+			res.send(sus);
 		},error =>{
-
+			res.send(error)
 		});
+	});
+	app.post("/im/queryallmsg" , (req,res) =>{
+
 	});
 }

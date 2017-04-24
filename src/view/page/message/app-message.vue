@@ -7,7 +7,7 @@
 			<div id="msg-list">
 				<div class="msg-list-height my-gallery" data-pswp-uid="1">
 					
-					<div v-for='n in 3' class="msg-item msg-item-self">
+					<div v-for='n in 1' class="msg-item msg-item-self">
 						<div class="nameandimg">
 							
 							<img class="msg-user" src="http://www.tt-elmontyouthsoccer.com/html/upload/headimg/58004f1c6a73b.jpg">
@@ -33,7 +33,7 @@
 						<div class="mui-item-clear"></div>
 					</div>
 					
-					<div v-for='n in 3' class="msg-item ">
+					<div v-for='n in 1' class="msg-item ">
 						<div class="nameandimg">
 							
 							<img class="msg-user-img" src="http://www.tt-elmontyouthsoccer.com/images/megmjlogo.jpg">
@@ -155,14 +155,14 @@
 	    },
 		methods : {
 			sendfn (form){
-				console.log("this.data",this.data)
+				//console.log("this.data",this.data)
 				console.log(form)
 				this.$ajax({
 					method :"post",
 					data:form,
 					url:this.MY_URL+"/im/sendmessage"
 				}).then(options =>{
-
+					console.log(options)
 				}).catch(err =>{
 
 				})
