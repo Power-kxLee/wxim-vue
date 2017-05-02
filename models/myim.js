@@ -8,7 +8,7 @@ module.exports = {
 			code : 401
 		}
 		this.queryRoom ({"number":data.number}, (person) =>{
-				console.log("查询是否有冲突房间号",person)
+				//console.log("查询是否有冲突房间号",person)
 				if(!!person ){
 					sendObj.code = 404;
 					sendObj.mark = "这个房号被人抢注了,赶紧换一个吧";
@@ -56,11 +56,34 @@ module.exports = {
 	 * @return {[type]}         [description]
 	 */
 	queryAllRoom (success,error ){
+		let roomarry = [];
 		IM.find( (err,person) => {
-			if(err) { //失败
-				return error(err);
+			//console.log("所有房间",person)
+			for(let i = 0 ; i < person.length ; i++){
+				console.log( person[i].number)
+				let sn = {}
+
+				imMsgLog.findOne({"number" : person[i].number}, (err,data) => {
+					if(err) { //失败
+						return error(err);
+					}
+					if(!!data){
+						person[i].roomnewmsg.push(data.msgarry[data.msgarry.length - 1]);
+
+						data.save( (err,res) =>{
+							if(err){
+								return error(err);
+							};
+							console.log("修改成功",res)
+
+						});
+						console.log(data)
+					}
+					success(person);
+				});
+				
+				
 			}
-			success(person);
 		});
 	},
 	/**
@@ -130,7 +153,7 @@ module.exports = {
 							if(err){
 								return error(err);
 							};
-							console.log("res",res)
+							//console.log("res",res)
 							success({code,res});
 
 						});

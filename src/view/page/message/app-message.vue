@@ -112,6 +112,7 @@
 	import initPhotoSwipeFromDOM from '../../../assets/js/initPhotoSwipeFromDOM.js'; 
 	import mVoice from "./app-message-voice.vue"
 	import io from "../../../socket-client";
+	const storage = window.localStorage;
 	export default {
 		data (){
 			return {
@@ -140,7 +141,8 @@
 					url:this.MY_URL+"/im/sendmessage"
 				}).then(options =>{
 					console.log(options)
-					this.socketIo.emit("sendmsg",form)
+					this.socketIo.emit("sendmsg",form);
+
 				}).catch(err =>{
 
 				})
@@ -165,16 +167,20 @@
         		return false;
         	}
         	
-        	this.$ajax({
-				method :"post",
-				data:{number:this.$route.query.number},
-				url:this.MY_URL+"/im/queryallmsg"
-			}).then(options =>{
-				console.log(options)
-				this.msgarry = options.data.msgarry
-			}).catch(err =>{
 
-			})
+	        	this.$ajax({
+					method :"post",
+					data:{number},
+					url:this.MY_URL+"/im/queryallmsg"
+				}).then(options =>{
+					console.log(options.data.msgarry)
+					console.log(JSON.stringify(options.data.msgarry))
+					this.msgarry = options.data.msgarry
+				}).catch(err =>{
+
+				});
+       
+        	console.log( storage.getItem("chatRoom"+number),"chatRoom"+number )
 
         	//加入聊天室
             this.socketIo.on("connect", () =>{
@@ -182,10 +188,13 @@
             		number ,
             		username ,
             		useremail
-            	})
+            	});
             });
             this.socketIo.on("getmsg",(msg) => {
             	this.msgarry.push(msg);
+            	this.$nextTick(() =>{
+            		window.scrollTo(0,document.body.scrollHeight);
+            	})
             })
             this.socketIo.on("newJoinUser",(msg) =>{
             	console.log("用户",msg.username,"加入了房间,当前人数是",msg.headcount)

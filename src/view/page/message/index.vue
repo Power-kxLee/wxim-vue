@@ -1,64 +1,37 @@
 <template>
   <div class='message-newbox'>
-    <div class="nav">
-		
-     
-    </div>
 
     <div class="page-tab-container">
       
-      <mt-tab-container class="page-tabbar-tab-container" v-model="active" >
-        <mt-tab-container-item id="tab-container1">
         <div class="page-loadmore">
 		    <div class="page-loadmore-wrapper" ref="wrapper" >
-		      <mt-loadmore >
-		        <ul class="page-loadmore-list">
-		          <li v-for="(item,i) in list" class='pm-item-list' >
-		          	<div class='pm-item-divbox'>
-		          		
-			          	<div class='pm-item-head flex'>
-			          		<span class='flex-1 pi-head-cont'>{{item.title }}</span>
-			          		
-			          	</div>
-						<div class='pm-item-cont flex'>
-							<router-link :to="{ path: '/message/more', query: { number: item.number,username:username , useremail:useremail}}"  class='flex'>
-							<div class='my-imgersandname'>
-								<div class='my-imgers'>
-									<img src="http://www.tt-elmontyouthsoccer.com/html/upload/headimg/58004f1c6a73b.jpg">
-								</div>
-								<span class='my-name'>
-									{{item.creator}}
-								</span>
-							</div>
-							<div class='my-message-info flex-1'>
-								<div class='ms-content'>
-									{{item.date}}
-									<span class='clamp-3'>{{item.date |timestamp }}</span>
-									
-								</div>
-								<div class='ms-sj'></div>
-							</div>
-							<div class='jiantou'>
-								<span class='messageicon icon-right'></span>
-							</div>
-						</router-link>
+		    	<div class="msg-room-list" v-for="(item,i) in list">
+		    		<router-link :to="{ path: '/message/more', query: { number: item.number,username:username , useremail:useremail}}"  >
+		    		<div class='msg-rl-warp flex-def'>
+		    			<div class='msg-room-img'>
+		    				<img src="http://www.tt-elmontyouthsoccer.com/html/upload/headimg/58004f1c6a73b.jpg">
+		    			</div>
+						<article class='msg-room-article'>
+							<header>{{item.title }}</header>
+							<section v-if='item.roomnewmsg.length > 0'>{{item.roomnewmsg[0].useremail}} : {{item.roomnewmsg[0].message}}</section>
+						</article>
+						<div class='msg-room-date'>
+							{{item.date |timestamp }}
 						</div>
-						
-		          	</div>
-		          </li>
-		        </ul>
+		    		</div>
+		    		</router-link>
+		    	</div>
+		    	
+		      
 		        <div slot="bottom" class="mint-loadmore-bottom">
 		          <span v-show="bottomStatus !== 'loading'" :class="{ 'is-rotate': bottomStatus === 'drop' }">↑</span>
 		          <span v-show="bottomStatus === 'loading'">
 		            <mt-spinner type="snake"></mt-spinner>
 		          </span>
 		        </div>
-		      </mt-loadmore>
 		    </div>
 		</div>
-        </mt-tab-container-item>
       
-      </mt-tab-container>
     </div>
 
 	<create-im @crateRoom = "crateRoom"></create-im>
@@ -170,7 +143,7 @@ const timestampFormat = ( timestamp ) => {
         if ( newDate.getFullYear() == Y && newDate.getMonth()+1 == m && newDate.getDate() == d ) {
             return '昨天' + zeroize(H) + ':' + zeroize(i);
         } else if ( curDate.getFullYear() == Y ) {
-            return  zeroize(m) + '月' + zeroize(d) + '日 ' + zeroize(H) + ':' + zeroize(i);
+            return  zeroize(m) + '月' + zeroize(d) + '日 ' ;
         } else {
             return  Y + '年' + zeroize(m) + '月' + zeroize(d) + '日 ' + zeroize(H) + ':' + zeroize(i);
         }

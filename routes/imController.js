@@ -56,12 +56,15 @@ module.exports = (app) =>{
 			code : 401
 		}
 		Myim.queryAllRoom( data =>{
+			//console.log("返回的data",data)
 			if(data.length < 1){
 				deploy.code = 403;
 				deploy.mark = "数据库没有查到数据啦";
 				return res.send(deploy);
 			}
+
 			deploy.imlistarry = data;
+			//console.log("输入到前端的数据",deploy)
 			res.send(deploy);
 			//console.log(data)
 		}, err =>{

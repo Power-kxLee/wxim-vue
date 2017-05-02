@@ -30,26 +30,7 @@
 	background:white;
 	font-size: 14px;
 }
-.page-loadmore .pm-item-list{
-	padding: 10px;
-}
-.page-loadmore .pm-item-list .pm-item-divbox{
-	border:1px solid #bababa;
-}
-.page-loadmore .pm-item-list .pm-item-divbox .pm-item-head{
-	background: #E5E5E5;
-	padding: 5px 10px;
-	border-bottom: 1px solid #bababa;
-}
-.page-loadmore .pm-item-list .pm-item-divbox .pi-head-cont{
-overflow: hidden;
-text-overflow: ellipsis;
--webkit-text-overflow: ellipsis;
--moz-text-overflow: ellipsis;
--o-text-overflow: ellipsis;
-white-space: nowrap;
-padding: 0 5px;
-}
+
 .pm-item-cont{
 	background: #F3F3F3;
 	padding: 5px 10px;
@@ -158,4 +139,34 @@ overflow: hidden;
 }
 .jiantou .icon-right{
 	font-size: 30px;
+}
+
+
+.msg-room-list {
+	border-bottom: 1px solid #F2F2F2;
+}
+.msg-room-list .msg-rl-warp{
+	padding: 10px 15px;
+}
+.msg-room-list .msg-room-img{
+	width: 50px;
+	height: 50px;
+	flex:0 0 60px;
+}
+.msg-room-list .msg-room-article{
+	flex:1;
+}
+.msg-room-list .msg-room-article section{
+	color: #bfbfbf;
+}
+.msg-room-list .msg-room-date{
+	flex:0 0 60px;
+	font-size: 12px;
+	color: #bfbfbf;
+	text-align: right;
+}
+.msg-room-list .msg-room-img img{
+	display: block;
+	width: 50px;
+	height: 50px;
 }

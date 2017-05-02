@@ -37,7 +37,7 @@ module.exports = function(io){
 		});
 		socket.on("leave", () =>{
 			socket.emit("disconnect");
-		})
+		});
 		socket.on('disconnect', (msg) => {
 			let index = -1;
 			romInfo[_id].forEach( (elem,i) =>{
