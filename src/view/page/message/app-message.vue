@@ -180,7 +180,6 @@
 
 				});
        
-        	console.log( storage.getItem("chatRoom"+number),"chatRoom"+number )
 
         	//加入聊天室
             this.socketIo.on("connect", () =>{
@@ -190,7 +189,8 @@
             		useremail
             	});
             });
-            this.socketIo.on("getmsg",(msg) => {
+            this.socketIo.on("roomgetmsg",(msg) => {
+            	console.log("房间内收到的信息是",msg)
             	this.msgarry.push(msg);
             	this.$nextTick(() =>{
             		window.scrollTo(0,document.body.scrollHeight);

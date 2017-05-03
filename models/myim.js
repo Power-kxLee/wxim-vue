@@ -1,6 +1,6 @@
 const IM = require("../lib/IM.js").IM;
 const imMsgLog = require("../lib/IM.js").IMRecord;
-
+const Q = require("q");
 module.exports = {
 	create (data,success,error){
 		let user = null;
@@ -57,34 +57,40 @@ module.exports = {
 	 */
 	queryAllRoom (success,error ){
 		let roomarry = [];
+		let defer = Q.defer();
 		IM.find( (err,person) => {
-			//console.log("所有房间",person)
-			for(let i = 0 ; i < person.length ; i++){
-				console.log( person[i].number)
-				let sn = {}
+			if(err){
+				defer.reject(err)
+			}
 
-				imMsgLog.findOne({"number" : person[i].number}, (err,data) => {
-					if(err) { //失败
-						return error(err);
-					}
+			person.forEach( (elem,i) =>{
+
+				this.queryRoomMsgLog({
+					"number":elem.number
+				}).then(data =>{
+
 					if(!!data){
-						person[i].roomnewmsg.push(data.msgarry[data.msgarry.length - 1]);
+						let lastmsg = data.msgarry;
+						elem.roomnewmsg = [];
+						elem.roomnewmsg.push(lastmsg[lastmsg.length - 1]);
 
-						data.save( (err,res) =>{
+						elem.save( (err,res) =>{
 							if(err){
 								return error(err);
 							};
-							console.log("修改成功",res)
-
+							defer.resolve(person);
 						});
-						console.log(data)
 					}
-					success(person);
+				}).catch(err =>{
+					defer.reject(err);
 				});
-				
-				
-			}
+			});
+
+
+			//console.log("所有房间",person)
+			
 		});
+		return defer.promise;
 	},
 	/**
 	 * [queryRoomMsgLog 查询指定房间的聊天记录]
@@ -92,13 +98,16 @@ module.exports = {
 	 * @param  {[type]} error   [description]
 	 * @return {[type]}         [description]
 	 */
-	queryRoomMsgLog (obj,success,error){
+	queryRoomMsgLog (obj){
+		let defer = Q.defer();
 		imMsgLog.findOne(obj, (err,person) => {
 			if(err) { //失败
-				return error(err);
+				defer.reject(err);
 			}
-			success(person);
+			defer.resolve(person);
+
 		});
+		return defer.promise;
 	},
 	/**
 	 * [createMsgLog 创建房间的聊天记录]
@@ -107,6 +116,7 @@ module.exports = {
 	 * @param  {[type]} error   [失败回调函数]
 	 */
 	createMsgLog (form,success,error){
+		console.log("form",form)
 		let code = 401;
 		let mark = "";
 		if(!form.number){
@@ -115,8 +125,8 @@ module.exports = {
 			return error({code,mark})
 		}
 		this.queryRoomMsgLog({
-			"number":form.number	
-		}, data =>{
+			"number":form.number
+		}).then( data =>{
 			let createdata = {
 				number : form.number,
 				msgarry : [{
@@ -163,9 +173,10 @@ module.exports = {
 				
 			}
 
-		}, err =>{
+		}).catch(err =>{
 			error(err);
 		});
+		
 
 	},
 	/**
@@ -181,13 +192,12 @@ module.exports = {
 			return error({code,mark})
 		}
 		this.queryRoomMsgLog({
-			"number":form.number	
-		}, data =>{
+			"number":form.number
+		}).then( data=>{
 			success(data);
-
-		}, err =>{
+		}).catch( err =>{
 			error(err);
-		});
-
+		})
+		
 	}
 } 

@@ -13,13 +13,16 @@ module.exports = function(io){
 			if(!romInfo[_id]){
 				romInfo[_id] = [];
 			}
-			console.log("romInfo[_id]",romInfo[_id])
-			romInfo[_id].forEach( (elem,i) =>{
-				if(elem.useremail == msg.useremail){
-					jsonclose = false;
-					return false;
-				}
-			});
+			console.log("房间号是",romInfo[_id])
+			if(romInfo[_id].length > 0){
+
+				romInfo[_id].forEach( (elem,i) =>{
+					if(elem.useremail == msg.useremail){
+						jsonclose = false;
+						return false;
+					}
+				});
+			}
 			if(!jsonclose){
 				return false;
 			}
@@ -28,7 +31,7 @@ module.exports = function(io){
 				useremail : myEmail = msg.useremail,
 				username  : myName  = msg.username
 			});
-
+			console.log("有人加入聊天室房号分别是:",_id)
 			socket.join(_id);
 			io.to(_id).emit("newJoinUser",{
 				username  : msg.username,
@@ -56,6 +59,7 @@ module.exports = function(io){
 
 		socket.on("sendmsg", (msg) =>{
 			io.to(_id).emit('getmsg', msg);
+			io.to(_id).emit('roomgetmsg', msg);
 		});
 
 	});

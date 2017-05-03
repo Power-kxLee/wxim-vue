@@ -70,7 +70,7 @@ module.exports = (app) =>{
 	 * [登录接口]
 	 * @return {[object]}   [成功返回的数据]
 	 */
-	app.post("'/user/login" , ( req , res ) =>{
+	app.post("/user/login" , ( req , res ) =>{
 		let email = req.body.email;
 		let password = req.body.password;
 		let returnObj = {};

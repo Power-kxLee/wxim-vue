@@ -15,8 +15,8 @@
 							<header>{{item.title }}</header>
 							<section v-if='item.roomnewmsg.length > 0'>{{item.roomnewmsg[0].useremail}} : {{item.roomnewmsg[0].message}}</section>
 						</article>
-						<div class='msg-room-date'>
-							{{item.date |timestamp }}
+						<div v-if='item.roomnewmsg.length > 0' class='msg-room-date'>
+							{{item.roomnewmsg[0].date |timestamp }}
 						</div>
 		    		</div>
 		    		</router-link>
@@ -43,6 +43,7 @@
 import '../../../assets/font/message/iconfont.css';
 import '../../../assets/css/page/message/index.css';
 import createIm from './createIM.vue'
+import io from "../../../socket-client";
 const storage = window.localStorage;
 export default {
   	data() {
@@ -50,6 +51,7 @@ export default {
 	    	MY_URL:this.$store.state.MY_URL,
 	     	active: 'tab-container1',
 		   	list: [],
+        socketIo : null ,
 		    allLoaded: false,
 		    bottomStatus: '',
 		    wrapperHeight: 0,
@@ -97,6 +99,8 @@ export default {
   		}
   	},
  	created() {
+      this.socketIo = io.io.connect(io.url);
+
       this.$ajax({
       	method :"post",
       	data : {},
@@ -105,11 +109,36 @@ export default {
       	if(d.data.code == 401){
 
       		this.list = d.data.imlistarry;
+          d.data.imlistarry.forEach( (elem,i)=>{
+            console.log(elem)
+
+            this.socketIo.on("connect", () =>{
+              this.socketIo.emit("join",{
+                number:elem.number ,
+                username :this.username,
+                useremail : this.useremail
+              });
+            });
+          });
       	}
-      	console.log("data",d.data.imlistarry)
+      	console.log("所有房间数据",d.data.imlistarry)
       }).catch(err =>{
       	console.log(err)
       });
+
+      //接收消息
+      this.socketIo.on("getmsg",(msg) => {
+        this.list.forEach( (elem,i) =>{
+          if(elem.number == msg.number){
+            elem.roomnewmsg = [];
+            elem.roomnewmsg.push(msg);
+            return false;
+          }
+        });
+        console.log("收到最新消息",msg)
+      })
+
+
     },
     mounted() {
       this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top;
