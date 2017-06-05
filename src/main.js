@@ -20,7 +20,7 @@ Vue.use(MintUI) //调用使用
 Vue.use(VueRouter)
 
 Vue.prototype.$ajax = axios; //将axios改写为vue原型属性
-
+window.axios = axios;
 //保存路由
 window.router = new VueRouter({
   routes,
@@ -76,8 +76,8 @@ const pagingfn = (to, from) => {
 }
 
 router.beforeEach((to, from, next) => {
-      //console.log("to",to.path,to,to.matched.some(record => record.meta.requireAuth))
-      //console.log(to.matched.some(record => record.meta.requireAuth))
+     // console.log(to,from)
+
       if (to.matched.some(record => record.meta.requireAuth)) {  // 判断该路由是否需要登录权限
 
         if (store.state.loginstart) {  // 通过vuex state获取当前的token是否存在

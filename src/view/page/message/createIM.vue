@@ -113,13 +113,8 @@ export default {
 	  showformfun(){
 	  	this.showform = this.showform ? false : true;
 	  }
-  	},
- 	created() {
-     
-    },
-    mounted() {
-     	
-    }
+  	}
+  	
 };
 </script>
 

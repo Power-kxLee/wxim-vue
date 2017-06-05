@@ -21,7 +21,7 @@
               <span class='seller-state'>Waiting payment</span>
             </div>
             <div class='orderitem'>
-              <router-link class='orderitem-tolink' to='/detail/more'>
+              <router-link class='orderitem-tolink' :to="{ path: '/detail/more', query: { number: 111}}"  >
                 <div class='orderitem-top'>
                   
                   <div class='orderitem-img'>
@@ -91,6 +91,11 @@
       leePopup,
       appHeader
     },
+    '$route' (to, from) {
+
+        console.log(111111111111)
+        
+      },
     methods: {
       test (){
         

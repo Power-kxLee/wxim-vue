@@ -117,31 +117,40 @@
 		data (){
 			return {
 				useremail : this.$route.query.useremail,
-				msgarry:[],
-				socketIo : null ,
-				MY_URL:this.$store.state.MY_URL
+				number    : this.$route.query.number,
+				username  : this.$route.query.username,
+				msgarry   :[],
+				socketIo  : null ,
+				MY_URL    :this.$store.state.MY_URL
 			}
 		},
 		components : {
 			mVoice
 		},
 		watch: {
-	      '$route' (to, from) {
-	      	console.log("离开")
-	      	this.socketIo.emit("leave");
+	      '$route' (to, from) {	      	
+	      
+	      	this.socketIo.emit("leave",{
+	      		number : this.number,
+	      		useremail : this.useremail,
+	      		username : this.username
+	      	});
 	      }
 	    },
 		methods : {
+			//发送消息
 			sendfn (form){
 				//console.log("this.data",this.data)
-				console.log(form)
 				this.$ajax({
 					method :"post",
 					data:form,
 					url:this.MY_URL+"/im/sendmessage"
 				}).then(options =>{
-					console.log(options)
-					this.socketIo.emit("sendmsg",form);
+
+					this.socketIo.emit("sendmsg",{
+						form,
+						number : this.number
+					});
 
 				}).catch(err =>{
 
@@ -155,10 +164,10 @@
 	  	},
 
         created(){
-        	
-        	const number = this.$route.query.number
-        	const username = this.$route.query.username	
-        	const useremail = this.$route.query.useremail
+        	console.log(this.$route)
+        	const number = this.number;
+        	const username = this.username;
+        	const useremail = this.useremail;
             this.socketIo = io.io.connect(io.url);
         	
         	//非法进入聊天室,直接退出
@@ -173,9 +182,12 @@
 					data:{number},
 					url:this.MY_URL+"/im/queryallmsg"
 				}).then(options =>{
-					console.log(options.data.msgarry)
-					console.log(JSON.stringify(options.data.msgarry))
+					//console.log(options.data.msgarry)
+					//console.log(JSON.stringify(options.data.msgarry))
 					this.msgarry = options.data.msgarry
+					this.$nextTick(() =>{
+	            		window.scrollTo(0,document.body.scrollHeight);
+	            	});
 				}).catch(err =>{
 
 				});
@@ -185,23 +197,17 @@
             this.socketIo.on("connect", () =>{
             	this.socketIo.emit("join",{
             		number ,
-            		username ,
+            		username , 
             		useremail
             	});
             });
-            this.socketIo.on("roomgetmsg",(msg) => {
-            	console.log("房间内收到的信息是",msg)
-            	this.msgarry.push(msg);
-            	this.$nextTick(() =>{
-            		window.scrollTo(0,document.body.scrollHeight);
-            	})
-            })
+            
             this.socketIo.on("newJoinUser",(msg) =>{
             	console.log("用户",msg.username,"加入了房间,当前人数是",msg.headcount)
             });
-            this.socketIo.on("msg",(msg,num) =>{
+            this.socketIo.on("user_leave",(d) =>{
 
-            	console.log("用户",msg,"退出了房间,当前人数是",num)
+            	console.log("用户",d.username,"退出了房间,当前人数是",d.length)
             });
             this.socketIo.on("event", (msg) => {
                 let gallery = document.querySelector(".my-gallery");
@@ -211,11 +217,25 @@
                 console.log(document.querySelector(".appviews") )
                 console.log("有最新的消息",msg)
             }); 
+            this.socketIo.on("roomgetmsg",(msg) => {
+            	console.log("房间内收到的信息是",msg)
+            	//console.log("this.msgarry",this.msgarry)
+            	this.msgarry.push(msg);
+            	this.$nextTick(() =>{
+            		window.scrollTo(0,document.body.scrollHeight);
+            	})
+            });
+
+            	
         },
         mounted (){
 			
 			//初始化缩略图放大
 		    initPhotoSwipeFromDOM('.my-gallery');
+            		
+		    
+
+
 		}
 		
 	}

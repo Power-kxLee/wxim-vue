@@ -93,6 +93,6 @@
   import '../../../assets/css/page/detail/index.css'
   import '../../../assets/css/page/detail/more.css'
   export default {
-   
+   	
   };
 </script>

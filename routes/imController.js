@@ -11,6 +11,7 @@ module.exports = (app) =>{
 		let deploy = {
 			code : 401
 		}
+		console.log("bodydata",bodydata)
 		try {
 			if(bodydata.title.length < 1){
 				
@@ -57,8 +58,7 @@ module.exports = (app) =>{
 		}
 		
 		Myim.queryAllRoom().then( data =>{
-			console.log("最后返回的数据",data)
-
+			//console.log("最后返回的数据",data)
 			if(data.length < 1){
 				deploy.code = 403;
 				deploy.mark = "数据库没有查到数据啦";
@@ -80,6 +80,7 @@ module.exports = (app) =>{
 	 * @return {[type]}                   [返回所有聊天信息]
 	 */
 	app.post("/im/sendmessage" , (req,res) =>{
+		//console.log("req.body",req.body)
 		let number = req.body.number;
 		let date = req.body.date;
 		let useremail = req.body.useremail; 
@@ -99,11 +100,11 @@ module.exports = (app) =>{
 		Myim.createMsgLog(immsg, sus =>{
 			//console.log(success)
 			//console.log("查询房间聊天记录结果");
-			console.log("成功啦",sus)
+			//console.log("成功啦",sus)
 			res.send(sus);
 		},error =>{
 			res.send(error)
-		});
+		}); 
 	});
 	app.post("/im/queryallmsg" , (req,res) =>{
 

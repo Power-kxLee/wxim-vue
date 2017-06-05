@@ -12,7 +12,7 @@
 		    				<img src="http://www.tt-elmontyouthsoccer.com/html/upload/headimg/58004f1c6a73b.jpg">
 		    			</div>
 						<article class='msg-room-article'>
-							<header>{{item.title }}</header>
+							<header>{{item.title }} {{item.number}}</header>
 							<section v-if='item.roomnewmsg.length > 0'>{{item.roomnewmsg[0].useremail}} : {{item.roomnewmsg[0].message}}</section>
 						</article>
 						<div v-if='item.roomnewmsg.length > 0' class='msg-room-date'>
@@ -43,9 +43,9 @@
 import '../../../assets/font/message/iconfont.css';
 import '../../../assets/css/page/message/index.css';
 import createIm from './createIM.vue'
-import io from "../../../socket-client";
+import io from "../../../socket-client";  
 const storage = window.localStorage;
-export default {
+export default  {
   	data() {
 	    return {
 	    	MY_URL:this.$store.state.MY_URL,
@@ -59,91 +59,105 @@ export default {
 		    useremail : storage.getItem("USER_EMAIL")
 	    };
   	},
+
+    
   	components : {
   		createIm
   	},
- 	methods:{
- 		crateRoom (e,form){
- 			console.log(form)
- 			this.$ajax({
- 				method : "post",
- 				data:form,
- 				url:this.MY_URL+"/createim"
- 			}).then(d =>{
- 				if(d.data.code == 401){
- 					this.list.push(d.data.roomdata.homedata)
- 				}
- 				console.log(d.data)
- 			}).catch(err =>{
- 				console.log(err)
- 			});
- 		},
-	  	checkedtab (cur){
-	  		if(this.active == cur){
-	  			return 'table-cur';
-	  		}else{
-	  			return '';
-	  		}
-	  	},
-	  	clicktab (cur){
-	  		console.log("onclick")
-	  		this.active = cur;
-	  	},
-	  	handleBottomChange(status) {
-	        this.bottomStatus = status;
-	    }
-  	},
-  	filters : {
-  		timestamp (value){
-  			return timestampFormat(value);
-  		}
-  	},
- 	created() {
-      this.socketIo = io.io.connect(io.url);
+    
+    beforeRouteLeave (to, from, next) {
 
-      this.$ajax({
-      	method :"post",
-      	data : {},
-      	url :this.MY_URL+"/getroomim"
-      }).then( d =>{
-      	if(d.data.code == 401){
+      if(this.list.length > 0){
 
-      		this.list = d.data.imlistarry;
-          d.data.imlistarry.forEach( (elem,i)=>{
-            console.log(elem)
-
-            this.socketIo.on("connect", () =>{
-              this.socketIo.emit("join",{
-                number:elem.number ,
-                username :this.username,
-                useremail : this.useremail
-              });
-            });
+        this.list.forEach( (elem,i) =>{
+         
+          //离开列表所有房间
+          this.socketIo.emit("leave",{
+            number : elem.number,
+            useremail : this.useremail,
+            username : this.username
           });
+
+        });
+      }
+
+      next()
+    },
+    methods:{
+
+      //创建房间
+      crateRoom (e,form){
+        this.$ajax({
+          method : "post",
+          data:form,
+          url:this.MY_URL+"/createim"
+        }).then(d =>{
+          if(d.data.code == 401){
+          	this.list.push(d.data.roomdata.homedata)
+          }
+        }).catch(err =>{
+          });
+        },
+
+        //动态添加calss
+        checkedtab (cur){
+          if(this.active == cur){
+            return 'table-cur';
+          }else{
+            return '';
+          }
+        },
+
+      },
+      filters : {
+        timestamp (value){
+        return timestampFormat(value);
+      }
+    },
+ 	  created() {
+      this.socketIo = io.io.connect(io.url);//创建链接
+      //获取所有相关的房间信息
+      this.$ajax({
+        method :"post",
+        data : {},
+        url :this.MY_URL+"/getroomim"
+      }).then( d =>{
+        if(d.data.code == 401){
+
+          this.list = d.data.imlistarry;
+          for ( let i = 0 ; i < this.list.length ; i++ ){
+            console.log("客户端连接房间",this.list[i].number )
+            this.socketIo.on("connect", () =>{
+                //加入房间
+                var roomArray = {
+                  number:this.list[i].number ,
+                  username :this.username,
+                  useremail : this.useremail
+                }
+                this.socketIo.emit("join",roomArray);
+                
+            });
+          }
+          
       	}
-      	console.log("所有房间数据",d.data.imlistarry)
-      }).catch(err =>{
+      }).catch(err =>{ 
       	console.log(err)
       });
-
-      //接收消息
-      this.socketIo.on("getmsg",(msg) => {
-        this.list.forEach( (elem,i) =>{
-          if(elem.number == msg.number){
-            elem.roomnewmsg = [];
-            elem.roomnewmsg.push(msg);
-            return false;
-          }
-        });
-        console.log("收到最新消息",msg)
-      })
-
 
     },
     mounted() {
       this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top;
+      //接收消息
+      this.socketIo.on("roomgetmsg",(msg) => {
+
+        console.log("首页列表收到信息",msg) 
+       
+      });
+
+    
     }
 };
+
 
 const timestampFormat = ( timestamp ) => {
 

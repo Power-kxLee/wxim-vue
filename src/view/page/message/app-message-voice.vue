@@ -15,7 +15,7 @@
                         <span >{{talkname}}</span>
                     </div>
                     <div v-else class='textin'>
-                        <div  id='textareafield' class="textareafield" @input='textinfn'  contenteditable="true" ></div>
+                        <div @keyup.enter='sendio'  id='textareafield' class="textareafield" @input='textinfn'  contenteditable="true" ></div>
 					   <input type="hidden" v-model='formdata.message'>
                       
                     </div>
@@ -104,6 +104,7 @@
                 }
             }
         },
+       
         methods:{
             textinfn (event){
                 let inhtml = event.target.innerHTML;
@@ -117,6 +118,7 @@
                 this.$emit("sendfn",this.formdata);
                 text.innerHTML = "";
                 this.inputshow  = false;
+                return false;
             },
             taptalk (){
                 this.talk = this.talk ? false : true;
@@ -201,6 +203,7 @@
                 this.talkTool();
             }
         }
+
 	};
     
 

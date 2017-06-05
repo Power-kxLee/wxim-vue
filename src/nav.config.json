@@ -47,7 +47,7 @@
 				}
 			},
 			{
-				"path": "/message",
+				"path": "/message/",
 				"name": "Message Center",
 				"component" : "/message/index.vue",
 				"meta":{

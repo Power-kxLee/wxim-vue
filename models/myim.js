@@ -68,7 +68,7 @@ module.exports = {
 				this.queryRoomMsgLog({
 					"number":elem.number
 				}).then(data =>{
-
+					//console.log("查询成功",data)
 					if(!!data){
 						let lastmsg = data.msgarry;
 						elem.roomnewmsg = [];
@@ -76,7 +76,7 @@ module.exports = {
 
 						elem.save( (err,res) =>{
 							if(err){
-								return error(err);
+								defer.reject(err);
 							};
 							defer.resolve(person);
 						});
@@ -116,7 +116,7 @@ module.exports = {
 	 * @param  {[type]} error   [失败回调函数]
 	 */
 	createMsgLog (form,success,error){
-		console.log("form",form)
+	//	console.log("form",form)
 		let code = 401;
 		let mark = "";
 		if(!form.number){

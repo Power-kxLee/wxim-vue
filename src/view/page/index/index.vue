@@ -6,7 +6,7 @@
         <img src="../../../assets/image/582819beNe89ce16d.png" >
       </div>
       <div class='head-setting cf' >
-         <router-link to='/message' class='head-message fr'>
+         <router-link :to="{path: '/message', query: {useremail:useremail}}" class='head-message fr'>
           <span class='indexicon icon-message'>
             <mt-badge size="small" color='#fdcb63'>30</mt-badge>
           </span>
@@ -189,6 +189,7 @@
 <script type="text/babel">
   import '../../../assets/font/index/iconfont.css';
   import '../../../assets/css/page/index.css';
+  const storage = window.localStorage;
   if(!!window.localStorage.getItem("userksy")){
   }
   const loadImage = () => {
@@ -219,8 +220,10 @@
     },
     data() {
     	return {
-	        defimg : "../../../assets/image/6135373832343233323531343739313739383233333937_big.jpg",
-	    };
+          username : storage.getItem("USER_NAME"),
+          useremail : storage.getItem("USER_EMAIL"),
+	        defimg : "../../../assets/image/6135373832343233323531343739313739383233333937_big.jpg"
+	    }
     },
     methods:{
       save () {
