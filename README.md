@@ -4,6 +4,7 @@
 
 
 [![事例图片](https://github.com/Power-kxLee/vue2-cordova-demo/blob/master/demo.gif)]()
+[![仿照微信的IM](https://github.com/Power-kxLee/vue2-cordova-demo/blob/master/weixindemo.gif)]()
 
 ## 安装
 ``` 

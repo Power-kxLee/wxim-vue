@@ -115,7 +115,7 @@ export default  {
       }
     },
  	  created() {
-      this.socketIo = io.io.connect(io.url);//创建链接
+      
       //获取所有相关的房间信息
       this.$ajax({
         method :"post",
@@ -125,19 +125,39 @@ export default  {
         if(d.data.code == 401){
 
           this.list = d.data.imlistarry;
-          for ( let i = 0 ; i < this.list.length ; i++ ){
-            console.log("客户端连接房间",this.list[i].number )
-            this.socketIo.on("connect", () =>{
-                //加入房间
-                var roomArray = {
-                  number:this.list[i].number ,
-                  username :this.username,
-                  useremail : this.useremail
+            for ( let i = 0 ; i < this.list.length ; i++ ){
+              var socketIo = this.socketIo = io.io.connect(io.url);//创建链接
+              socketIo.on("connect", () =>{
+                  //加入房间
+                  var roomArray = {
+                    number:this.list[i].number ,
+                    username :this.username,
+                    useremail : this.useremail
+                  }
+                  socketIo.emit("join",roomArray);
+                      
+              });
+
+
+              //接收消息
+              socketIo.on("roomgetmsg",(d) => {
+
+                console.log("首页列表收到信息",d) 
+                let list_arry = this.list;
+                for (let i = 0 ; i < list_arry.length ; i ++){
+                  if(list_arry[i].number == d.number){
+                    list_arry[i].roomnewmsg[0].message = d.message;
+                    list_arry[i].roomnewmsg[0].date = d.date;
+                    list_arry[i].roomnewmsg[0].useremail = d.useremail;
+                    //console.log(list_arry[i].roomnewmsg[0].message , d.message)
+                  }
                 }
-                this.socketIo.emit("join",roomArray);
+                this.list = list_arry;
+                console.log(this.list)
                 
-            });
-          }
+               
+              });
+            }
           
       	}
       }).catch(err =>{ 
@@ -147,12 +167,7 @@ export default  {
     },
     mounted() {
       this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top;
-      //接收消息
-      this.socketIo.on("roomgetmsg",(msg) => {
-
-        console.log("首页列表收到信息",msg) 
-       
-      });
+      
 
     
     }
