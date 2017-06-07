@@ -40,7 +40,7 @@ module.exports = (app) =>{
 			}
 			deploy.roomdata = data;
 			res.send(deploy);
-		},(err) =>{
+		},(err) =>{sendmessage
 			deploy.code = 404;
 			deploy.errdata = err;
 			res.send(deploy);
@@ -81,26 +81,24 @@ module.exports = (app) =>{
 	 */
 	app.post("/im/sendmessage" , (req,res) =>{
 		//console.log("req.body",req.body)
-		let number = req.body.number;
-		let date = req.body.date;
-		let useremail = req.body.useremail; 
-		let username = req.body.username; 
-		let message = req.body.message; 
-		let identity = req.body.identity; 
-
-		let immsg = {
-			number,
-			date,
-			useremail,
-			username,
-			message,
-			identity
-		}
+		let 
+			number = req.body.number,
+			date = req.body.date,
+			useremail = req.body.useremail,
+			username = req.body.username,
+			message = req.body.message,
+			identity = req.body.identity,
+			if_ready = req.body.if_ready,
+			immsg = {
+				number,
+				date,
+				useremail,
+				username,
+				message,
+				if_ready
+			};
 
 		Myim.createMsgLog(immsg, sus =>{
-			//console.log(success)
-			//console.log("查询房间聊天记录结果");
-			//console.log("成功啦",sus)
 			res.send(sus);
 		},error =>{
 			res.send(error)
@@ -114,5 +112,9 @@ module.exports = (app) =>{
 		},err =>{
 			re.send(err)
 		});
+	});
+
+	app.post("/im/recordlength", (req,res) =>{
+		Myim.recordLength(req.body)
 	});
 }

@@ -127,13 +127,24 @@
 		components : {
 			mVoice
 		},
+		
 		watch: {
-	      '$route' (to, from) {	      	
-	      
+	      '$route' (to, from) {	   
+
 	      	this.socketIo.emit("leave",{
 	      		number : this.number,
 	      		useremail : this.useremail,
 	      		username : this.username
+	      	});
+	      	console.log({useremail:this.useremail,number:this.number,length:this.msgarry.length})
+	      	this.$ajax({
+	      		method : "post",
+	      		data : {useremail:this.useremail,number:this.number,length:this.msgarry.length},
+	      		url:this.MY_URL+"/im/recordlength"
+	      	}).then(options =>{
+
+	      	}).catch(err =>{
+
 	      	});
 	      }
 	    },
@@ -176,21 +187,21 @@
         		return false;
         	}
         	
+        	//获取房间的聊天信息
+        	this.$ajax({
+				method :"post",
+				data:{number},
+				url:this.MY_URL+"/im/queryallmsg"
+			}).then(options =>{
 
-	        	this.$ajax({
-					method :"post",
-					data:{number},
-					url:this.MY_URL+"/im/queryallmsg"
-				}).then(options =>{
-					//console.log(options.data.msgarry)
-					//console.log(JSON.stringify(options.data.msgarry))
-					this.msgarry = options.data.msgarry
-					this.$nextTick(() =>{
-	            		window.scrollTo(0,document.body.scrollHeight);
-	            	});
-				}).catch(err =>{
+				this.msgarry = options.data.msgarry
+				//保持在最底部
+				this.$nextTick(() =>{
+            		window.scrollTo(0,document.body.scrollHeight);
+            	});
+			}).catch(err =>{
 
-				});
+			});
        
 
         	//加入聊天室

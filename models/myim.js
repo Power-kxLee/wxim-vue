@@ -1,5 +1,6 @@
-const IM = require("../lib/IM.js").IM;
-const imMsgLog = require("../lib/IM.js").IMRecord;
+const newim = require("../lib/IM.js");
+const IM = newim.IM;
+const imMsgLog = newim.IMRecord;
 const Q = require("q");
 module.exports = {
 	create (data,success,error){
@@ -110,7 +111,7 @@ module.exports = {
 		return defer.promise;
 	},
 	/**
-	 * [createMsgLog 创建房间的聊天记录]
+	 * [createMsgLog 创建房间,并保存聊天记录]
 	 * @param  {[type]} form    [数据data]
 	 * @param  {[type]} success [成功回调函数]
 	 * @param  {[type]} error   [失败回调函数]
@@ -127,15 +128,19 @@ module.exports = {
 		this.queryRoomMsgLog({
 			"number":form.number
 		}).then( data =>{
-			let createdata = {
-				number : form.number,
-				msgarry : [{
+			let 
+				form_post_obj = {
 					date : form.date,
 					useremail : form.useremail,
+					username : form.username,
 					message : form.message,
 					identity : form.identity
-				}]
-			}
+				},
+				createdata = {
+					number : form.number,
+					msgarry : [form_post_obj]
+				};
+
 			
 			//没有查询到就创建一个
 			if(!data){
@@ -151,19 +156,11 @@ module.exports = {
 				//存在房间,直接进行数据更新
 				if(data.number == form.number){
 					imMsgLog.findById(data._id, (err,user) =>{
-						user.msgarry.push({
-							date : form.date,
-							useremail : form.useremail,
-							username : form.username,
-							message : form.message,
-							identity : form.identity
-						});
-
+						user.msgarry.push(form_post_obj);
 						user.save( (err,res) =>{
 							if(err){
 								return error(err);
 							};
-							//console.log("res",res)
 							success({code,res});
 
 						});
@@ -199,5 +196,37 @@ module.exports = {
 			error(err);
 		})
 		
+	},
+	recordLength(form){
+		let defer = Q.defer(),
+			roomlength = newim.roomlength;
+		//先查询这个表
+		roomlength.findOne({user_email:form.username},(err,person) =>{
+			if(err){
+				defer.reject(err);
+			}
+			//不存在就创建
+			if(!person){
+				let r_l = new roomlength({
+					user_email : form.useremail,
+					room_array :[{
+						room_number : form.number,
+						room_record_length : form.length
+					}]
+				});
+				r_l.save( (err,sus) =>{
+					if(err){
+						defer.reject(err);
+					}
+					defer.resolve(sus)
+				});
+			}else{
+				console.log("存在数据进行更新")
+			}
+			console.log("person",person)
+
+		});
+
+		return defer.promise;
 	}
 } 

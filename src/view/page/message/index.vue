@@ -141,19 +141,21 @@ export default  {
 
               //接收消息
               socketIo.on("roomgetmsg",(d) => {
+                d.if_ready = 0;
 
-                console.log("首页列表收到信息",d) 
                 let list_arry = this.list;
+
                 for (let i = 0 ; i < list_arry.length ; i ++){
                   if(list_arry[i].number == d.number){
                     list_arry[i].roomnewmsg[0].message = d.message;
                     list_arry[i].roomnewmsg[0].date = d.date;
                     list_arry[i].roomnewmsg[0].useremail = d.useremail;
-                    //console.log(list_arry[i].roomnewmsg[0].message , d.message)
                   }
                 }
                 this.list = list_arry;
-                console.log(this.list)
+
+
+                
                 
                
               });

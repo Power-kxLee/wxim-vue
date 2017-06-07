@@ -99,7 +99,8 @@
                     useremail : "",
                     userename : "",
                     message : "",
-                    identity : 0
+                    identity : 0,
+                    if_ready : 1
 
                 }
             }
