@@ -201,9 +201,10 @@ module.exports = {
 		let defer = Q.defer(),
 			roomlength = newim.roomlength;
 		//先查询这个表
-		roomlength.findOne({user_email:form.username},(err,person) =>{
+		roomlength.findOne({user_email:form.useremail},(err,person) =>{
+			let if_push = true;
 			if(err){
-				defer.reject(err);
+				defer.reject(err,"查询出错误");
 			}
 			//不存在就创建
 			if(!person){
@@ -216,14 +217,37 @@ module.exports = {
 				});
 				r_l.save( (err,sus) =>{
 					if(err){
-						defer.reject(err);
+						defer.reject(err,"创建表失败");
 					}
 					defer.resolve(sus)
 				});
 			}else{
-				console.log("存在数据进行更新")
+				let room_array = person.room_array ;
+				for (let i = 0 ; i < room_array.length ; i++ ){
+					console.log("看看执行了几次",room_array[i].room_number ,form.number)
+					if(room_array[i].room_number == form.number){
+						room_array[i].room_record_length = form.length;
+						if_push = false;
+						break;
+					}
+					
+				}
+				if(if_push){
+					
+					room_array.push({
+						room_number:form.number,
+						room_record_length : form.length
+					});
+				}
+				person.save( (err,res) =>{
+					if(err){
+						defer.reject(err,"更新数据出错");
+					}
+
+					defer.resolve(res);
+				});
+				
 			}
-			console.log("person",person)
 
 		});
 

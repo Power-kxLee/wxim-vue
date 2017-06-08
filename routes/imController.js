@@ -115,6 +115,10 @@ module.exports = (app) =>{
 	});
 
 	app.post("/im/recordlength", (req,res) =>{
-		Myim.recordLength(req.body)
+		Myim.recordLength(req.body).then( data =>{
+			console.log("成功记录了这么多条",data)
+		}).catch(err =>{
+
+		});
 	});
 }
