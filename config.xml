@@ -45,5 +45,4 @@
     <plugin name="cordova-plugin-media" spec="~3.0.0" />
     <plugin name="cordova-plugin-console" spec="~1.0.6" />
     <plugin name="cordova-plugin-nativeaudio" spec="~3.0.9" />
-    test
 </widget>
