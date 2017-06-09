@@ -15,13 +15,13 @@ cd vue2-cordova-demo
 # 百度下淘宝镜像,把cnpm装下.如果没有就用npm
 cnpm install
 ```
-
+ 
 
 ## 使用
 
 ```
 # 开发模式
-npm run dev
+npm run dev 
 
 # 客户端运行
 http://localhost:8080/#/
