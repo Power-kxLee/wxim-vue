@@ -65,12 +65,11 @@ module.exports = {
 			}
 
 			person.forEach( (elem,i) =>{
-
+				console.log(person)
 				this.queryRoomMsgLog({
 					"number":elem.number
 				}).then(data =>{
-					//console.log("查询成功",data)
-					if(!!data){
+					if(data){
 						let lastmsg = data.msgarry;
 						elem.roomnewmsg = [];
 						elem.roomnewmsg.push(lastmsg[lastmsg.length - 1]);
@@ -81,6 +80,9 @@ module.exports = {
 							};
 							defer.resolve(person);
 						});
+					}else{
+						console.log("房间没有留言",elem)
+						defer.resolve(person);
 					}
 				}).catch(err =>{
 					defer.reject(err);

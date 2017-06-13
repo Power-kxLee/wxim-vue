@@ -124,6 +124,7 @@ export default  {
         data : {},
         url :this.MY_URL+"/getroomim"
       }).then( d =>{
+        console.log("房间列表",d)
         if(d.data.code == 401){
 
           this.list = d.data.imlistarry;
@@ -165,7 +166,7 @@ export default  {
           
       	}
       }).catch(err =>{ 
-      	console.log(err)
+      	console.log("获取房间失败",err)
       });
 
     },
