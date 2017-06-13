@@ -169,14 +169,13 @@
 	}
 </style>
 <script type="text/javascript">
-	import "../../assets/plugin/Swiper-master/dist/js/swiper.min.js";
-	import A from "../../assets/plugin/Swiper-master/dist/js/swiper.animate1.0.2.min.js";
-	import "../../assets/plugin/Swiper-master/dist/css/swiper.min.css";
+	import "swiper/dist/css/swiper.min.css";
 	import "../../assets/css/common/animate.min.css";	
+	import Swiper from "swiper";
+	import A from "../../assets/js/swiper.animate.min.js";
 	import '../../assets/plugin/particles/particles.min.js';
 	import particles_background from '../../assets/plugin/particles/background.js';
 	import particles_background2 from '../../assets/plugin/particles/background2.js';
-
 	export default {
 		data (){
 			return {

@@ -1,8 +1,8 @@
 <template>
   <div class='message-newbox'>
-
+ 
     <div class="page-tab-container">
-      
+ 
         <div class="page-loadmore">
 		    <div class="page-loadmore-wrapper" ref="wrapper" >
 		    	<div class="msg-room-list" v-for="(item,i) in list">
@@ -56,7 +56,9 @@ export default  {
 		    bottomStatus: '',
 		    wrapperHeight: 0,
 		    username : storage.getItem("USER_NAME"),
+       
 		    useremail : storage.getItem("USER_EMAIL")
+
 	    };
   	},
 
