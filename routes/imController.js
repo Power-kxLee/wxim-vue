@@ -110,15 +110,22 @@ module.exports = (app) =>{
 		Myim.queryAllMsg({number:req.body.number},sus =>{
 			res.send(sus);
 		},err =>{
-			re.send(err)
+			res.send(err)
 		});
 	});
 
 	app.post("/im/recordlength", (req,res) =>{
 		Myim.recordLength(req.body).then( data =>{
-			console.log("成功记录了这么多条",data)
+			res.send(data);
 		}).catch(err =>{
-
+			res.send(err);
+		});
+	});
+	app.post("/im/get_room_length",(req,res) =>{
+		Myim.get_room_length(req.body).then(data =>{
+			res.send(data);
+		}).catch(err =>{
+			res.send(err);
 		});
 	});
 }

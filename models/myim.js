@@ -65,7 +65,6 @@ module.exports = {
 			}
 
 			person.forEach( (elem,i) =>{
-				console.log(person)
 				this.queryRoomMsgLog({
 					"number":elem.number
 				}).then(data =>{
@@ -73,12 +72,18 @@ module.exports = {
 						let lastmsg = data.msgarry;
 						elem.roomnewmsg = [];
 						elem.roomnewmsg.push(lastmsg[lastmsg.length - 1]);
+						elem.room_length = lastmsg.length;
 
 						elem.save( (err,res) =>{
 							if(err){
 								defer.reject(err);
 							};
-							defer.resolve(person);
+							console.log("修改后保存的数据",person)
+							let newobj = {}
+							for(let i = 0 ; i < person.length ; i++){
+								newobj[person[i].number] = person[i];
+							}
+							defer.resolve(newobj);
 						});
 					}else{
 						console.log("房间没有留言",elem)
@@ -207,6 +212,7 @@ module.exports = {
 			let if_push = true;
 			if(err){
 				defer.reject(err,"查询出错误");
+				return defer.promise;
 			}
 			//不存在就创建
 			if(!person){
@@ -226,7 +232,6 @@ module.exports = {
 			}else{
 				let room_array = person.room_array ;
 				for (let i = 0 ; i < room_array.length ; i++ ){
-					console.log("看看执行了几次",room_array[i].room_number ,form.number)
 					if(room_array[i].room_number == form.number){
 						room_array[i].room_record_length = form.length;
 						if_push = false;
@@ -254,5 +259,20 @@ module.exports = {
 		});
 
 		return defer.promise;
+	},
+	get_room_length(form){
+		let defer = Q.defer(),
+			roomlength = newim.roomlength;
+		roomlength.findOne({user_email:form.useremail},(err,person) => {
+			if(err){
+				return defer.promise;
+			}
+			if(person){
+				console.log("查询到用户",form.useremail,"的数据",person)
+				defer.resolve(person);
+			}
+		});
+		return defer.promise;
+
 	}
 } 

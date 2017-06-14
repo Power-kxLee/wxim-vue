@@ -2,6 +2,7 @@ module.exports = function(io){
 
 	let romInfo = {};
 	io.on('connection', function(socket){
+		console.log("链接socket")
 		let myEmail = "";
 		let myName = "";
 		let _id = "";

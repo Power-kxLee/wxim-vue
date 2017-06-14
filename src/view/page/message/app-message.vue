@@ -136,7 +136,6 @@
 	      		useremail : this.useremail,
 	      		username : this.username
 	      	});
-	      	console.log({useremail:this.useremail,number:this.number,length:this.msgarry.length})
 	      	this.$ajax({
 	      		method : "post",
 	      		data : {useremail:this.useremail,number:this.number,length:this.msgarry.length},
@@ -193,8 +192,8 @@
 				data:{number},
 				url:this.MY_URL+"/im/queryallmsg"
 			}).then(options =>{
-
-				this.msgarry = options.data.msgarry
+				console.log("房间信息",options)
+				this.msgarry = !!options.data.msgarry ? options.data.msgarry : [];
 				//保持在最底部
 				this.$nextTick(() =>{
             		window.scrollTo(0,document.body.scrollHeight);
@@ -226,10 +225,8 @@
                 div.innerHTML = msg;
                 gallery.insertBefore(div,gallery.childNodes[0])
                 console.log(document.querySelector(".appviews") )
-                console.log("有最新的消息",msg)
             }); 
             this.socketIo.on("roomgetmsg",(msg) => {
-            	console.log("房间内收到的信息是",msg)
             	//console.log("this.msgarry",this.msgarry)
             	this.msgarry.push(msg);
             	this.$nextTick(() =>{

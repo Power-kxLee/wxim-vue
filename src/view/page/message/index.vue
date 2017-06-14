@@ -6,7 +6,9 @@
         <div class="page-loadmore">
 		    <div class="page-loadmore-wrapper" ref="wrapper" >
 		    	<div class="msg-room-list" v-for="(item,i) in list">
+            
 		    		<router-link :to="{ path: '/message/more', query: { number: item.number,username:username , useremail:useremail}}"  >
+            <span class='unread_msg'>{{item.differ}}</span>
 		    		<div class='msg-rl-warp flex-def'>
 		    			<div class='msg-room-img'>
 		    				<img src="http://www.tt-elmontyouthsoccer.com/html/upload/headimg/58004f1c6a73b.jpg">
@@ -51,6 +53,7 @@ export default  {
 	    	MY_URL:this.$store.state.MY_URL,
 	     	active: 'tab-container1',
 		   	list: [],
+        room_length : null,
         socketIo : null ,
 		    allLoaded: false,
 		    bottomStatus: '',
@@ -116,8 +119,33 @@ export default  {
         return timestampFormat(value);
       }
     },
+   /* watch:{
+      list : {
+        handler : function(val, oldVal){
+          console.log( val)
+          
+          if(val.room_array.length >0 ){
+            val.room_array.forEach( (elem,i) =>{
+            // this.list[elem.room_number]. elem.room_number
+            });
+          }
+        },
+        deep : true
+      }
+    },*/
+
  	  created() {
-      
+      //查询旧的房间信息
+      this.$ajax({
+        method : "post",
+        data : {useremail: this.useremail},
+        url : this.MY_URL+"/im/get_room_length"
+      }).then(d =>{
+        this.room_length = d.data;
+
+      }).catch(err =>{
+
+      });
       //获取所有相关的房间信息
       this.$ajax({
         method :"post",
@@ -127,7 +155,18 @@ export default  {
         console.log("房间列表",d)
         if(d.data.code == 401){
 
-          this.list = d.data.imlistarry;
+            this.list = d.data.imlistarry;
+            let room_array = this.room_length.room_array;
+
+            room_array.forEach( (elem,i) =>{
+              if(this.list[elem.room_number]){
+                let differ = this.list[elem.room_number].room_length - elem.room_record_length;
+                this.list[elem.room_number].differ = 0;
+              }
+            });
+            for(let val of this.list){
+              console.log("value",val)
+            }
             for ( let i = 0 ; i < this.list.length ; i++ ){
               var socketIo = this.socketIo = io.io.connect(io.url);//创建链接
               socketIo.on("connect", () =>{
@@ -146,20 +185,10 @@ export default  {
               socketIo.on("roomgetmsg",(d) => {
                 d.if_ready = 0;
 
-                let list_arry = this.list;
-
-                for (let i = 0 ; i < list_arry.length ; i ++){
-                  if(list_arry[i].number == d.number){
-                    list_arry[i].roomnewmsg[0].message = d.message;
-                    list_arry[i].roomnewmsg[0].date = d.date;
-                    list_arry[i].roomnewmsg[0].useremail = d.useremail;
-                  }
-                }
-                this.list = list_arry;
-
-
-                
-                
+                console.log("首页接受到最新数据",d)
+                this.list[d.number].roomnewmsg[0].message = d.message;
+                this.list[d.number].roomnewmsg[0].date = d.date;
+                this.list[d.number].roomnewmsg[0].useremail = d.useremail;
                
               });
             }
