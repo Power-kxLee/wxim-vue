@@ -164,15 +164,14 @@ export default  {
                 this.list[elem.room_number].differ = 0;
               }
             });
-            for(let val of this.list){
-              console.log("value",val)
-            }
-            for ( let i = 0 ; i < this.list.length ; i++ ){
+
+            
+            for(let val in this.list){
               var socketIo = this.socketIo = io.io.connect(io.url);//创建链接
               socketIo.on("connect", () =>{
                   //加入房间
                   var roomArray = {
-                    number:this.list[i].number ,
+                    number:this.list[val].number ,
                     username :this.username,
                     useremail : this.useremail
                   }
@@ -184,8 +183,9 @@ export default  {
               //接收消息
               socketIo.on("roomgetmsg",(d) => {
                 d.if_ready = 0;
-
+                this.list[d.number].differ += 1
                 console.log("首页接受到最新数据",d)
+
                 this.list[d.number].roomnewmsg[0].message = d.message;
                 this.list[d.number].roomnewmsg[0].date = d.date;
                 this.list[d.number].roomnewmsg[0].useremail = d.useremail;
