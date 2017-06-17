@@ -2,7 +2,6 @@
   <div class='message-newbox'>
  
     <div class="page-tab-container">
- 
         <div class="page-loadmore">
 		    <div class="page-loadmore-wrapper" ref="wrapper" >
 		    	<div class="msg-room-list" v-for="(item,i) in list">
@@ -25,12 +24,7 @@
 		    	</div>
 		    	
 		      
-		        <div slot="bottom" class="mint-loadmore-bottom">
-		          <span v-show="bottomStatus !== 'loading'" :class="{ 'is-rotate': bottomStatus === 'drop' }">↑</span>
-		          <span v-show="bottomStatus === 'loading'">
-		            <mt-spinner type="snake"></mt-spinner>
-		          </span>
-		        </div>
+		        
 		    </div>
 		</div>
       
@@ -42,14 +36,54 @@
 </template>
 
 <script>
+
 import '../../../assets/font/message/iconfont.css';
 import '../../../assets/css/page/message/index.css';
 import createIm from './createIM.vue'
 import io from "../../../socket-client";  
 const storage = window.localStorage;
+let connect_io = io.io.connect(io.url);
+class min_module {
+  constructor (){
+  };
+  /**
+   * [add_room 连接scoket,然后加入房间]
+   * @param {[object]} vue    [vue对象]
+   * @param {[object]} socketIo [socket对象]
+   * @param {[String]} number [房间号]
+   */
+  add_room(vue,socketIo,number){
+    socketIo.on("connect", () =>{
+        var roomArray = {
+          number,
+          username :vue.username,
+          useremail : vue.useremail
+        }
+        console.log( roomArray)
+        socketIo.emit("join",roomArray);
+            
+    });
+
+    socketIo.on("roomgetmsg",(d) => {
+      console.log(d)
+      d.if_ready = 0;
+      vue.list[d.number].differ += 1
+      vue.list[d.number].roomnewmsg[0].message = d.message;
+      vue.list[d.number].roomnewmsg[0].date = d.date;
+      vue.list[d.number].roomnewmsg[0].useremail = d.useremail;
+     
+      console.log("首页接受到最新数据",d)
+    });
+  };
+}
+
+let _MM = new min_module();
+
+
 export default  {
   	data() {
 	    return {
+        
 	    	MY_URL:this.$store.state.MY_URL,
 	     	active: 'tab-container1',
 		   	list: [],
@@ -71,22 +105,14 @@ export default  {
   	},
     
     beforeRouteLeave (to, from, next) {
-
-      if(this.list.length > 0){
-
-        this.list.forEach( (elem,i) =>{
-         
-          //离开列表所有房间
-          this.socketIo.emit("leave",{
-            number : elem.number,
-            useremail : this.useremail,
-            username : this.username
-          });
-
+      for (let i in this.list){        
+        this.socketIo.emit("leave",{
+          number : this.list[i].number,
+          useremail : this.useremail,
+          username : this.username
         });
-      }
-
-      next()
+      };
+      next();
     },
     methods:{
 
@@ -97,8 +123,9 @@ export default  {
           data:form,
           url:this.MY_URL+"/createim"
         }).then(d =>{
+          console.log("创建成功",d)
           if(d.data.code == 401){
-          	this.list.push(d.data.roomdata.homedata)
+            connect_io.emit("get_room",d.data.roomdata.homedata);
           }
         }).catch(err =>{
           });
@@ -119,59 +146,72 @@ export default  {
         return timestampFormat(value);
       }
     },
-   /* watch:{
-      list : {
-        handler : function(val, oldVal){
-          console.log( val)
-          
-          if(val.room_array.length >0 ){
-            val.room_array.forEach( (elem,i) =>{
-            // this.list[elem.room_number]. elem.room_number
-            });
+    watch:{
+      list : function(val, oldVal){
+        console.log("读取房间浏览最新的条目是第几条")
+        console.log(val)
+          let in_room_msg = [];
+          for(let key in val){
+            in_room_msg.push({
+              room_number:val[key].number,
+              room_record_length : 0
+            })
           }
-        },
-        deep : true
+          //查询旧的房间信息
+          this.$ajax({
+            method : "post",
+            data : {useremail: this.useremail , in_room_msg},
+            url : this.MY_URL+"/im/getroomlength"
+          }).then(d =>{
+            console.log(d.data)
+            this.room_length = d.data;
+
+          }).catch(err =>{
+
+          });
+
+           this.socketIo.on("emit_room",(d) =>{
+        console.log("有新的房间",d)
+        this.list[d.number] = d;
+       // _MM.add_room(this,connect_io,d.number)
+        
+        console.log("this.list",this.list)
+      });
+      },
+      room_length : function( val ,oldVal){
+          console.log("进行处理计算 有多少未读")
+          let room_array = this.room_length.room_array;
+
+          for ( let elem of room_array){
+            if(this.list[elem.room_number]){
+              let differ = this.list[elem.room_number].room_length - elem.room_record_length;
+              this.list[elem.room_number].differ = differ;
+            }
+
+          }
       }
-    },*/
+        
+    },
 
  	  created() {
-      //查询旧的房间信息
-      this.$ajax({
-        method : "post",
-        data : {useremail: this.useremail},
-        url : this.MY_URL+"/im/get_room_length"
-      }).then(d =>{
-        this.room_length = d.data;
+      
 
-      }).catch(err =>{
-
-      });
       //获取所有相关的房间信息
       this.$ajax({
         method :"post",
         data : {},
         url :this.MY_URL+"/getroomim"
       }).then( d =>{
-        console.log("房间列表",d)
-        if(d.data.code == 401){
-
+        if(d.data.code == 401){ 
+          console.log("所有房间信息",d)
             this.list = d.data.imlistarry;
-            let room_array = this.room_length.room_array;
-
-            room_array.forEach( (elem,i) =>{
-              if(this.list[elem.room_number]){
-                let differ = this.list[elem.room_number].room_length - elem.room_record_length;
-                this.list[elem.room_number].differ = 0;
-              }
-            });
-
-            
+           
             for(let val in this.list){
-              var socketIo = this.socketIo = io.io.connect(io.url);//创建链接
+              var socketIo  = this.socketIo = io.io.connect(io.url);//创建链接
+              //_MM.add_room(this,socketIo,this.list[val].number);
               socketIo.on("connect", () =>{
-                  //加入房间
                   var roomArray = {
-                    number:this.list[val].number ,
+                    number:this.list[val].number,
                     username :this.username,
                     useremail : this.useremail
                   }
@@ -179,18 +219,24 @@ export default  {
                       
               });
 
-
-              //接收消息
               socketIo.on("roomgetmsg",(d) => {
+                console.log(d)
+                let roomnewmsg = this.list[d.number].roomnewmsg;
                 d.if_ready = 0;
                 this.list[d.number].differ += 1
-                console.log("首页接受到最新数据",d)
-
-                this.list[d.number].roomnewmsg[0].message = d.message;
-                this.list[d.number].roomnewmsg[0].date = d.date;
-                this.list[d.number].roomnewmsg[0].useremail = d.useremail;
-               
+                if(!this.list[d.number].roomnewmsg[0]){
+                    this.list[d.number].roomnewmsg.push({
+                      message:"",
+                      date : 0,
+                      useremail:""
+                    });
+                }
+                this.list[d.number].roomnewmsg[0]["message"] = d.message;
+                this.list[d.number].roomnewmsg[0]["date"] = d.date;
+                this.list[d.number].roomnewmsg[0]["useremail"] = d.useremail;
+              
               });
+              
             }
           
       	}
@@ -200,6 +246,8 @@ export default  {
 
     },
     mounted() {
+
+
       this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top;
       
 
