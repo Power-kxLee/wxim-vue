@@ -136,6 +136,7 @@
 	      		useremail : this.useremail,
 	      		username : this.username
 	      	});
+	      	console.log("离开房间",{useremail:this.useremail,number:this.number,length:this.msgarry.length})
 	      	this.$ajax({
 	      		method : "post",
 	      		data : {useremail:this.useremail,number:this.number,length:this.msgarry.length},

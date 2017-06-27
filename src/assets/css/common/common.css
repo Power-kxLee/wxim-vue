@@ -13,6 +13,9 @@
 }
 .flex-def{
 	display: flex;
+	-webkit-box-pack: center;
+    -webkit-box-align: center;
+     align-items:center;
 }
 .flex{
 	display: flex;

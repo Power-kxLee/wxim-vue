@@ -1,0 +1,15 @@
+[
+	{
+		"list":[
+			{
+				"path": "/",
+				"name": "index",
+				"component" : "/index.vue",
+				"meta":{
+					"requireAuth": false,
+					"showHeader": false
+				}
+			}
+		]
+	}
+]

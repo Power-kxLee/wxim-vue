@@ -72,25 +72,26 @@ module.exports = {
                         let lastmsg = data.msgarry;
                         elem.roomnewmsg = [];
                         elem.roomnewmsg.push(lastmsg[lastmsg.length - 1]);
+                        console.log("lastmsg.length",lastmsg.length)
                         elem.room_length = lastmsg.length;
 
                         elem.save((err, res) => {
                             if (err) {
                                 defer.reject(err, "查询第二步错误");
-                                return defer.promise;
-                            };
-                            let newobj = {}
-                            for (let i = 0; i < person.length; i++) {
-                                person[i].room_length = 0;
-                                newobj[person[i].number] = person[i];
+                            }else{
+
+                                let newobj = {}
+                                for (let i = 0; i < person.length; i++) {
+                                    person[i].room_length = person[i].room_length || 0;
+                                    newobj[person[i].number] = person[i];
+                                }
+                                defer.resolve(newobj);
                             }
-                            console.log("newobj",newobj )
-                            defer.resolve(newobj);
                         });
                     } else {
                         let newobj = {}
                         for (let i = 0; i < person.length; i++) {
-                            person[i].room_length = 0;
+                            person[i].room_length = person[i].room_length || 0;
                             newobj[person[i].number] = person[i];
                         }
                         defer.resolve(newobj);

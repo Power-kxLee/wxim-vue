@@ -1,4 +1,4 @@
-import NavConfig from "./nav.config.json";
+import NavConfig from "./nav.config_2.json";
 
 const checkRouter = (config) => {
   let route = [];
@@ -7,7 +7,7 @@ const checkRouter = (config) => {
       route.push({
         name : page.name,
         path : page.path,
-        component : resolve => require([`./view/page${page.component}`], resolve),
+        component : resolve => require([`./view/xwim${page.component}`], resolve),
         meta: {
           requireAuth : page.meta.requireAuth,
           showHeader  : page.meta.showHeader ,
