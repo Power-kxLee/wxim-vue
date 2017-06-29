@@ -1,6 +1,6 @@
 <template>
-	<footer>
-		<mt-tabbar v-model="selected" fixed>
+	<footer class='layout_footer' >
+		<mt-tabbar v-model="selected" >
 		  <mt-tab-item id="xw_id">
 		    <span slot='icon' class='iconfont icon-liaotianqipao'></span>
 		    信微
@@ -31,19 +31,25 @@
 	  }
 	};
 </script>
-<style type="text/css" scoped>
-	footer{
+<style type="text/css" >
+	footer.layout_footer{
 		height: 55px;
 		color: #FCFCFC;
+		position: fixed;
+		bottom:0px;
+		left: 0px;
+		width: 100%;
 	}
-	footer a{
+	footer.layout_footer a{
 		color: #AAAAAA;
-		font-size: 20px;
 	}
-	footer .mint-tab-item-label{
-		font-size: 20px;
+	footer.layout_footer .mint-tab-item-icon > *{
+		font-size: 22px
 	}
-	footer .mint-tabbar > .mint-tab-item.is-selected{
+	footer.layout_footer .mint-tab-item-label{
+		font-size: 12px;
+	}
+	footer.layout_footer .mint-tabbar > .mint-tab-item.is-selected{
 		color: #46C01B;
 		background: none;
 	}

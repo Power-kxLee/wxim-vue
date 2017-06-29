@@ -2,12 +2,27 @@
 	{
 		"list":[
 			{
-				"path": "/",
+				"path": "/xw",
 				"name": "index",
-				"component" : "/index.vue",
+				"component" : "/layout.vue",
+				"children":[
+					{
+			          "path": "index",
+			          "component": "/index.vue"
+			        }
+				],
 				"meta":{
-					"requireAuth": false,
-					"showHeader": false
+					"requireAuth": true,
+					"showHeader": true
+				}
+			},
+			{
+				"path": "/xwmore",
+				"name": "more",
+				"component" : "/more.vue",
+				"meta":{
+					"requireAuth": true,
+					"showHeader": true
 				}
 			}
 		]

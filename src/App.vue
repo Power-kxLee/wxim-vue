@@ -3,11 +3,11 @@
     
     <guiance-page v-if='pageinit' v-on:changenext='changenextchild'></guiance-page>
 
-    <im-header></im-header>
+    
     <transition :name="transitionName"  v-if='!pageinit'>
     <router-view class='appviews'  ></router-view>
     </transition>
-    <im-footer></im-footer>
+    
   </div>
 </template>
 

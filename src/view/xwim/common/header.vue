@@ -16,6 +16,7 @@
 		position: fixed;
 		top:0px;
 		width: 100%;
+		z-index: 9;
 	}
 	header  > div{
 		height: 100%;
