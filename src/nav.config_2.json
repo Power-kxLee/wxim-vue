@@ -1,14 +1,16 @@
 [
 	{
 		"list":[
+	
 			{
-				"path": "/xw",
-				"name": "index",
-				"component" : "/layout.vue",
+				"path": "/",
+				"name": "首页",
+				"component" : "/xwim/layout.vue",
+				"redirect":"/wx",
 				"children":[
 					{
-			          "path": "index",
-			          "component": "/index.vue"
+			          "path": "wx",
+			          "component": "/xwim/index.vue"
 			        }
 				],
 				"meta":{
@@ -17,12 +19,42 @@
 				}
 			},
 			{
-				"path": "/xwmore",
+				"path": "/xwim/xwmore",
 				"name": "more",
 				"component" : "/more.vue",
 				"meta":{
 					"requireAuth": true,
 					"showHeader": true
+				}
+			},
+			{
+				"path": "/login",
+				"name": "登录",
+				"component" : "/page/login.vue",
+				"meta":{
+					"requireAuth": false,
+					"showHeader": false,
+					"loginInCheckIndex" : true
+				}
+			},
+			{
+				"path": "/register",
+				"name": "注册",
+				"component" : "/page/register.vue",
+				"meta":{
+					"requireAuth": false,
+					"showHeader": false,
+					"loginInCheckIndex" : true
+				}
+			},
+			{
+				"path": "/guidancepage",
+				"name": "找回密码",
+				"component" : "/page/guidancePage.vue",
+				"meta":{
+					"requireAuth": false,
+					"showHeader": false,
+					"loginInCheckIndex" : true
 				}
 			}
 		]

@@ -10,22 +10,22 @@ const mychild = (child) =>{
   for(let val of child){
     in_arrys.push({
       path : val.path,
-      component : resolve => require([`./view/xwim${val.component}`], resolve)
+      component : resolve => require([`./view${val.component}`], resolve)
     })
   }
   return in_arrys;
 }
 const checkRouter = (config) => {
   let route = [];
-  let children_arry = [];
   config.map( nav => 
     nav.list.map(page => 
 
       route.push({
         name : page.name,
         path : page.path,
-        component : resolve => require([`./view/xwim${page.component}`], resolve),
+        component : resolve => require([`./view${page.component}`], resolve),
         children : mychild(page.children),
+        redirect : page.redirect || "",
         meta: {
           requireAuth : page.meta.requireAuth,
           showHeader  : page.meta.showHeader ,
@@ -34,7 +34,7 @@ const checkRouter = (config) => {
       })
     )
   );
-
+  
   return {
     route
   } 
