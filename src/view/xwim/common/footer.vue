@@ -1,7 +1,7 @@
 <template>
 	<footer class='layout_footer' >
 		<mt-tabbar v-model="selected" >
-		  <mt-tab-item id="xw_id">
+		  <mt-tab-item id="xw_id" href='#/wx'>	  
 		    <span slot='icon' class='iconfont icon-liaotianqipao'></span>
 		    信微
 		  </mt-tab-item>
@@ -9,7 +9,7 @@
 		    <span slot='icon' class='iconfont icon-tongxunlu'></span>
 		    通讯录
 		  </mt-tab-item>
-		  <mt-tab-item id="find">
+		  <mt-tab-item id="find" href='#/find'>
 		    <span slot='icon' class='iconfont icon-faxian'></span>
 		    发现
 		  </mt-tab-item>

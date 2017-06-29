@@ -11,11 +11,15 @@
 					{
 			          "path": "wx",
 			          "component": "/xwim/index.vue"
+			        },
+			        {
+			          "path": "find",
+			          "component": "/xwim/find.vue"
 			        }
 				],
 				"meta":{
-					"requireAuth": true,
-					"showHeader": true
+					"requireAuth": false,
+					"showHeader": false
 				}
 			},
 			{
@@ -23,8 +27,8 @@
 				"name": "more",
 				"component" : "/more.vue",
 				"meta":{
-					"requireAuth": true,
-					"showHeader": true
+					"requireAuth": false,
+					"showHeader": false
 				}
 			},
 			{
