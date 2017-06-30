@@ -47,10 +47,7 @@
 							v-model='formdata.password'
 							required>
 						</div>
-						<div class="group-ipt verify">
-							<input type="text" name="verify" id="verify" class="ipt" placeholder="输入验证码" required>
-							<img  class="imgcode">
-						</div>
+						
 					</div>
 				</div>
 

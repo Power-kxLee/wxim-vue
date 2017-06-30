@@ -18,8 +18,8 @@
 			        }
 				],
 				"meta":{
-					"requireAuth": false,
-					"showHeader": false
+					"requireAuth": true,
+					"showHeader": true
 				}
 			},
 			{
@@ -27,8 +27,8 @@
 				"name": "more",
 				"component" : "/more.vue",
 				"meta":{
-					"requireAuth": false,
-					"showHeader": false
+					"requireAuth": true,
+					"showHeader": true
 				}
 			},
 			{

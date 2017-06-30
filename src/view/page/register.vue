@@ -40,7 +40,7 @@
 				</div>
 
 				<div class="button">
-					<button @click='regfn' type="button" class="login-btn register-btn" id="button">跳过</button>
+					<button @click='regfn' type="button" class="login-btn register-btn" id="button">注册</button>
 				</div>
 			</div>
 		</div>
