@@ -35,6 +35,7 @@
 <style type="text/css">
 	.layout_body{
 		padding-top: 50px;
+		padding-bottom: 55px;
 	}
 	.bounce-out-enter-active {
 	animation: boun-in-left .4s;

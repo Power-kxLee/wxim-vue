@@ -15,6 +15,14 @@
 			        {
 			          "path": "find",
 			          "component": "/xwim/find.vue"
+			        },
+			        {
+			          "path": "book",
+			          "component": "/xwim/wx_book.vue"
+			        },
+			        {
+			          "path": "my",
+			          "component": "/xwim/wx_my.vue"
 			        }
 				],
 				"meta":{
@@ -27,8 +35,8 @@
 				"name": "more",
 				"component" : "/more.vue",
 				"meta":{
-					"requireAuth": false,
-					"showHeader": false
+					"requireAuth": true,
+					"showHeader": true
 				}
 			},
 			{
