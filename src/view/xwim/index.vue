@@ -2,7 +2,9 @@
   <div class='message-newbox'>
  
     <div class="page-tab-container">
-        <div class="page-loadmore">
+      <mt-spinner v-if='list.length < 1' class='inloading' :type="0" color="#46c01b"></mt-spinner>
+
+      <div v-else class="page-loadmore">
 		    <div class="page-loadmore-wrapper" ref="wrapper" >
 		    	<div class="msg-room-list" @touchstart="showutil" v-for="(item,i) in list">
             
@@ -26,9 +28,9 @@
 		    	
 		      
 		        
-		    </div>
+		  </div>
 		</div>
-      
+    
     </div>
 
 	<create-im @crateRoom = "crateRoom"></create-im>
@@ -98,7 +100,15 @@ export default  {
 
 	    };
   	},
-
+    beforeRouteEnter (to, from, next) {
+     next()
+    },
+    beforeRouteUpdate (to, from, next) {
+      
+    },
+    beforeRouteLeave (to, from, next) {
+        
+    },
     
   	components : {
   		createIm
@@ -271,7 +281,7 @@ export default  {
     mounted() {
 
 
-      this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top;
+     // this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top;
       
 
     
@@ -314,3 +324,13 @@ const timestampFormat = ( timestamp ) => {
 }
 </script>
 
+<style type="text/css" >
+  .inloading{
+   display: block;
+    margin: 0px auto;
+
+  }
+  .inloading .mint-spinner-snake {
+        margin: 20px auto;
+  }
+</style>

@@ -92,7 +92,7 @@
     }
   };
 </script>
-<style type="text/css" scoped>
+<style type="text/css" >
 .logoubox{
     position: fixed;
     top: 0px;
@@ -111,7 +111,7 @@
     color: #2c3e50;
   	padding: 0px;
   	margin:0px;
-    
+    min-height: 100%;
   }
 
 

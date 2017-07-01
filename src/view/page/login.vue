@@ -103,7 +103,7 @@
 					Indicator.close();
 					if(data.data.state == "success"){
 						
-						MessageBox.alert('登录成功', '牛逼了,登录成功了').then( btn => {
+						MessageBox.alert('登录成功', '登录成功了').then( btn => {
 							this.$router.push({ path: '/' });
 							storage.setItem(types.CHECK_LOGIN_STATUS,true);
 							

@@ -3,7 +3,9 @@
 		
 		<im-header></im-header>
 		<div id='layout_body' class='layout_body'>
+
 			<transition :name="transitionName"  >
+				
 				<router-view class=''></router-view>
 			</transition>
 		</div>
@@ -19,6 +21,7 @@
         transitionName: 'bounce-in'
       }
     },
+
     watch: {
       '$route' (to, from) {
 
@@ -36,6 +39,7 @@
 	.layout_body{
 		padding-top: 50px;
 		padding-bottom: 55px;
+		min-height: 100%;
 	}
 	.bounce-out-enter-active {
 	animation: boun-in-left .4s;
