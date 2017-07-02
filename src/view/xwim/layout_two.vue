@@ -1,20 +1,18 @@
 <template>
 	<div>
 		
-		<im-header></im-header>
-		<div id='layout_body' class='layout_body'>
+		<im-header ref='imhead'></im-header>
+		<div id='layout_two_body' class='layout_two_body'>
 
 			<transition :name="transitionName"  >
 				
-				<router-view class=''></router-view>
+				<router-view ></router-view>
 			</transition>
 		</div>
-		<im-footer></im-footer>
 	</div>
 </template>
 <script type="text/javascript">
-  	import imFooter from './common/footer.vue';
-  	import imHeader from './common/header.vue';
+  	import imHeader from './common/header_two.vue';
 	export default {
     data () {
       return {
@@ -31,13 +29,15 @@
       }
     },
     components:{
-      imFooter,
       imHeader
-    }
+    },
+    mounted (){
+    	this.$refs.imhead.title =this.$route.params.title
+	}
   };
 </script>
 <style type="text/css">
-	.layout_body{
+	.layout_two_body{
 		padding-top: 50px;
 		padding-bottom: 55px;
 		min-height: 100%;

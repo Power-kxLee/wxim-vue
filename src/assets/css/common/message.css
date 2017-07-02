@@ -39,7 +39,7 @@
     display: inline-block;
     border-radius: 3px;
     vertical-align: top;
-    text-align: center;
+    text-align: center; 
     float: left;
     color: #ddd
 }

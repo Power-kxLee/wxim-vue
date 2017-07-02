@@ -1,6 +1,6 @@
 <template>
 	<footer class='layout_footer' >
-		<mt-tabbar v-model="selected" >
+		<mt-tabbar class='f_inbody' v-model="selected" >
 		  <mt-tab-item id="xw_id" href='#/wx'>	  
 		    <span slot='icon' class='iconfont icon-liaotianqipao'></span>
 		    信微
@@ -52,5 +52,8 @@
 	footer.layout_footer .mint-tabbar > .mint-tab-item.is-selected{
 		color: #46C01B;
 		background: none;
+	}
+	.layout_footer .f_inbody{
+		border-top: 1px solid #dadada;
 	}
 </style>

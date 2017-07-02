@@ -59,17 +59,24 @@ module.exports = {
         let roomarry = [];
         let defer = Q.defer();
         IM.find((err, person) => {
+            console.log("进来啦查询所有房间",person)
             if (err) {
                 defer.reject(err, "查询第一步错误");
+                return defer.promise;;
+            }
+            if(person.length < 1){
+                defer.resolve([]);
                 return defer.promise;
             }
-
             person.forEach((elem, i) => {
                 this.queryRoomMsgLog({
                     "number": elem.number
                 }).then(data => {
+
+                    //如果查询到房间
                     if (data) {
                         let lastmsg = data.msgarry;
+                        console.log("lastmsg",data   )
                         elem.roomnewmsg = [];
                         elem.roomnewmsg.push(lastmsg[lastmsg.length - 1]);
                         console.log("lastmsg.length",lastmsg.length)

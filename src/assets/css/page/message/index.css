@@ -111,18 +111,7 @@ overflow: hidden;
 	color: black;
 }
 
-.message-info{
-	background: white;
-	position: fixed;
-	bottom:0px;
-	left: 0px;
-	width: 100%;
-	box-shadow: 0 0 5px #868686;
-	padding: 7px 10px;
-}
-.message-newbox{
-	padding-bottom: 50px;
-}
+
 .page-js{
 	    font-size: 12px;
     background: #ffffff;

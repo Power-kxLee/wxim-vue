@@ -1,7 +1,7 @@
 <template>
 	<div class='app-message'>
 		
-		<!-- Root element of PhotoSwipe. Must have class pswp. -->
+		<!-- Root element of PhotoSwipe. Must have class pswp. :src='[  useremail == value.useremail ? "../../assets/image/huaji1.jpg" : "../../assets/image/huaji2.jpg"]'-->
 		
 		<div class="mui-content">
 			<div id="msg-list">
@@ -9,12 +9,13 @@
 					<div v-for='(value,i) in msgarry' class="msg-item " :class='[  useremail == value.useremail ? "msg-item-self" : ""]'>
 						<div class="nameandimg">
 							
-							<img class="msg-user" src="http://www.tt-elmontyouthsoccer.com/html/upload/headimg/58004f1c6a73b.jpg">
+							<img v-if='useremail == value.useremail' class="msg-user" src='../../assets/image/huaji2.jpg'>
+							<img v-else class="msg-user" src='../../assets/image/huaji1.jpg'>
 							
 						   	<span class="msg-name">{{value.userename}}</span>
 						</div>
 						<div class="ms-content-warp">
-							
+							<h4 class='inusername'>{{value.username}}</h4>
 							<div class="msg-content">
 
 								<div class="msg-content-inner">
@@ -105,6 +106,23 @@
 	
 	</div>
 </template>
+<style type="text/css" scople>
+	.inusername{
+		    font-size: 12px;
+    color: #AAAAAA;
+	}
+	.msg-item-self .inusername{
+		text-align: right;
+		padding-right: 13px;
+	}
+	.nt-time{
+		display: block;
+    font-size: 12px;
+	}
+	#layout_two_body{
+		background: #EBEBEB;
+	}
+</style>
 <script type="text/javascript">
 	import '../../assets/plugin/photoSwipe/photoSwipe.css'; 
 	import '../../assets/plugin/photoSwipe/default-skin/default-skin.css'; 
@@ -116,51 +134,35 @@
 	export default {
 		data (){
 			return {
-				useremail : this.$route.query.useremail,
-				number    : this.$route.query.number,
-				username  : this.$route.query.username,
+				username : storage.getItem("USER_NAME"),
+                useremail : storage.getItem("USER_EMAIL"),
+				number    : this.$route.params.number,
 				msgarry   :[],
 				socketIo  : null ,
+				goaway	  : 0,
 				MY_URL    :this.$store.state.MY_URL
 			}
 		},
 		components : {
 			mVoice
 		},
+
 		
-		watch: {
-	      '$route' (to, from) {	   
-
-	      	this.socketIo.emit("leave",{
-	      		number : this.number,
-	      		useremail : this.useremail,
-	      		username : this.username
-	      	});
-	      	console.log("离开房间",{useremail:this.useremail,number:this.number,length:this.msgarry.length})
-	      	this.$ajax({
-	      		method : "post",
-	      		data : {useremail:this.useremail,number:this.number,length:this.msgarry.length},
-	      		url:this.MY_URL+"/im/recordlength"
-	      	}).then(options =>{
-
-	      	}).catch(err =>{
-
-	      	});
-	      }
-	    },
 		methods : {
 			//发送消息
 			sendfn (form){
-				//console.log("this.data",this.data)
+				console.log("发送form",form)
+				////console.log("this.data",this.data)
 				this.$ajax({
 					method :"post",
 					data:form,
 					url:this.MY_URL+"/im/sendmessage"
 				}).then(options =>{
-
+					form.username = this.username;
 					this.socketIo.emit("sendmsg",{
 						form,
-						number : this.number
+						number : this.number,
+						username:this.username
 					});
 
 				}).catch(err =>{
@@ -175,7 +177,7 @@
 	  	},
 
         created(){
-        	console.log(this.$route)
+        	//console.log(this.$route)
         	const number = this.number;
         	const username = this.username;
         	const useremail = this.useremail;
@@ -183,7 +185,7 @@
         	
         	//非法进入聊天室,直接退出
         	if(!number || !username || !useremail){
-        		this.$router.push({path:"/message"});
+        		this.$router.push({path:"/"});
         		return false;
         	}
         	
@@ -193,7 +195,7 @@
 				data:{number},
 				url:this.MY_URL+"/im/queryallmsg"
 			}).then(options =>{
-				console.log("房间信息",options)
+				//console.log("房间信息",options)
 				this.msgarry = !!options.data.msgarry ? options.data.msgarry : [];
 				//保持在最底部
 				this.$nextTick(() =>{
@@ -214,21 +216,21 @@
             });
             
             this.socketIo.on("newJoinUser",(msg) =>{
-            	console.log("用户",msg.username,"加入了房间,当前人数是",msg.headcount)
+            	//console.log("用户",msg.username,"加入了房间,当前人数是",msg.headcount)
             });
             this.socketIo.on("user_leave",(d) =>{
 
-            	console.log("用户",d.username,"退出了房间,当前人数是",d.length)
+            	//console.log("用户",d.username,"退出了房间,当前人数是",d.length)
             });
             this.socketIo.on("event", (msg) => {
                 let gallery = document.querySelector(".my-gallery");
                 let div = document.createElement("div");
                 div.innerHTML = msg;
                 gallery.insertBefore(div,gallery.childNodes[0])
-                console.log(document.querySelector(".appviews") )
+                //console.log(document.querySelector(".appviews") )
             }); 
             this.socketIo.on("roomgetmsg",(msg) => {
-            	//console.log("this.msgarry",this.msgarry)
+            	////console.log("this.msgarry",this.msgarry)
             	this.msgarry.push(msg);
             	this.$nextTick(() =>{
             		window.scrollTo(0,document.body.scrollHeight);

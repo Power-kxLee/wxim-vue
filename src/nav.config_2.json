@@ -31,9 +31,16 @@
 				}
 			},
 			{
-				"path": "/xwmore",
-				"name": "more",
-				"component" : "/xwim/more.vue",
+				"path": "/inside",
+				"name": "inside",
+				"component" : "/xwim/layout_two.vue",
+				"children":[
+					{
+			          "path": "xwmore/:title/:number",
+			          "component": "/xwim/more.vue"
+			        }
+			        
+				],
 				"meta":{
 					"requireAuth": true,
 					"showHeader": true

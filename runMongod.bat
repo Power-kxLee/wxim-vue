@@ -1,2 +1,2 @@
 @echo off
-d:&cd D:\bin&mongod.exe --dbpath C:\Users\lee\OneDrive\appCordova\testapp\data&cmd 
+e:&cd E:\M-mongodb\bin&mongod.exe --dbpath E:\Ddata&cmd 
