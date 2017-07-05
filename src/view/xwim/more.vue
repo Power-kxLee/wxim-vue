@@ -1,8 +1,6 @@
 <template>
 	<div class='app-message'>
 		
-		<!-- Root element of PhotoSwipe. Must have class pswp. :src='[  useremail == value.useremail ? "../../assets/image/huaji1.jpg" : "../../assets/image/huaji2.jpg"]'-->
-		
 		<div class="mui-content">
 			<div id="msg-list">
 				<div class="msg-list-height my-gallery" data-pswp-uid="1">
@@ -125,10 +123,7 @@
 	}
 </style>
 <script type="text/javascript">
-	import '../../assets/plugin/photoSwipe/photoSwipe.css'; 
-	import '../../assets/plugin/photoSwipe/default-skin/default-skin.css'; 
 	import '../../assets/css/common/message.css'; 
-	import initPhotoSwipeFromDOM from '../../assets/js/initPhotoSwipeFromDOM.js'; 
 	import mVoice from "./app-message-voice.vue"
 	import io from "../../socket-client";
 	const storage = window.localStorage;
@@ -262,7 +257,7 @@
         mounted (){
 			
 			//初始化缩略图放大
-		    initPhotoSwipeFromDOM('.my-gallery');
+		    //initPhotoSwipeFromDOM('.my-gallery');
             		
 		    
 
