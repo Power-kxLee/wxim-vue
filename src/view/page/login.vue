@@ -47,10 +47,7 @@
 							v-model='formdata.password'
 							required>
 						</div>
-						<div class="group-ipt verify">
-							<input type="text" name="verify" id="verify" class="ipt" placeholder="输入验证码" required>
-							<img  class="imgcode">
-						</div>
+						
 					</div>
 				</div>
 
@@ -106,7 +103,7 @@
 					Indicator.close();
 					if(data.data.state == "success"){
 						
-						MessageBox.alert('登录成功', '牛逼了,登录成功了').then( btn => {
+						MessageBox.alert('登录成功', '登录成功了').then( btn => {
 							this.$router.push({ path: '/' });
 							storage.setItem(types.CHECK_LOGIN_STATUS,true);
 							

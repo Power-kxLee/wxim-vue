@@ -1,3 +1,4 @@
+
 # 从零构建vue2开发环境到入门,实现cordov打包APP
 
 [![npm](https://img.shields.io/badge/npm-3.10.9-blue.svg)]() [![node](https://img.shields.io/badge/node-6.9.2-lightgrey.svg)]() [![vue](https://img.shields.io/badge/vue-2.0-brightgreen.svg)]() [![cordova](https://img.shields.io/badge/cordova-6.5.0-brightgreen.svg)]() 

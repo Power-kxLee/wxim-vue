@@ -11,16 +11,19 @@ import FastClick from 'fastclick' //消除点击延迟
 import App from './App.vue' //加载路由中间模版
 import routes from './route.js' //加载路由器模版
 import Cordova from '../platforms/android/assets/www/cordova.js'
+import io from "./socket-client"; 
 
 
+FastClick.attach(document.body);
 
-FastClick.attach(document.body)
+Vue.use(MintUI); //调用使用
+Vue.use(VueRouter);
 
-Vue.use(MintUI) //调用使用
-Vue.use(VueRouter)
+Vue.prototype.$socketIo = io.io.connect(io.url);
 
 Vue.prototype.$ajax = axios; //将axios改写为vue原型属性
 window.axios = axios;
+
 //保存路由
 window.router = new VueRouter({
     routes,

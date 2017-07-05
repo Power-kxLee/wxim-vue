@@ -1,11 +1,11 @@
 <template>
 	<footer class='layout_footer' >
-		<mt-tabbar v-model="selected" >
+		<mt-tabbar class='f_inbody' v-model="selected" >
 		  <mt-tab-item id="xw_id" href='#/wx'>	  
 		    <span slot='icon' class='iconfont icon-liaotianqipao'></span>
 		    信微
 		  </mt-tab-item>
-		  <mt-tab-item id="address_bool">
+		  <mt-tab-item id="address_bool" href='#/book'>
 		    <span slot='icon' class='iconfont icon-tongxunlu'></span>
 		    通讯录
 		  </mt-tab-item>
@@ -13,7 +13,7 @@
 		    <span slot='icon' class='iconfont icon-faxian'></span>
 		    发现
 		  </mt-tab-item>
-		  <mt-tab-item id="myde">
+		  <mt-tab-item id="myde" href='#/my'>
 		    <span slot='icon' class='iconfont icon-tongxunlu1'></span>
 		    我
 		  </mt-tab-item>
@@ -21,8 +21,6 @@
 	</footer>
 </template>
 <script type="text/javascript">
-
-	
 	export default {
 	  data() {
 	    return {
@@ -52,5 +50,8 @@
 	footer.layout_footer .mint-tabbar > .mint-tab-item.is-selected{
 		color: #46C01B;
 		background: none;
+	}
+	.layout_footer .f_inbody{
+		border-top: 1px solid #dadada;
 	}
 </style>

@@ -97,7 +97,7 @@
                     number : "",
                     date : 0,
                     useremail : "",
-                    userename : "",
+                    username : "",
                     message : "",
                     identity : 0,
                     if_ready : 1
@@ -115,7 +115,7 @@
             sendio (){
                 let text = document.getElementById("textareafield");
                 this.formdata.date = parseInt(new Date().getTime() / 1000);
-                //console.log("this.formdata",this.formdata)
+                ////console.log("this.formdata",this.formdata)
                 this.$emit("sendfn",this.formdata);
                 text.innerHTML = "";
                 this.inputshow  = false;
@@ -135,15 +135,15 @@
             touchstart (event){
                 this.talkmodule = true;
 
-                console.log("长按",event.touches[0].clientX,event.touches[0].clientY)
+                //console.log("长按",event.touches[0].clientX,event.touches[0].clientY)
                 this.touchY = event.touches[0].clientY;
                 document.addEventListener('touchmove',this.touchmovefn, false);
             },
             touchend(){
                 this.talkmodule = false;
-                console.log(document.removeEventListener)
+                //console.log(document.removeEventListener)
                 document.removeEventListener('touchmove',this.touchmovefn, false); 
-                console.log("松开")
+                //console.log("松开")
             },
             touchmovefn (event){
                 
@@ -154,7 +154,7 @@
                 }else if(this.touchclientY < event.touches[0].clientY){ //向下滑动
                     this.talkcancel = false;
                 }
-                //console.log("启动touchmove事件",event.touches[0].clientX,event.touches[0].clientY)
+                ////console.log("启动touchmove事件",event.touches[0].clientX,event.touches[0].clientY)
             },
             talkTool (){
                 let talkli = document.querySelector(".speakanimate").getElementsByTagName("li");
@@ -163,7 +163,7 @@
                 $(talkli).addClass("yinboan");
 
                 talkli[0].addEventListener("webkitAnimationEnd",function(){
-                    //console.log("第一个结束")
+                    ////console.log("第一个结束")
                     for (let i = 0 ; i < talkliLength ; i++){
                         if(i != talkliLength-1){
                             talkli[i].className = talkli[i].className.replace("yinboan", '');
@@ -191,9 +191,10 @@
             }
         },
         created(){
-            this.formdata.number = this.$route.query.number;
-            this.formdata.useremail = this.$route.query.useremail;
-            this.formdata.userename = this.$route.query.userename;
+
+            this.formdata.number = this.$route.params.number;
+            this.formdata.useremail = storage.getItem("USER_EMAIL");
+            this.formdata.username =  storage.getItem("USER_NAME");
         },
         mounted (){
             let textareafield = document.querySelector(".textareafield");

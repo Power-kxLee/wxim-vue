@@ -99,7 +99,6 @@ module.exports = (app) => {
                 message,
                 if_ready
             };
-
         Myim.createMsgLog(immsg, sus => {
             res.send(sus);
         }, error => {

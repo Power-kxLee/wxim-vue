@@ -3,7 +3,6 @@
     
     <guiance-page v-if='pageinit' v-on:changenext='changenextchild'></guiance-page>
 
-    
     <transition :name="transitionName"  v-if='!pageinit'>
     <router-view class='appviews'  ></router-view>
     </transition>
@@ -92,7 +91,7 @@
     }
   };
 </script>
-<style type="text/css" scoped>
+<style type="text/css" >
 .logoubox{
     position: fixed;
     top: 0px;
@@ -111,7 +110,7 @@
     color: #2c3e50;
   	padding: 0px;
   	margin:0px;
-    
+    min-height: 100%;
   }
 
 
