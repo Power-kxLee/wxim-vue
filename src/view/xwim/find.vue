@@ -41,7 +41,6 @@
   </div>
 </template>
 
-<style type="text/css" scoped src='../../assets/font/xwim/find/iconfont.css'></style>
 <style>
     .pd10 {
         padding: 10px 0;
