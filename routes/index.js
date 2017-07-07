@@ -1,6 +1,6 @@
 module.exports = (app) => {
 	
-	app.all("*",  (req, res, next) => {
+	app.post("*",  (req, res, next) => {
 		res.header('Access-Control-Allow-Origin', '*'); //允许的域名
 		res.header("Access-Control-Allow-Headers","Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild"); //允许的header类型
 		res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
@@ -12,9 +12,12 @@ module.exports = (app) => {
 			next();
 		}
 	});
-	
+	app.get("/",(req, res, next) =>{
+		 res.render('index');
+	});
 	require("./userController")(app);
 	require("./imController")(app);
+	
 	
 	
 };
