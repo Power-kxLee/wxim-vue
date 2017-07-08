@@ -1,0 +1,81 @@
+[
+	{
+		"list":[
+	
+			{
+				"path": "/",
+				"name": "首页",
+				"component" : "/xwim/layout.vue",
+				"redirect":"/wx",
+				"children":[
+					{
+			          "path": "wx",
+			          "component": "/xwim/index.vue"
+			        },
+			        {
+			          "path": "find",
+			          "component": "/xwim/find.vue"
+			        },
+			        {
+			          "path": "book",
+			          "component": "/xwim/wx_book.vue"
+			        },
+			        {
+			          "path": "my",
+			          "component": "/xwim/wx_my.vue"
+			        }
+				],
+				"meta":{
+					"requireAuth": true,
+					"showHeader": true
+				}
+			},
+			{
+				"path": "/inside",
+				"name": "inside",
+				"component" : "/xwim/layout_two.vue",
+				"children":[
+					{
+			          "path": "xwmore/:title/:number",
+			          "component": "/xwim/more.vue"
+			        }
+			        
+				],
+				"meta":{
+					"requireAuth": true,
+					"showHeader": true
+				}
+			},
+			{
+				"path": "/login",
+				"name": "登录",
+				"component" : "/xwim/login.vue",
+				"meta":{
+					"requireAuth": false,
+					"showHeader": false,
+					"loginInCheckIndex" : false
+				}
+			},
+			{
+				"path": "/register",
+				"name": "注册",
+				"component" : "/xwim/register.vue",
+				"meta":{
+					"requireAuth": false,
+					"showHeader": false,
+					"loginInCheckIndex" : false
+				}
+			},
+			{
+				"path": "/guidancepage",
+				"name": "引导页面",
+				"component" : "/xwim/guidancePage.vue",
+				"meta":{
+					"requireAuth": false,
+					"showHeader": false,
+					"loginInCheckIndex" : false
+				}
+			}
+		]
+	}
+]
