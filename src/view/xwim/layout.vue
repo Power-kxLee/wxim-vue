@@ -13,6 +13,7 @@
 	</div>
 </template>
 <script type="text/javascript">
+console.log("global.url",global.url)
   	import imFooter from './common/footer.vue';
   	import imHeader from './common/header.vue';
 	export default {

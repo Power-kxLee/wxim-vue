@@ -43,7 +43,6 @@
     import io from "../../socket-client";  
     const storage = window.localStorage;
     let connect_io = io.io.connect(io.url);
-   
 
     export default  {
       	data() {

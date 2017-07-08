@@ -58,6 +58,9 @@ const mutations ={
       }
       
       state.loginstart = storage.getItem(types.CHECK_LOGIN_STATUS) == "true" ? true : false ;
+    },
+    change_MY_URL (state,newdata){
+      state.MY_URL = newdata;
     }
 }
 export default new Vuex.Store({

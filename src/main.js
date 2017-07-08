@@ -13,11 +13,13 @@ import routes from './route.js' //加载路由器模版
 import Cordova from '../platforms/android/assets/www/cordova.js'
 import io from "./socket-client"; 
 
-
+io.url = global.server_url = "http://39.108.216.96:3389"
+store.commit("change_MY_URL",global.server_url)
 FastClick.attach(document.body);
 
 Vue.use(MintUI); //调用使用
 Vue.use(VueRouter);
+
 
 Vue.prototype.$socketIo = io.io.connect(io.url);
 
