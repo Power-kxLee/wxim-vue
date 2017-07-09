@@ -1,5 +1,5 @@
 <template>
-    <div class='message-newbox'>
+    <div class='message-newbox many_conetnt'>
  
         <div class="page-tab-container">
 
@@ -37,7 +37,7 @@
 
 <script>
 
-    import '../../assets/font/message/iconfont.css';
+    //import '../../assets/font/message/iconfont.css';
     import '../../assets/css/page/message/index.css';
 
     import io from "../../socket-client";  

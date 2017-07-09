@@ -103,6 +103,14 @@
   font-size: 12px;
   background: rebeccapurple;
 }
+.many_conetnt {
+      position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    min-height: 100%;
+    padding-top: 50px;
+  }
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;  
     -webkit-font-smoothing: antialiased;

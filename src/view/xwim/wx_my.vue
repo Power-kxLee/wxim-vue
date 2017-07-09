@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class='many_conetnt'>
 		<div class="pd10 first">
 			<mt-cell title="王大锤" label="微信号：18813364620" is-link>
 				<img slot="icon" src="../../assets/image/6135373832343233323531343739313739383233333937_big.jpg" class="avatar">

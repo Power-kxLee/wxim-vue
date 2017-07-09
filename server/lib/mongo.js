@@ -11,7 +11,8 @@ let DB_URL = 'mongodb://test:test@39.108.216.96:27017/test';
 /**
  * 连接
  */
-mongoose.connect(DB_URL);
+mongoose.Promise = global.Promise;
+mongoose.connect(DB_URL,{useMongoClient: true});
 
 /**
  * 连接成功

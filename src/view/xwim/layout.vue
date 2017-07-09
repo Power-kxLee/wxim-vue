@@ -1,11 +1,8 @@
 <template>
 	<div>
-		
 		<im-header></im-header>
 		<div id='layout_body' class='layout_body'>
-
 			<transition :name="transitionName"  >
-				
 				<router-view class=''></router-view>
 			</transition>
 		</div>
@@ -13,7 +10,6 @@
 	</div>
 </template>
 <script type="text/javascript">
-console.log("global.url",global.url)
   	import imFooter from './common/footer.vue';
   	import imHeader from './common/header.vue';
 	export default {
@@ -42,53 +38,9 @@ console.log("global.url",global.url)
 		padding-top: 50px;
 		padding-bottom: 55px;
 		min-height: 100%;
+		position: absolute;
+		width: 100%;
 	}
-	.bounce-out-enter-active {
-	animation: boun-in-left .4s;
-	}
-	.bounce-out-leave-active { 
-	animation: boun-out-right .4s;
-	}
-	.bounce-in-enter-active {
-	animation: boun-in-right .4s;
-	}
-	.bounce-in-leave-active {
-	animation: boun-out-left .4s;
-	}
-	@keyframes boun-in-left {
-	0% {
-	  transform: translate3d(-100%, 0, 0);
-	}
-
-	100% {
-	  transform: translate3d(0, 0, 0);
-	}
-	}
-	@keyframes boun-out-left {
-	 0% {
-	  transform: translate3d(0, 0, 0);
-	}
-
-	100% {
-	  transform: translate3d(-100%, 0, 0);
-	}
-	}
-	@keyframes boun-in-right {
-	0% {
-	  transform: translate3d(100%, 0, 0);
-	}
-
-	100% {
-	  transform: translate3d(0, 0, 0);
-	}
-	}
-	@keyframes boun-out-right {
-	 0% {
-	  transform: translate3d(0, 0, 0);
-	}
-
-	100% {
-	  transform: translate3d(100%, 0, 0);
-	}
-	}
+	
+	
 </style>

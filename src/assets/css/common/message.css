@@ -1,8 +1,6 @@
 
 .app-message .mui-content {
     height: 100%;
-    padding: 44px 0 50px 0;
-    overflow: auto;
     background-color: #eaeaea
 }
 

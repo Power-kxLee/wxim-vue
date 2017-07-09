@@ -3,8 +3,8 @@
 		<div class='header_t flex-def'>
 			
 			<h1 class='flex-1'>信微(12)</h1>
-			<span class='flex iconfont icon-weixinduan-sousuo '></span>
-			<span @click="popupVisible1 = true" size="large" ref="button" class='flex iconfont icon-jiahao'></span>
+			<span class='flex layout_icon icon-weixinduan-sousuo '></span>
+			<span @click="popupVisible1 = true" size="large" ref="button" class='flex layout_icon icon-jiahao'></span>
 		</div>
 
 		<mt-popup v-model="popupVisible1" popup-transition="popup-fade" class="mint-popup-1" :style="{ top: buttonBottom  + 'px', right : 10 + 'px' }">
@@ -86,7 +86,7 @@
 		font-size: 20px;
 		padding-left: 15px;
 	}
-	#wx_bd_head > .header_t > .iconfont{
+	#wx_bd_head > .header_t > .layout_icon{
 		font-size: 26px;
 		height: 100%;
 		padding: 0 20px;

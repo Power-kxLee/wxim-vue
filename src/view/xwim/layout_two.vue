@@ -3,11 +3,7 @@
 		
 		<im-header ref='imhead'></im-header>
 		<div id='layout_two_body' class='layout_two_body'>
-
-			<transition :name="transitionName"  >
-				
-				<router-view ></router-view>
-			</transition>
+			<router-view ></router-view>
 		</div>
 	</div>
 </template>
@@ -39,55 +35,9 @@
 <style type="text/css">
 	.layout_two_body{
 		padding-top: 50px;
-		padding-bottom: 55px;
 		min-height: 100%;
-	}
-	.bounce-out-enter-active {
-	animation: boun-in-left .4s;
-	}
-	.bounce-out-leave-active { 
-	animation: boun-out-right .4s;
-	}
-	.bounce-in-enter-active {
-	animation: boun-in-right .4s;
-	}
-	.bounce-in-leave-active {
-	animation: boun-out-left .4s;
-	}
-	@keyframes boun-in-left {
-	0% {
-	  transform: translate3d(-100%, 0, 0);
+    position: absolute;
+    width: 100%;
 	}
 
-	100% {
-	  transform: translate3d(0, 0, 0);
-	}
-	}
-	@keyframes boun-out-left {
-	 0% {
-	  transform: translate3d(0, 0, 0);
-	}
-
-	100% {
-	  transform: translate3d(-100%, 0, 0);
-	}
-	}
-	@keyframes boun-in-right {
-	0% {
-	  transform: translate3d(100%, 0, 0);
-	}
-
-	100% {
-	  transform: translate3d(0, 0, 0);
-	}
-	}
-	@keyframes boun-out-right {
-	 0% {
-	  transform: translate3d(0, 0, 0);
-	}
-
-	100% {
-	  transform: translate3d(100%, 0, 0);
-	}
-	}
 </style>

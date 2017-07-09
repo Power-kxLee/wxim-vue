@@ -2,19 +2,19 @@
 	<footer class='layout_footer' >
 		<mt-tabbar class='f_inbody' v-model="selected" >
 		  <mt-tab-item id="xw_id" href='#/wx'>	  
-		    <span slot='icon' class='iconfont icon-liaotianqipao'></span>
+		    <span slot='icon' class='layout_icon icon-liaotianqipao'></span>
 		    信微
 		  </mt-tab-item>
 		  <mt-tab-item id="address_bool" href='#/book'>
-		    <span slot='icon' class='iconfont icon-tongxunlu'></span>
+		    <span slot='icon' class='layout_icon icon-tongxunlu'></span>
 		    通讯录
 		  </mt-tab-item>
 		  <mt-tab-item id="find" href='#/find'>
-		    <span slot='icon' class='iconfont icon-faxian'></span>
+		    <span slot='icon' class='layout_icon icon-faxian'></span>
 		    发现
 		  </mt-tab-item>
 		  <mt-tab-item id="myde" href='#/my'>
-		    <span slot='icon' class='iconfont icon-tongxunlu1'></span>
+		    <span slot='icon' class='layout_icon icon-tongxunlu1'></span>
 		    我
 		  </mt-tab-item>
 		</mt-tabbar>

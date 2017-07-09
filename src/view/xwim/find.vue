@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class='many_conetnt'>
       <div class="pd10">
           <mt-cell title="朋友圈">
               <img slot="icon" src="../../assets/image/friends.png">
