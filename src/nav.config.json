@@ -1,7 +1,7 @@
 [
 	{
 		"list":[
-	
+
 			{
 				"path": "/",
 				"name": "首页",
@@ -23,6 +23,18 @@
 			        {
 			          "path": "my",
 			          "component": "/xwim/wx_my.vue"
+			        },
+			        {
+			          "path": "settings",
+			          "component": "/xwim/settings.vue"
+			        },
+			        {
+			          "path": "information",
+			          "component": "/xwim/information.vue"
+			        },
+			        {
+			          "path": "account",
+			          "component": "/xwim/account.vue"
 			        }
 				],
 				"meta":{
@@ -39,7 +51,7 @@
 			          "path": "xwmore/:title/:number",
 			          "component": "/xwim/more.vue"
 			        }
-			        
+
 				],
 				"meta":{
 					"requireAuth": true,

@@ -1,17 +1,17 @@
 <template>
   <div id='app'>
-    
+
     <guiance-page v-if='pageinit' v-on:changenext='changenextchild'></guiance-page>
 
     <transition :name="transitionName"  v-if='!pageinit'>
     <router-view class='appviews'  ></router-view>
     </transition>
-    
+
   </div>
 </template>
 
 <script type="text/javascript">
-  import "./assets/font/xwim/common/iconfont.css";
+  import "./assets/image/common/iconfont.css";
   import './assets/css/common/common.css' //加载公共css
   import './assets/css/common/HTML5-reset.css' //加载css reste表
   import 'mint-ui/lib/style.css' //加载mint依赖的css
@@ -27,7 +27,7 @@
     localStorage.setItem(appGuide,apphao)
   }
 
-  
+
   export default {
     data () {
       return {
@@ -41,7 +41,7 @@
       imHeader,
       guiancePage
     },
-    
+
     watch: {
       '$route' (to, from) {
 
@@ -104,7 +104,7 @@
   background: rebeccapurple;
 }
   #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;  
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: #2c3e50;
@@ -127,7 +127,7 @@
   .bounce-out-enter-active {
     animation: boun-in-left .4s;
   }
-  .bounce-out-leave-active { 
+  .bounce-out-leave-active {
     animation: boun-out-right .4s;
   }
   .bounce-in-enter-active {
@@ -140,7 +140,7 @@
     0% {
       transform: translate3d(-100%, 0, 0);
     }
-   
+
     100% {
       transform: translate3d(0, 0, 0);
     }
@@ -149,7 +149,7 @@
      0% {
       transform: translate3d(0, 0, 0);
     }
-   
+
     100% {
       transform: translate3d(-100%, 0, 0);
     }
@@ -158,7 +158,7 @@
     0% {
       transform: translate3d(100%, 0, 0);
     }
-   
+
     100% {
       transform: translate3d(0, 0, 0);
     }
@@ -167,7 +167,7 @@
      0% {
       transform: translate3d(0, 0, 0);
     }
-   
+
     100% {
       transform: translate3d(100%, 0, 0);
     }
