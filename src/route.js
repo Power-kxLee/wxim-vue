@@ -2,7 +2,7 @@ import NavConfig from "./nav.config.json";
 
 const mychild = (child) =>{
   let in_arrys = [];
-  
+
   if(!child ){
     return [];
   }
@@ -17,8 +17,8 @@ const mychild = (child) =>{
 }
 const checkRouter = (config) => {
   let route = [];
-  config.map( nav => 
-    nav.list.map(page => 
+  config.map( nav =>
+    nav.list.map(page =>
 
       route.push({
         name : page.name,
@@ -35,10 +35,10 @@ const checkRouter = (config) => {
       })
     )
   );
-  
+
   return {
     route
-  } 
+  }
 }
 
 const route = checkRouter(NavConfig);

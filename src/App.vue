@@ -1,16 +1,17 @@
 <template>
   <div id='app'>
-    
+
     <guiance-page v-if='pageinit' v-on:changenext='changenextchild'></guiance-page>
 
     <transition :name="transitionName"  v-if='!pageinit'>
     <router-view class='appviews'  ></router-view>
     </transition>
-    
+
   </div>
 </template>
 
 <script type="text/javascript">
+<<<<<<< HEAD
 import "./assets/font/xwim/common/iconfont.css";
 import './assets/css/common/common.css'; //加载公共css
 import './assets/css/common/HTML5-reset.css'; //加载css reste表
@@ -26,8 +27,25 @@ let letappGuide = localStorage.getItem(appGuide);
 if(!letappGuide){
   localStorage.setItem(appGuide,apphao);
 }
+=======
+  import "./assets/image/common/iconfont.css";
+  import './assets/css/common/common.css' //加载公共css
+  import './assets/css/common/HTML5-reset.css' //加载css reste表
+  import 'mint-ui/lib/style.css' //加载mint依赖的css
+  import * as types from './vuex/mutation-types'
+  import imFooter from './view/xwim/common/footer.vue';
+  import imHeader from './view/xwim/common/header.vue';
+  import guiancePage from './view/xwim/guidancePage.vue';
+  import store     from './vuex';
+  const apphao   = "1.191";
+  const appGuide = "appGuidennumber"+apphao;
+  let letappGuide = localStorage.getItem(appGuide)
+  if(!letappGuide){
+    localStorage.setItem(appGuide,apphao)
+  }
+>>>>>>> d7ac990ca9768e0f45632bf9f7abfa3d0f77184d
 
-  
+
   export default {
     data () {
       return {
@@ -41,7 +59,11 @@ if(!letappGuide){
       imHeader,
       guiancePage
     },
+<<<<<<< HEAD
    
+=======
+
+>>>>>>> d7ac990ca9768e0f45632bf9f7abfa3d0f77184d
     watch: {
       '$route' (to, from) {
 
@@ -112,7 +134,7 @@ if(!letappGuide){
     padding-top: 50px;
   }
   #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;  
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: #2c3e50;
@@ -135,7 +157,7 @@ if(!letappGuide){
   .bounce-out-enter-active {
     animation: boun-in-left .4s;
   }
-  .bounce-out-leave-active { 
+  .bounce-out-leave-active {
     animation: boun-out-right .4s;
   }
   .bounce-in-enter-active {
@@ -148,7 +170,7 @@ if(!letappGuide){
     0% {
       transform: translate3d(-100%, 0, 0);
     }
-   
+
     100% {
       transform: translate3d(0, 0, 0);
     }
@@ -157,7 +179,7 @@ if(!letappGuide){
      0% {
       transform: translate3d(0, 0, 0);
     }
-   
+
     100% {
       transform: translate3d(-100%, 0, 0);
     }
@@ -166,7 +188,7 @@ if(!letappGuide){
     0% {
       transform: translate3d(100%, 0, 0);
     }
-   
+
     100% {
       transform: translate3d(0, 0, 0);
     }
@@ -175,7 +197,7 @@ if(!letappGuide){
      0% {
       transform: translate3d(0, 0, 0);
     }
-   
+
     100% {
       transform: translate3d(100%, 0, 0);
     }
