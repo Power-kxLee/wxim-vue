@@ -11,21 +11,21 @@
 </template>
 
 <script type="text/javascript">
-  import "./assets/font/xwim/common/iconfont.css";
-  import './assets/css/common/common.css' //加载公共css
-  import './assets/css/common/HTML5-reset.css' //加载css reste表
-  import 'mint-ui/lib/style.css' //加载mint依赖的css
-  import * as types from './vuex/mutation-types'
-  import imFooter from './view/xwim/common/footer.vue';
-  import imHeader from './view/xwim/common/header.vue';
-  import guiancePage from './view/xwim/guidancePage.vue';
-  import store     from './vuex';
-  const apphao   = "1.191";
-  const appGuide = "appGuidennumber"+apphao;
-  let letappGuide = localStorage.getItem(appGuide)
-  if(!letappGuide){
-    localStorage.setItem(appGuide,apphao)
-  }
+import "./assets/font/xwim/common/iconfont.css";
+import './assets/css/common/common.css'; //加载公共css
+import './assets/css/common/HTML5-reset.css'; //加载css reste表
+import 'mint-ui/lib/style.css'; //加载mint依赖的css
+import * as types from './vuex/mutation-types';
+import imFooter from './view/xwim/common/footer.vue';
+import imHeader from './view/xwim/common/header.vue';
+import guiancePage from './view/xwim/guidancePage.vue';
+import store     from './vuex';
+const apphao   = "1.191";
+const appGuide = "appGuidennumber"+apphao;
+let letappGuide = localStorage.getItem(appGuide);
+if(!letappGuide){
+  localStorage.setItem(appGuide,apphao);
+}
 
   
   export default {
@@ -33,7 +33,7 @@
       return {
         transitionName: 'bounce-in',
         apphao:apphao
-      }
+      };
     },
     store,
     components:{
@@ -41,7 +41,7 @@
       imHeader,
       guiancePage
     },
-    
+   
     watch: {
       '$route' (to, from) {
 
@@ -94,7 +94,7 @@
 <style type="text/css" >
 .logoubox{
     position: fixed;
-    top: 0px;
+    top: 0;
     right: 100px;
     z-index: 9999;
     font-size: 12px;
@@ -105,8 +105,8 @@
 }
 .many_conetnt {
       position: absolute;
-    top: 0px;
-    left: 0px;
+    top: 0;
+    left: 0;
     width: 100%;
     min-height: 100%;
     padding-top: 50px;
@@ -116,15 +116,15 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: #2c3e50;
-  	padding: 0px;
-  	margin:0px;
+  	padding: 0;
+  	margin:0;
     min-height: 100%;
   }
 
 
   .appviews{
     position: absolute;
-    left: 0px;
+    left: 0;
     width: 100%;
     min-height: 100%;
   }

@@ -59,7 +59,6 @@
 	import { Indicator , MessageBox  } from 'mint-ui';
 	let storage = window.localStorage;
 	//storage.clear();
-	
 	export default {
 		name: 'login',
 		data() {

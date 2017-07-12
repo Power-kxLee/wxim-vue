@@ -12,6 +12,7 @@
 <script type="text/javascript">
   	import imFooter from './common/footer.vue';
   	import imHeader from './common/header.vue';
+  	
 	export default {
     data () {
       return {
@@ -40,6 +41,7 @@
 		min-height: 100%;
 		position: absolute;
 		width: 100%;
+
 	}
 	
 	

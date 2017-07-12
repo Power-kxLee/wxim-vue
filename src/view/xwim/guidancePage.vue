@@ -1,7 +1,6 @@
 <template>
 	
 	<div class='guidance-page appviews'>
-
 		<div class="swiper-container">
 	        <div class="swiper-wrapper">
 	            <div class="swiper-slide slide-1">
@@ -49,23 +48,23 @@
 <style type="text/css" scoped>
 	.commoncanvas{
 		position: absolute;
-		top:0px;
-		left: 0px;
+		top:0;
+		left: 0;
 		width: 100%;
 		height: 100%;
 
 	}
 	.swiper-content{
 		position: absolute;
-		top:0px;
-		left: 0px;
+		top:0;
+		left: 0;
 		width: 100%;
 		height: 100%;
 	}
 	.guidance-page{
 		width: 100%;
 		height: 100%;
-		padding-top: 0px;
+		padding-top: 0;
 	}
 	.swiper-container {
 	    width: 100%;
@@ -122,7 +121,7 @@
 	    visibility: visible;
 	    position: relative;
 	    top: 130px;
-	    left: 0px;
+	    left: 0;
 	    text-align: left;
 	    
 	}
@@ -133,7 +132,7 @@
 	    visibility: visible;
 	    position: relative;
 	    top: 280px;
-	    right: 0px;
+	    right: 0;
 	    text-align: right;
 	}
 	.slide-1 .slide-1-p3 span{
@@ -173,20 +172,20 @@
 	import "../../assets/css/common/animate.min.css";	
 	import Swiper from "swiper";
 	import A from "../../assets/js/swiper.animate.min.js";
-	import '../../assets/plugin/particles/particles.min.js';
+	import particlesJS from 'particles.js';
 	import particles_background from '../../assets/plugin/particles/background.js';
 	import particles_background2 from '../../assets/plugin/particles/background2.js';
+
 	export default {
 		data (){
 			return {
 				acalss:"ani"
-			}
+			};
 		},
 		mounted (){
-
+			
 			particlesJS('login-box',particles_background);
 			particlesJS('login-box2',particles_background2);
-
 
 			let myswiper = new Swiper('.swiper-container',{
 				grabCursor: false,
@@ -203,9 +202,12 @@
 		},
 		methods: {
 			changenext (){
-				this.$emit('changenext')
+				this.$emit('changenext');
+			},
+			initParticleJS(){
+				particlesJS('login-box',particles_background);
 			}
 		}
-	} 
+	};
 
 </script>
