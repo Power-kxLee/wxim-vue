@@ -1,9 +1,8 @@
 <template>
   <div id='app'>
 
-    <guiance-page v-if='pageinit' v-on:changenext='changenextchild'></guiance-page>
-
-    <transition :name="transitionName"  v-if='!pageinit'>
+    <guiance-page v-if='apphao != appGuide && guibtn' v-on:changenext='changenextchild'></guiance-page>
+    <transition  :name="transitionName"  >
     <router-view class='appviews'  ></router-view>
     </transition>
 
@@ -22,17 +21,16 @@ import imHeader from './view/xwim/common/header.vue';
 import guiancePage from './view/xwim/guidancePage.vue';
 import store     from './vuex';
 const apphao   = "1.191";
-const appGuide = "appGuidennumber"+apphao;
-let letappGuide = localStorage.getItem(appGuide);
-if(!letappGuide){
-  localStorage.setItem(appGuide,apphao);
-}
+const appGuide = "appGuidennumber";
+let storage = window.localStorage;
 
   export default {
     data () {
       return {
         transitionName: 'bounce-in',
-        apphao:apphao
+        apphao,
+        appGuide : storage.getItem(appGuide),
+        guibtn : true
       };
     },
     store,
@@ -41,7 +39,7 @@ if(!letappGuide){
       imHeader,
       guiancePage
     },
-
+  
     watch: {
       '$route' (to, from) {
 
@@ -51,8 +49,7 @@ if(!letappGuide){
     },
     methods:{
       changenextchild(){
-        this.apphao = 0;
-        localStorage.setItem(appGuide,0);
+        this.guibtn = false;
       },
       logoufn (){
         this.$router.push({
@@ -76,10 +73,7 @@ if(!letappGuide){
       title (){
         return this.componentName;
       },
-      pageinit (){
-        ////console.log("letappGuide",letappGuide)
-        return letappGuide == this.apphao;
-      },
+      
       checklogin (){
         //console.log(this.$store.state.loginstart)
 
@@ -87,6 +81,7 @@ if(!letappGuide){
       }
     },
     mounted (){
+      storage.setItem(appGuide,apphao);
       //初始的时候,如果是引导页面,则不执行cordova的插件
     }
   };

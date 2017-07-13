@@ -1,4 +1,5 @@
 import Vue from 'vue' //加载vue
+import VueParticles from 'vue-particles';
 import MintUI from 'mint-ui' //加载mint-ui框架
 import VueRouter from 'vue-router' //加载vue路由
 import axios from 'axios' //加载http请求的
@@ -16,7 +17,7 @@ import io from "./socket-client";
 io.url = global.server_url = "http://39.108.216.96:3389"
 store.commit("change_MY_URL",global.server_url)
 FastClick.attach(document.body);
-
+Vue.use(VueParticles);
 Vue.use(MintUI); //调用使用
 Vue.use(VueRouter);
 
@@ -78,10 +79,13 @@ const pagingfn = (to, from) => {
     }
 
     commit(types.MAKE_PAGE, to.name);
-}
+};
+const apphao   = "1.191";
+const appGuide = "appGuidennumber";
+let storage = window.localStorage;
+let letappGuide = storage.getItem(appGuide);
 
 router.beforeEach((to, from, next) => {
-    // console.log(to,from)
 
     if (to.matched.some(record => record.meta.requireAuth)) { // 判断该路由是否需要登录权限
 

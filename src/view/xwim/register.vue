@@ -92,13 +92,14 @@
 					let obj = data.data.data;
 					Indicator.close();
 					if(data.data.state == 'success'){
+						MessageBox.alert('注册成功', '注册成功啦').then( btn => {
+							this.$router.push({ path: 'wx' });
+						});
 						storage.setItem(types.CHECK_LOGIN_STATUS,true);
 						this.$store.commit(types.CHECK_LOGIN_STATUS,{
 							obj
 						});
-						MessageBox.alert('注册成功', '注册成功啦').then( btn => {
-							this.$router.push({ path: '/' })
-						});
+						
 					}else{
 
 						MessageBox.alert(data.data.head,"注册失败");

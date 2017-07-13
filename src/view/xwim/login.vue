@@ -1,7 +1,7 @@
 <template>
 	<div class=' loginandreg'>
 	
-		<div id="login-box" class='commonbox'></div>
+		<div id="login-box3" class='commonbox'></div>
 		<div class="cent-box">
 			<div class="cent-box-header">
 				<h1 class="main-title "></h1>
@@ -74,7 +74,7 @@
 	import '../../assets/css/page/loginRegister.css';
 	import '../../assets/plugin/particles/particles.min.js';
 	import particles_background from '../../assets/plugin/particles/background.js';
-	import * as types from '../../vuex/mutation-types'
+	import * as types from '../../vuex/mutation-types';
 	import { Indicator , MessageBox  } from 'mint-ui';
 	let storage = window.localStorage;
 	export default {
@@ -83,12 +83,12 @@
 			return {
 				MY_URL:this.$store.state.MY_URL,
 				formdata :{}
-			}
+			};
 		},
 		created (){
 			this.$nextTick( () => {
-				particlesJS('login-box',particles_background);
-			})
+				particlesJS('login-box3',particles_background);
+			});
 		},
 		methods: {
 			loginfun (){
@@ -100,15 +100,16 @@
 				}).then(data => {
 					let obj = data.data.data;
 					Indicator.close();
+
 					if(data.data.state == "success"){
 						
 						MessageBox.alert('登录成功', '登录成功了').then( btn => {
-							this.$router.push({ path: '/' });
-							storage.setItem(types.CHECK_LOGIN_STATUS,true);
-							
-							this.$store.commit(types.CHECK_LOGIN_STATUS,{
-								obj
-							});
+							this.$router.push({ path: 'wx' });
+						});
+						storage.setItem(types.CHECK_LOGIN_STATUS,true);
+						
+						this.$store.commit(types.CHECK_LOGIN_STATUS,{
+							obj
 						});
 					}else{
 						MessageBox.alert("登录失败",data.data.head);

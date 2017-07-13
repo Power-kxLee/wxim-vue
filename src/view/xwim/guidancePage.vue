@@ -65,6 +65,7 @@
 		width: 100%;
 		height: 100%;
 		padding-top: 0;
+		z-index: 99999;
 	}
 	.swiper-container {
 	    width: 100%;
@@ -172,7 +173,7 @@
 	import "../../assets/css/common/animate.min.css";	
 	import Swiper from "swiper";
 	import A from "../../assets/js/swiper.animate.min.js";
-	import particlesJS from 'particles.js';
+	import '../../assets/plugin/particles/particles.min.js';
 	import particles_background from '../../assets/plugin/particles/background.js';
 	import particles_background2 from '../../assets/plugin/particles/background2.js';
 
@@ -202,6 +203,7 @@
 		},
 		methods: {
 			changenext (){
+				console.log(this.$router);
 				this.$emit('changenext');
 			},
 			initParticleJS(){

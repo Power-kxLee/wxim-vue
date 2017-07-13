@@ -14,5 +14,8 @@
       "presets": ["env", "stage-2"],
       "plugins": ["istanbul"]
     }
-  }
+  },
+  "ignore": [
+    "./src/assets/plugin/particles/particles.min.js"
+  ]
 }

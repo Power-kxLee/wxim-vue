@@ -4,12 +4,13 @@
 
 			{
 				"path": "/",
-				"name": "首页",
+				"name": "index",
 				"component" : "/xwim/layout.vue",
 				"redirect":"/wx",
 				"children":[
 					{
 			          "path": "wx",
+			          "name":"wx",
 			          "component": "/xwim/index.vue"
 			        },
 			        {
@@ -36,6 +37,7 @@
 			          "path": "account",
 			          "component": "/xwim/account.vue"
 			        }
+			        
 				],
 				"meta":{
 					"requireAuth": true,
@@ -65,7 +67,7 @@
 				"meta":{
 					"requireAuth": false,
 					"showHeader": false,
-					"loginInCheckIndex" : false
+					"loginInCheckIndex" : true
 				}
 			},
 			{
@@ -75,12 +77,12 @@
 				"meta":{
 					"requireAuth": false,
 					"showHeader": false,
-					"loginInCheckIndex" : false
+					"loginInCheckIndex" : true
 				}
 			},
 			{
-				"path": "/guidancepage",
-				"name": "引导页面",
+	        	"path": "/guidancepage",
+	        	"name": "guidancePage",
 				"component" : "/xwim/guidancePage.vue",
 				"meta":{
 					"requireAuth": false,

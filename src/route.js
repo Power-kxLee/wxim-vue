@@ -10,11 +10,14 @@ const mychild = (child) =>{
   for(let val of child){
     in_arrys.push({
       path : val.path,
+      name : val.name || "",
       component : resolve => require([`./view${val.component}`], resolve)
     })
   }
   return in_arrys;
-}
+};
+
+
 const checkRouter = (config) => {
   let route = [];
   config.map( nav =>
@@ -26,7 +29,7 @@ const checkRouter = (config) => {
         component : resolve => require([`./view${page.component}`], resolve),
         //component : require(`./view${page.component}`),
         children : mychild(page.children),
-        redirect : page.redirect || "",
+        redirect: page.redirect,
         meta: {
           requireAuth : page.meta.requireAuth,
           showHeader  : page.meta.showHeader ,
@@ -38,8 +41,8 @@ const checkRouter = (config) => {
 
   return {
     route
-  }
-}
+  };
+};
 
 const route = checkRouter(NavConfig);
 
