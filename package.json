@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
+    "compression": "^1.7.0",
     "fastclick": "^1.0.6",
     "mint-ui": "^2.2.7",
     "particles.js": "^2.0.0",

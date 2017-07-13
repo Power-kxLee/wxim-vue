@@ -2,6 +2,7 @@ var express = require('express');
 var path = require('path');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
+var compression = require('compression');  
 var routes = require('./routes/index');
 var socket = require('./socket/socket');
 var app = express();
@@ -10,7 +11,7 @@ var app = express();
 app.set('views', path.join(__dirname, '../dist'));
 app.engine('.html', require('ejs').renderFile );
 app.set("view engine", "html");
-
+app.use(compression()); 
 app.use(logger('dev'));//加载日志中间件
 app.use(bodyParser.json());//加载解析json中间件
 app.use(bodyParser.urlencoded({ extended: false }));//加载解析urlencoded请求体中间件
