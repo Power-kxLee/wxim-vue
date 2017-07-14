@@ -2,6 +2,9 @@
 
 演示:[www.jsobject.cc](http://www.jsobject.cc)
 
+手机扫一扫
+![二维码](https://github.com/Power-kxLee/wxim-vue/blob/master/server/erweima.png)
+
 ## 技术栈
 前端 : `vue` + `vue-router` + `vuex` + `vue-cil` + `axios` + `mint-ui` + `socket.io` + `webpack` 
 后端 : `nodeJS` + `express` + `compression`  + `mongoose`
