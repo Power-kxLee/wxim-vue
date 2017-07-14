@@ -1,6 +1,5 @@
 import 'babel-polyfill';
 import Vue from 'vue' //加载vue
-import VueParticles from 'vue-particles';
 import MintUI from 'mint-ui' //加载mint-ui框架
 import VueRouter from 'vue-router' //加载vue路由
 import axios from 'axios' //加载http请求的
@@ -18,10 +17,8 @@ import io from "./socket-client";
 io.url = global.server_url = "http://39.108.216.96"
 store.commit("change_MY_URL",global.server_url)
 FastClick.attach(document.body);
-Vue.use(VueParticles);
-Vue.use(MintUI); //调用使用
 Vue.use(VueRouter);
-
+Vue.use(MintUI); //调用使用
 
 Vue.prototype.$socketIo = io.io.connect(io.url);
 
