@@ -2,7 +2,8 @@
 
 演示:[www.jsobject.cc](http://www.jsobject.cc)
 
-手机扫一扫
+>手机扫一扫
+
 ![二维码](https://github.com/Power-kxLee/wxim-vue/blob/master/server/erweima.png)
 
 ## 技术栈
