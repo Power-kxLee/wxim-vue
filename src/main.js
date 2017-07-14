@@ -1,3 +1,4 @@
+import 'babel-polyfill';
 import Vue from 'vue' //加载vue
 import VueParticles from 'vue-particles';
 import MintUI from 'mint-ui' //加载mint-ui框架
