@@ -29,9 +29,9 @@ window.axios = axios;
 window.router = new VueRouter({
     routes,
     scrollBehavior(to, from, savedPosition) {
-        console.log("text,top", to)
+        console.log("text,top", to);
     }
-})
+});
 
 window.AppStore = store;
 
@@ -92,18 +92,19 @@ router.beforeEach((to, from, next) => {
             next();
         } else {
             return next({
-                    path: '/login'
-                })
-                //next();
+                path: '/login'
+            });
+            
+            //next();
         }
     } else {
-        console.log("不用验证")
+        console.log("不用验证");
             //如果已经登录了,那就不能够进入注册登录等页面
         if (to.matched.some(record => record.meta.loginInCheckIndex) && store.state.loginstart) {
-            console.log(from)
+            console.log(from);
             return next({
                 path: from.fullPath
-            })
+            });
         } else {
 
             pagingfn(to, from);

@@ -1,30 +1,22 @@
-# wxim
+# wxim - 一款运行到web上的聊天工具
 
-> A Vue.js project
+演示:[www.jsobject.cc](http://www.jsobject.cc)
 
-## Build Setup
+## 技术栈
+前端 : `vue` + `vue-router` + `vuex` + `vue-cil` + `axios` + `mint-ui` + `socket.io` + `webpack` 
+后端 : `nodeJS` + `express` + `compression`  + `mongoose`
+数据库 :`mongodb`
 
+## 构建程序
 ``` bash
-# install dependencies
+# 安装依赖
 npm install
 
-# serve with hot reload at localhost:8080
+# 本地服务器启动
 npm run dev
 
-# build for production with minification
+# 打包
 npm run build
 
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
 ```
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
