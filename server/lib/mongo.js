@@ -1,12 +1,7 @@
+import server from "../../server_data";
+
 let mongoose = require('mongoose');
-
-//let DB_URL = 'mongodb://localhost:27017';
-
-
-
-//let DB_URL = 'mongodb://kxlee:a123456789@ds123182.mlab.com:23182/testmogodb';
-let DB_URL = 'mongodb://test:test@39.108.216.96:27017/test';
-//let DB_URL = 'mongodb://39.108.216:27017';
+let DB_URL = 'mongodb://'+server.db_number+':'+server.db_password+"@"+server.db_url+'/'+server.db_name;
 
 /**
  * 连接

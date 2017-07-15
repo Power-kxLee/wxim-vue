@@ -1,9 +1,9 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import * as types from './mutation-types'
+import Vue from 'vue';
+import Vuex from 'vuex';
+import * as types from './mutation-types';
+import Server from "../server_data";
 Vue.use(Vuex);
 
-console.log("初始化state")
 // 使用 vuex.commit("fn") 触发函数更改状态
 const state = {
   count: 0,
@@ -11,8 +11,8 @@ const state = {
   router:{},
   pageName:"index",
   loginstart : false,
-  MY_URL : "http://39.108.216.96" //接口请求的所在域名
-}
+  MY_URL : Server.url //接口请求的所在域名
+};
 const storage = window.localStorage;
 const mutations ={
    /**
