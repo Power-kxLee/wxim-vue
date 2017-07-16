@@ -2,11 +2,11 @@ var path = require('path')
 var utils = require('./utils')
 var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
-
+var autoprefixer = require("autoprefixer");
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
-
+console.log("vueLoaderConfig",vueLoaderConfig)
 module.exports = {
   entry: {
     app: './src/main.js'
@@ -26,7 +26,9 @@ module.exports = {
     },
     modules: ["node_modules"]
   },
+  
   module: {
+    
     rules: [
       /*{
         test: /\.(js|vue)$/,

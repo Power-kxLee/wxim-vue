@@ -36,11 +36,11 @@
 </script>
 <style type="text/css">
 	.layout_body{
-		padding-top: 50px;
-		padding-bottom: 55px;
-		min-height: 100%;
-		position: absolute;
-		width: 100%;
+		    min-height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
 
 	}
 	

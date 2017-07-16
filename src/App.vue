@@ -105,6 +105,7 @@ let storage = window.localStorage;
     width: 100%;
     min-height: 100%;
     padding-top: 50px;
+    padding-bottom: 55px;
   }
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;

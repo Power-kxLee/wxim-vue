@@ -64,10 +64,10 @@
         </div>
 	</footer>
 </template>
-
+<style type="text/css"></style>
 <script type="text/javascript">
     
-
+import '../../assets/css/common/talk-tools.css';
     const storage = window.localStorage;
     
     const $ = (obj) =>{
@@ -112,7 +112,10 @@
                 this.inputshow = inhtml.length < 1 ? false : true;
                 this.formdata.message = event.target.innerHTML;
             },
-            sendio (){
+            sendio (event){
+                console.log(event)
+                event.preventDefault();
+                console.log(event.preventDefault())
                 let text = document.getElementById("textareafield");
                 this.formdata.date = parseInt(new Date().getTime() / 1000);
                 ////console.log("this.formdata",this.formdata)
@@ -213,5 +216,4 @@
 
     </script>
 <style type="text/css" scoped src='../../assets/font/message/more/iconfont.css'></style>
-<style type="text/css" scoped src='../../assets/css/common/talk-tools.css'></style>
 
