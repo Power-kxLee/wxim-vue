@@ -10,19 +10,19 @@
 		</div>
 
 		<div class="pd10">
-			<mt-cell title="钱包" is-link>
+			<mt-cell title="钱包" is-link to="/wallet">
 				<img slot="icon" src="../../assets/image/wallet.png">
 			</mt-cell>
 		</div>
 
 		<div class="pd10">
-			<mt-cell title="收藏" is-link>
+			<mt-cell title="收藏" is-link to="/collection">
 				<img slot="icon" src="../../assets/image/collection.png">
 			</mt-cell>
 			<mt-cell title="相册" is-link>
 				<img slot="icon" src="../../assets/image/album.png">
 			</mt-cell>
-			<mt-cell title="卡包" is-link>
+			<mt-cell title="卡包" is-link to="/card">
 				<img slot="icon" src="../../assets/image/card_package.png">
 			</mt-cell>
 			<mt-cell title="表情" is-link>

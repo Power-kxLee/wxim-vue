@@ -36,8 +36,28 @@
 			        {
 			          "path": "account",
 			          "component": "/xwim/account.vue"
-			        }
-			        
+			        },
+              {
+                "path": "more-information",
+                "component": "/xwim/more-information.vue"
+              },
+              {
+                "path": "area",
+                "component": "/xwim/area.vue"
+              },
+              {
+                "path": "wallet",
+                "component": "/xwim/wallet.vue"
+              },
+              {
+                "path": "collection",
+                "component": "/xwim/collection.vue"
+              },
+              {
+                "path": "card",
+                "component": "/xwim/card.vue"
+              }
+
 				],
 				"meta":{
 					"requireAuth": true,
