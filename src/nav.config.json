@@ -56,6 +56,10 @@
               {
                 "path": "card",
                 "component": "/xwim/card.vue"
+              },
+              {
+                "path": "coupon",
+                "component": "/xwim/coupon.vue"
               }
 
 				],
