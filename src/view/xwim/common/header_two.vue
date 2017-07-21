@@ -43,7 +43,7 @@
 		position: fixed;
 		top:0px;
 		width: 100%;
-		z-index: 9;
+		z-index: 9999;
 	}
 	#wx_bd_head_two  > .header_t{
 		height: 100%;

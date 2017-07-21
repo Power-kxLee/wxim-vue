@@ -1,9 +1,9 @@
 <template>
 	<div>
-		<im-header></im-header>
+		<im-header ref='imheader'></im-header>
 		<div id='layout_body' class='layout_body'>
 			<transition :name="transitionName"  >
-				<router-view class=''></router-view>
+				<router-view @updata_room_length = 'updata_room_length'></router-view>
 			</transition>
 		</div>
 		<im-footer></im-footer>
@@ -26,6 +26,11 @@
 
         var direction = this.$store.state.direction;
         this.transitionName = direction == "reverse" ? 'bounce-out' : 'bounce-in';
+      }
+    },
+    methods :{
+      updata_room_length(data){
+        this.$refs.imheader.room_length = data;
       }
     },
     components:{
