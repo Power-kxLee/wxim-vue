@@ -1,18 +1,21 @@
 <!--收藏-->
 <template>
-  <div>
+  <div class='many_conetnt'>
     <mt-search v-model="value" cancel-text="取消" placeholder="搜索"></mt-search>
-
-    <div class="collection">
-      <div class="cell">
-        <img slot="icon" src="../../assets/image/6135373832343233323531343739313739383233333937_big.jpg" class="avatar">
-        <p class="left">广州人广州人广州人广州人广州人广州人广州人广州人广州人</p>
-        <span>3天前</span>
-      </div>
-      <section>
-        <img src="../../assets/image/6135373832343233323531343739313739383233333937_big.jpg" alt="">
-        <p>广州7月份千个小区广州7月份千个小区广州7月份千个小区广州7月份千个小区广州7月份千个小区广州7月份千个小区广州7月份千个小区广州7月份千个小区广州7月份千个小区广州7月份千个小区广州7月份千个小区广州7月份千个小区</p>
-      </section>
+    <div v-for="(item,index) in 3">
+      <slider :index="index" v-on:deletes="deleteItem" v-on:lebelIndex="labelItem">
+        <div class="collection">
+          <div class="cell">
+            <img slot="icon" src="../../assets/image/6135373832343233323531343739313739383233333937_big.jpg" class="avatar">
+            <p class="left">广州人广州人广州人广州人广州人广州人广州人广州人广州人</p>
+            <span>3天前</span>
+          </div>
+          <section>
+            <img src="../../assets/image/6135373832343233323531343739313739383233333937_big.jpg" alt="">
+            <p>广州7月份千个小区广州7月份千个小区广州7月份千个小区广州7月份千个小区广州7月份千个小区广州7月份千个小区广州7月份千个小区广州7月份千个小区广州7月份千个小区广州7月份千个小区广州7月份千个小区广州7月份千个小区</p>
+          </section>
+        </div>
+      </slider>
     </div>
 
     <!--图片-->
@@ -31,6 +34,32 @@
 </template>
 
 <script>
+  import slider from './common/leftSlider.vue'
+  export default {
+
+    components: {
+      slider
+    },
+    data () {
+      return {
+      }
+    },
+    created () {
+    },
+    methods: {
+      // 标签
+      labelItem: function (index) {
+        window.alert(index)
+      },
+      // 删除
+      deleteItem: function (index) {
+        console.log(index)
+      }
+    },
+    mounted () {
+    }
+  }
+
 </script>
 <style scoped>
   .collection {
