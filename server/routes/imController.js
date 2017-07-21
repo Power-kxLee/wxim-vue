@@ -11,7 +11,7 @@ module.exports = (app) => {
         let deploy = {
             code: 401
         }
-        console.log("bodydata", bodydata)
+        ////console.log("bodydata", bodydata)
         try {
             if (bodydata.title.length < 1) {
 
@@ -59,7 +59,7 @@ module.exports = (app) => {
         }
 
         Myim.queryAllRoom().then(data => {
-            //console.log("最后返回的数据",data)
+            //////console.log("最后返回的数据",data)
             if (data.length < 1) {
                 deploy.code = 403;
                 deploy.mark = "数据库没有查到数据啦";
@@ -69,7 +69,7 @@ module.exports = (app) => {
             res.send(deploy);
 
         }).catch(err => {
-            console.log("查询所有房间出错了", err);
+            ////console.log("查询所有房间出错了", err);
             deploy.code = 404;
             deploy.mark = "直接报错啦";
             deploy.errdata = err;
@@ -82,7 +82,7 @@ module.exports = (app) => {
      * @return {[type]}                   [返回所有聊天信息]
      */
     app.post("/im/sendmessage", (req, res) => {
-        //console.log("req.body",req.body)
+        //////console.log("req.body",req.body)
         let
             number = req.body.number,
             date = req.body.date,
@@ -127,10 +127,10 @@ module.exports = (app) => {
 
     app.post("/im/getroomlength", (req, res) => {
         Myim.getroomlength(req.body).then(data => {
-            console.log("请求成功", data)
+            ////console.log("请求成功", data)
             res.send(data);
         }).catch(err => {
-            console.log(err, "出错了")
+            ////console.log(err, "出错了")
             res.send(err);
         });
     });

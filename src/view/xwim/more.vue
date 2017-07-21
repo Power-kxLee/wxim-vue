@@ -5,7 +5,9 @@
 			<div id="msg-list">
 				<div class="msg-list-height my-gallery" data-pswp-uid="1">
 					<div v-for='(value,i) in msgarry' class="msg-item " :class='[  useremail == value.useremail ? "msg-item-self" : ""]'>
-						<div class="nameandimg">
+						<p v-if='!!value.addroom ' class='newuser'>{{value.username}},加入了房间.赶紧怼他吧</p>
+
+						<div v-if='!value.addroom || !value.addroom' class="nameandimg">
 							
 							<img v-if='useremail == value.useremail' class="msg-user" src='../../assets/image/huaji2.jpg'>
 							<img v-else class="msg-user" src='../../assets/image/huaji1.jpg'>
@@ -29,7 +31,7 @@
 					
 					
 				</div>
-				
+
 				<m-voice @sendfn = "sendfn"></m-voice>
 				
 			</div>
@@ -56,11 +58,17 @@
 	#layout_two_body{
 		background: #EBEBEB;
 	}
+	.newuser{
+		    text-align: center;
+    width: 100%;
+    font-size: 12px;
+    line-height: 24px;
+    color: #828282;
+	}
 </style>
 <script type="text/javascript">
 	import '../../assets/css/common/message.css'; 
 	import mVoice from "./app-message-voice.vue"
-	import io from "../../socket-client";
 	const storage = window.localStorage;
 	export default {
 		data (){
@@ -78,8 +86,7 @@
 			mVoice
 		},
 		beforeRouteLeave (to, from, next) {
-    		//console.log("离开房间",{useremail:this.useremail,number:this.number,length:this.msgarry.length})
-	      	this.socketIo.emit("leave",{
+	      	this.socket.emit("leave",{
 	      		number : this.number,
 	      		useremail : this.useremail,
 	      		username : this.username
@@ -96,7 +103,29 @@
           
           next();
         },
-		
+		sockets : {
+			newJoinUser (data){
+				data["addroom"] = 1;
+				console.log("有用户加入了房间",data)
+				this.msgarry.push(data);
+				console.log(this.msgarry)
+			},
+			user_leave (){
+				console.log("有用户离开了房间")
+			},
+			event(){
+				let gallery = document.querySelector(".my-gallery");
+                let div = document.createElement("div");
+                div.innerHTML = msg;
+                gallery.insertBefore(div,gallery.childNodes[0])
+			},
+			add_to_new_info(msg){
+				this.msgarry.push(msg);
+            	this.$nextTick(() =>{
+            		window.scrollTo(0,document.body.scrollHeight);
+            	})
+			}
+		},
 		
 		methods : {
 			//发送消息
@@ -109,7 +138,7 @@
 					url:this.MY_URL+"/im/sendmessage"
 				}).then(options =>{
 					form.username = this.username;
-					this.socketIo.emit("sendmsg",{
+					this.$socket.emit("add_to_new_info",{
 						form,
 						number : this.number,
 						username:this.username
@@ -131,14 +160,19 @@
         	const number = this.number;
         	const username = this.username;
         	const useremail = this.useremail;
-            this.socketIo = io.io.connect(io.url);
         	
         	//非法进入聊天室,直接退出
         	if(!number || !username || !useremail){
         		this.$router.push({path:"/"});
         		return false;
         	}
-        	
+        	//加入聊天室
+        	this.$socket.emit("join",{
+        		number ,
+        		username , 
+        		useremail
+        	});
+
         	//获取房间的聊天信息
         	this.$ajax({
 				method :"post",
@@ -151,52 +185,10 @@
 				this.$nextTick(() =>{
             		window.scrollTo(0,document.body.scrollHeight);
             	});
-			}).catch(err =>{
-
 			});
        
-
-        	//加入聊天室
-            this.socketIo.on("connect", () =>{
-            	this.socketIo.emit("join",{
-            		number ,
-            		username , 
-            		useremail
-            	});
-            });
-            
-            this.socketIo.on("newJoinUser",(msg) =>{
-            	//console.log("用户",msg.username,"加入了房间,当前人数是",msg.headcount)
-            });
-            this.socketIo.on("user_leave",(d) =>{
-
-            	//console.log("用户",d.username,"退出了房间,当前人数是",d.length)
-            });
-            this.socketIo.on("event", (msg) => {
-                let gallery = document.querySelector(".my-gallery");
-                let div = document.createElement("div");
-                div.innerHTML = msg;
-                gallery.insertBefore(div,gallery.childNodes[0])
-                //console.log(document.querySelector(".appviews") )
-            }); 
-            this.socketIo.on("roomgetmsg",(msg) => {
-            	////console.log("this.msgarry",this.msgarry)
-            	this.msgarry.push(msg);
-            	this.$nextTick(() =>{
-            		window.scrollTo(0,document.body.scrollHeight);
-            	})
-            });
-
-            	
         },
         mounted (){
-			
-			//初始化缩略图放大
-		    //initPhotoSwipeFromDOM('.my-gallery');
-            		
-		    
-
-
 		}
 		
 	}

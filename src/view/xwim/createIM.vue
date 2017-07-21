@@ -85,11 +85,7 @@ export default {
             	formdata.title = "";
             	formdata.number = randoms();
 
-            	
-
-        		
-				
-				this.$socketIo.emit("newRoom",homedata);
+				this.$socket.emit("newRoom",homedata);
 				this.$emit("crateRoom");//触发事件监听父组件
 				//this.$socketIo.emit("join",roomArray);
                 //this.$socketIo.emit("get_room",d.data.roomdata.homedata);

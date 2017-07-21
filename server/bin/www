@@ -36,7 +36,7 @@ socket(io);
  */
 
 server.listen(port, function() {
-  console.log('Express服务器监听端口 ' + port);
+  //console.log('Express服务器监听端口 ' + port);
 });
 server.on('error', onError);
 server.on('listening', onListening);

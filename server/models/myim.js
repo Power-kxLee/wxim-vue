@@ -9,7 +9,7 @@ module.exports = {
             code: 401
         }
         this.queryRoom({ "number": data.number }, (person) => {
-            //console.log("查询是否有冲突房间号",person)
+            ////console.log("查询是否有冲突房间号",person)
             if (!!person) {
                 sendObj.code = 404;
                 sendObj.mark = "这个房号被人抢注了,赶紧换一个吧";
@@ -59,7 +59,7 @@ module.exports = {
         let roomarry = [];
         let defer = Q.defer();
         IM.find((err, person) => {
-            console.log("进来啦查询所有房间",person)
+            //console.log("进来啦查询所有房间",person)
             if (err) {
                 defer.reject(err, "查询第一步错误");
                 return defer.promise;;
@@ -76,10 +76,10 @@ module.exports = {
                     //如果查询到房间
                     if (data) {
                         let lastmsg = data.msgarry;
-                        console.log("lastmsg",data   )
+                        //console.log("lastmsg",data   )
                         elem.roomnewmsg = [];
                         elem.roomnewmsg.push(lastmsg[lastmsg.length - 1]);
-                        console.log("lastmsg.length",lastmsg.length)
+                        //console.log("lastmsg.length",lastmsg.length)
                         elem.room_length = lastmsg.length;
 
                         elem.save((err, res) => {
@@ -110,7 +110,7 @@ module.exports = {
             });
 
 
-            //console.log("所有房间",person)
+            ////console.log("所有房间",person)
 
         });
         return defer.promise;
@@ -139,7 +139,7 @@ module.exports = {
      * @param  {[type]} error   [失败回调函数]
      */
     createMsgLog(form, success, error) {
-        //	console.log("form",form)
+        //	//console.log("form",form)
         let code = 401;
         let mark = "";
         if (!form.number) {
@@ -223,7 +223,7 @@ module.exports = {
         let defer = Q.defer(),
             roomlength = newim.roomlength;
         //先查询这个表
-        console.log({ user_email: form.useremail });
+        //console.log({ user_email: form.useremail });
         roomlength.findOne({ user_email: form.useremail }, (err, person) => {
             let if_push = true;
             if (err) {
@@ -279,11 +279,11 @@ module.exports = {
     getroomlength(form) {
         let defer = Q.defer();
             roomlength = newim.roomlength;
-        //console.log("form",form)
+        ////console.log("form",form)
         roomlength.findOne({ user_email: form.useremail }, (err, person) => {
-           // console.log("err, person",err, person )
+           // //console.log("err, person",err, person )
             if (err) {
-                console.log("出错啦")
+                //console.log("出错啦")
                 defer.reject(err, "查询出错");
             }
             if (!person) {
@@ -299,7 +299,7 @@ module.exports = {
                 });
             }else{
 
-               // console.log("查询到用户", form.useremail, "的数据", person)
+               // //console.log("查询到用户", form.useremail, "的数据", person)
                 defer.resolve(person);
             }
            

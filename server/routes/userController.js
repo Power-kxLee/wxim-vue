@@ -17,7 +17,7 @@ module.exports = (app) =>{
 
 
 		try {
-			//console.log("!emailreg.test(email)",!emailreg.test(email),email)
+			////console.log("!emailreg.test(email)",!emailreg.test(email),email)
 			if (!emailreg.test(email)) {
 
 			  throw  '邮箱不正确啊';
@@ -38,9 +38,9 @@ module.exports = (app) =>{
 		      throw  '两次输入密码不一致';
 		    }
 		}catch(err){
-			//console.log("new Date()",new Date())
-			//console.log("转换时间戳(毫秒)",new Date().getTime())
-			//console.log("转换标准时间(毫秒)",new Date().toLocaleString())
+			////console.log("new Date()",new Date())
+			////console.log("转换时间戳(毫秒)",new Date().getTime())
+			////console.log("转换标准时间(毫秒)",new Date().toLocaleString())
 			sendData.state = "error";
 			sendData.head = err;
 			return res.send(sendData)
@@ -74,7 +74,7 @@ module.exports = (app) =>{
 		let email = req.body.email;
 		let password = req.body.password;
 		let returnObj = {};
-		console.log("登录post过来了")
+		//console.log("登录post过来了")
 		if (!emailreg.test(email)) {
 			returnObj.state = "error";
 			returnObj.head = "登录的邮箱格式还是错的,还登录个毛线";
@@ -89,7 +89,7 @@ module.exports = (app) =>{
 				returnObj.head = "账号不存在,登录失败";
 				return res.send(returnObj)
 			}
-			//console.log(sha1(password) !== data.password , sha1(password) , data.password)
+			////console.log(sha1(password) !== data.password , sha1(password) , data.password)
 			if( sha1(password) !== data.password){
 				returnObj.state = "error";
 				returnObj.head = "用户名或密码错误";
@@ -99,12 +99,12 @@ module.exports = (app) =>{
 			returnObj.head = "登录成功";
 			returnObj.data = data;
 			res.send(returnObj);
-			//console.log("查询成功",data)
+			////console.log("查询成功",data)
 		},(error) => {
 			returnObj.state = "error";
 			returnObj.data = error;
 			res.send(returnObj);
-			//console.log("查询失败",error)
+			////console.log("查询失败",error)
 		});
 	});
 }

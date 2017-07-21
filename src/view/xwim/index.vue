@@ -37,12 +37,8 @@
 
 <script>
 
-    //import '../../assets/font/message/iconfont.css';
     import '../../assets/css/page/message/index.css';
-
-    import io from "../../socket-client";  
     const storage = window.localStorage;
-    let connect_io = io.io.connect(io.url);
 
     export default  {
       	data() {
@@ -62,39 +58,9 @@
 
     	    };
       	},
-        beforeRouteEnter (to, from, next) {
-          
-         next()
-        },
-        beforeRouteUpdate (to, from, next) {
-          
-        },
-        
-        beforeRouteLeave (to, from, next) {
-            console.log("离开页面")
-          for (let i in this.list){    
-           console.log({
-              number : this.list[i].number,
-              useremail : this.useremail,
-              username : this.username
-            })
-            this.$socketIo.emit("leave",{
-              number : this.list[i].number,
-              useremail : this.useremail,
-              username : this.username
-            });
-          };
-          next();
-        },
         methods:{
-
             showutil (e){
-                setTimeout(()=>{
-                    ////console.log("这样就属于长按了",e)
-                },800)
             },
-                
-
             //动态添加calss
             checkedtab (cur){
                 if(this.active == cur){
@@ -133,25 +99,17 @@
                 //console.log("获取到房间未读的信息",d.data)
                 this.room_length = d.data;
 
-              }).catch(err =>{
-
-              });
-
-              this.$socketIo.on("emit_room",(d) =>{
-                //console.log("有新的房间",d)
-                this.list[d.number] = d;
-                
-                //console.log("this.list",this.list)
-              });
+              }).catch(err =>{});
 
               return val;   
           },
-          //房间未读的信息条目
+          /**
+           * [room_length 初始化计算未读信息的总数]
+           * @return {[type]}        [description]
+           */
           room_length : function( val ,oldVal){
               let room_array = val.room_array;
               let room_list = this.list;
-              //console.log("进行处理计算 有多少未读",room_array)
-              //console.log("进行处理计算",this.list)
               //循环房间列表
               for(let elem in this.list){
                 for( let i in  room_array){
@@ -163,28 +121,55 @@
                 }
              
               }
-            //console.log(this.list)
           }
             
         },
+        sockets:{
+          connect() {
+            console.log('socket connected')
+          },
+          /**
+           * [all_infor 实时获取房间的聊天信息]
+           * @param  {[object]} info [聊天信息数据]
+           * @return {[type]}      [description]
+           */
+          all_infor(info) {
+            let roomnewmsg = this.list[info.number].roomnewmsg || [];
+            info.if_ready = 0;
+            this.list[info.number].differ += 1
+            if(!this.list[info.number].roomnewmsg[0]){
+                this.list[info.number].roomnewmsg.push({
+                  message:"",
+                  date : 0,
+                  useremail:""
+                });
+            }
+            this.list[info.number].roomnewmsg[0]["message"] = info.message;
+            this.list[info.number].roomnewmsg[0]["date"] = info.date;
+            this.list[info.number].roomnewmsg[0]["useremail"] = info.useremail;
+            this.list[info.number].roomnewmsg[0]["username"] = info.username;
+          },
+          /**
+           * [newRoom 监听是否有新的房间创建,如果有就添加到列表]
+           * @param  {[type]} room_data [房间的数据]
+           * @return {[type]}           [description]
+           */
+          newRoom (room_data){
+            this.list = this.list instanceof Array ? {} : this.list;
+            this.$set(this.list,room_data.number ,room_data);
 
+            var roomArray = {
+                number:room_data.number,
+                username :this.username,
+                useremail : room_data.creator
+            }
+          }
+        },
      	created() {
 
-            let newio = io.io.connect(io.url);
-            this.$socketIo.on("newRoom",(d) =>{
-                this.list = this.list instanceof Array ? {} : this.list;
-                this.$set(this.list,d.number ,d);
-
-                var roomArray = {
-                    number:d.number,
-                    username :this.username,
-                    useremail : d.creator
-                }
-                console.log("有新房间创建并加入io",roomArray,"房间是",d.number)
-                this.$socketIo.emit("join",roomArray);
-            });
-
-          //获取所有相关的房间信息
+          /**
+           * [获取所有的房间列表]
+           */
           this.$ajax({
             method :"post",
             data : {},
@@ -202,61 +187,13 @@
                   d.data.imlistarry[item].differ  = d.data.imlistarry[item].differ || 0
                 }
                 this.list = d.data.imlistarry;
-
-               
-                for(let val in this.list){
-                  //创建socket链接
-                  //var socketIo  = this.socketIo = io.io.connect(io.url);//创建链接
-                    this.$socketIo = io.io.connect(io.url);//创建链接
-                  //链接socket成功返回事件
-                  this.$socketIo.on("connect", () =>{
-                      var roomArray = {
-                        number:this.list[val].number,
-                        username :this.username,
-                        useremail : this.useremail
-                      }
-                      //发送相关参数,链接房间
-                      this.$socketIo.emit("join",roomArray);
-                          
-                  });
-
-                  //监听派送信息的事件
-                  this.$socketIo.on("roomgetmsg",(d) => {
-                    //console.log(d)
-                    //console.log(this.list)
-                    //console.log(this.list[d.number])
-                    let roomnewmsg = this.list[d.number].roomnewmsg || [];
-                    d.if_ready = 0;
-                    this.list[d.number].differ += 1
-                    if(!this.list[d.number].roomnewmsg[0]){
-                        this.list[d.number].roomnewmsg.push({
-                          message:"",
-                          date : 0,
-                          useremail:""
-                        });
-                    }
-                    this.list[d.number].roomnewmsg[0]["message"] = d.message;
-                    this.list[d.number].roomnewmsg[0]["date"] = d.date;
-                    this.list[d.number].roomnewmsg[0]["useremail"] = d.useremail;
-                    this.list[d.number].roomnewmsg[0]["username"] = d.username;
-                  
-                  });
-                  
-                }
               
           	}
-          }).catch(err =>{ 
-          	//console.log("获取房间失败",err)
           });
 
         },
-        mounted() {
+        mounted() {          
 
-
-         // this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top;
-          
-
-        
         }
     };
 
