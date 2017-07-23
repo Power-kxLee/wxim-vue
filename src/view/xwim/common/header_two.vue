@@ -37,12 +37,16 @@
 <style type="text/css" >
 	
 	#wx_bd_head_two {
-		height: 50px;
+		transform: translateZ(0);
+
 		background: #393A3F;
 		color: white;
-		position: fixed;
-		top:0px;
+		position: absolute;
+		top: 0;
+		left: 0;
 		width: 100%;
+		padding: 0;
+		height: 50px;
 		z-index: 9999;
 	}
 	#wx_bd_head_two  > .header_t{

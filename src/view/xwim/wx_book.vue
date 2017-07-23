@@ -39,7 +39,10 @@
   export default {
     data() {
       return {
-        alphabet: []
+        alphabet: [],
+        vuegConfig: {
+            disable: false
+        }
       }
     },
     created() {

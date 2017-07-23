@@ -98,7 +98,6 @@
                 data : {useremail: this.useremail , in_room_msg},
                 url : this.MY_URL+"/im/getroomlength"
               }).then(d =>{
-                console.log("获取到房间未读的信息",d.data)
                 this.room_length = d.data;
 
               }).catch(err =>{});

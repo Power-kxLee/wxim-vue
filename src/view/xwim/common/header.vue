@@ -75,10 +75,9 @@
 		height: 50px;
 		background: #393A3F;
 		color: white;
-		position: fixed;
+		position: absolute;
 		top:0px;
 		width: 100%;
-		z-index: 9;
 	}
 	#wx_bd_head  > .header_t{
 		height: 100%;

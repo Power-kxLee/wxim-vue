@@ -6,17 +6,15 @@ import axios from 'axios' //加载http请求的
 import { sync } from 'vuex-router-sync'
 import store from './vuex' // 初始vuex
 import * as types from './vuex/mutation-types'
-
 import FastClick from 'fastclick' //消除点击延迟
 
 import App from './App.vue' //加载路由中间模版
 import routes from './route.js' //加载路由器模版
 import VueSocketio from 'vue-socket.io';
-//import Cordova from '../platforms/android/assets/www/cordova.js'
 FastClick.attach(document.body);
 Vue.use(VueRouter);
 Vue.use(VueSocketio, 'http://127.0.0.1:80');
-Vue.use(MintUI); //调用使用
+Vue.use(MintUI); 
 
 
 Vue.prototype.$ajax = axios; //将axios改写为vue原型属性
@@ -24,12 +22,8 @@ window.axios = axios;
 
 //保存路由
 window.router = new VueRouter({
-    routes,
-    scrollBehavior(to, from, savedPosition) {
-        console.log("text,top", to);
-    }
+    routes
 });
-
 window.AppStore = store;
 
 let history = window.sessionStorage; //创建本地储存(PS:sessionStorage在页面关闭时候清除)
@@ -117,7 +111,9 @@ commit(types.UPDATE_DIRECTION, 'reverse')
 
 //成功进入新页面之后
 router.afterEach((to, from) => {
-    window.scrollTo(0, 0);
+    Vue.nextTick(() =>{
+        document.getElementById("layout_body").scrollTop = 0
+    });
 });
 //保存路由,方便后面调用
 commit(types.SAVE_ROUTER, router);

@@ -5,7 +5,7 @@
       opacity: 0
     }
     .messagtc {
-        position: fixed;
+        position: absolute;
         width: 100%;
         border-top: solid 1px #bbb;
         left: 0;

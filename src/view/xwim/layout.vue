@@ -39,15 +39,3 @@
     }
   };
 </script>
-<style type="text/css">
-	.layout_body{
-		    min-height: 100%;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-
-	}
-	
-	
-</style>

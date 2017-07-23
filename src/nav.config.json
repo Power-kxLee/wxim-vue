@@ -71,7 +71,7 @@
 			{
 				"path": "/inside",
 				"name": "inside",
-				"component" : "/xwim/layout_two.vue",
+				"component" : "/xwim/im_more_layout.vue",
 				"children":[
 					{
 			          "path": "xwmore/:title/:number",

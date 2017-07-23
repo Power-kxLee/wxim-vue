@@ -2,10 +2,9 @@
   <div id='app'>
 
     <guiance-page v-if='apphao != appGuide && guibtn' v-on:changenext='changenextchild'></guiance-page>
-    <transition  :name="transitionName"  >
-    <router-view class='appviews'  ></router-view>
-    </transition>
-
+      <transition  :name="transitionName"  >
+      <router-view class='appviews'  ></router-view>
+      </transition>
   </div>
 </template>
 
@@ -20,7 +19,8 @@ import imFooter from './view/xwim/common/footer.vue';
 import imHeader from './view/xwim/common/header.vue';
 import guiancePage from './view/xwim/guidancePage.vue';
 import store     from './vuex';
-const apphao   = "1.191";
+
+ const apphao   = "1.191";
 const appGuide = "appGuidennumber";
 let storage = window.localStorage;
 
@@ -42,12 +42,17 @@ let storage = window.localStorage;
   
     watch: {
       '$route' (to, from) {
-
         var direction = this.$store.state.direction;
         this.transitionName = direction == "reverse" ? 'bounce-out' : 'bounce-in';
       }
     },
     methods:{
+      onSwipeLeft(){
+        console.log("左边滑动")
+      },
+      onSwipeRight(){
+        console.log("右边滑动")
+      },
       changenextchild(){
         this.guibtn = false;
       },
@@ -87,6 +92,37 @@ let storage = window.localStorage;
   };
 </script>
 <style type="text/css" >
+#layout_body   {
+  position: absolute;
+  z-index: 1;
+  top: 50px;
+  bottom: 55px;
+  left: 0;
+  width: 100%;
+  overflow:auto;
+}
+
+#scroller {
+  position: absolute;
+  z-index: 1;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-text-size-adjust: none;
+  -moz-text-size-adjust: none;
+  -ms-text-size-adjust: none;
+  -o-text-size-adjust: none;
+  text-size-adjust: none;
+  background: #fff;
+}
 .logoubox{
     position: fixed;
     top: 0;
@@ -99,13 +135,10 @@ let storage = window.localStorage;
   background: rebeccapurple;
 }
 .many_conetnt {
-      position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    min-height: 100%;
-    padding-top: 50px;
-    padding-bottom: 55px;
+       position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%; 
   }
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -120,6 +153,7 @@ let storage = window.localStorage;
 
   .appviews{
     position: absolute;
+    top:0;
     left: 0;
     width: 100%;
     min-height: 100%;
