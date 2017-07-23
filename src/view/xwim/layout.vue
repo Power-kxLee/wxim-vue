@@ -9,6 +9,7 @@
 		<im-footer></im-footer>
 	</div>
 </template>
+
 <script type="text/javascript">
   	import imFooter from './common/footer.vue';
   	import imHeader from './common/header.vue';
