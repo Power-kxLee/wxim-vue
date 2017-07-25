@@ -15,7 +15,6 @@ import server from './server_data';
 //import Cordova from '../platforms/android/assets/www/cordova.js'
 FastClick.attach(document.body);
 Vue.use(VueRouter);
-console.log("server.url",server.url)
 Vue.use(VueSocketio, server.url);
 Vue.use(MintUI); //调用使用
 
@@ -115,7 +114,10 @@ commit(types.UPDATE_DIRECTION, 'reverse')
 //成功进入新页面之后
 router.afterEach((to, from) => {
     Vue.nextTick(() =>{
-        document.getElementById("layout_body").scrollTop = 0
+        let $layout_body = document.getElementById("layout_body");
+        if($layout_body){
+            $layout_body.scrollTop = 0
+        }
     });
 });
 //保存路由,方便后面调用
