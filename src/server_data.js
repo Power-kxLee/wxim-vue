@@ -1,4 +1,4 @@
-var url = process.env.NODE_ENV === 'production' ? "39.108.216.96:27017" : "127.0.0.1:80";
+var url = process.env.NODE_ENV === 'production' ? "http://39.108.216.96" : "http://127.0.0.1:80";
 
 module.exports =  {
 	url : url,
