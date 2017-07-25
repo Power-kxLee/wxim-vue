@@ -163,15 +163,35 @@ let storage = window.localStorage;
   }
 
   .bounce-out-enter-active {
+    webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
     animation: boun-in-left .4s;
   }
   .bounce-out-leave-active {
+    webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
     animation: boun-out-right .4s;
   }
   .bounce-in-enter-active {
-  animation: boun-in-right .4s;
+    webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+    animation: boun-in-right .4s;
   }
   .bounce-in-leave-active {
+    webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
     animation: boun-out-left .4s;
   }
   @keyframes boun-in-left {
