@@ -1,11 +1,9 @@
 
 .app-message .mui-content {
-    height: 100%;
     background-color: #eaeaea
 }
 
 .app-message #msg-list {
-    height: 100%;
     overflow: auto;
     -webkit-overflow-scrolling: touch
 }

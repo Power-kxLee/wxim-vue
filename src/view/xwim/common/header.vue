@@ -2,7 +2,7 @@
 	<header id='wx_bd_head'>
 		<div class='header_t flex-def'>
 			
-			<h1 class='flex-1'>信微(12)</h1>
+			<h1 class='flex-1'>信微<span v-if='room_length > 0'>({{room_length}})</span></h1>
 			<span class='flex layout_icon icon-weixinduan-sousuo '></span>
 			<span @click="popupVisible1 = true" size="large" ref="button" class='flex layout_icon icon-jiahao'></span>
 		</div>
@@ -29,7 +29,8 @@
 			return {
 				popupVisible1:false,
 				popupVisible4:false,
-        		buttonBottom  : 0
+        		buttonBottom  : 0,
+        		room_length : 0
 			}
 		},
 		mounted(){
@@ -74,10 +75,9 @@
 		height: 50px;
 		background: #393A3F;
 		color: white;
-		position: fixed;
+		position: absolute;
 		top:0px;
 		width: 100%;
-		z-index: 9;
 	}
 	#wx_bd_head  > .header_t{
 		height: 100%;

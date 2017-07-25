@@ -113,9 +113,6 @@ import '../../assets/css/common/talk-tools.css';
                 this.formdata.message = event.target.innerHTML;
             },
             sendio (event){
-                console.log(event)
-                event.preventDefault();
-                console.log(event.preventDefault())
                 let text = document.getElementById("textareafield");
                 this.formdata.date = parseInt(new Date().getTime() / 1000);
                 ////console.log("this.formdata",this.formdata)

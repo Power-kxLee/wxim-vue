@@ -7,7 +7,7 @@
             
             <div v-if='!loading && !!list' class="page-loadmore">
     		    <div class="page-loadmore-wrapper" ref="wrapper" >
-    		    	<div class="msg-room-list" @touchstart="showutil" v-for="(item,i) in list">
+    		    	<div class="msg-room-list"  v-for="(item,i) in list">
                 
         	    		<router-link :to="'/inside/xwmore/'+item.title+'/'+item.number"  >
 
@@ -53,13 +53,15 @@
                 allLoaded: false,
                 bottomStatus: '',
                 wrapperHeight: 0,
+                allroom_length : 0,
                 username : storage.getItem("USER_NAME"),
                 useremail : storage.getItem("USER_EMAIL")
 
     	    };
       	},
         methods:{
-            showutil (e){
+            return_room_length (e){
+
             },
             //动态添加calss
             checkedtab (cur){
@@ -96,7 +98,6 @@
                 data : {useremail: this.useremail , in_room_msg},
                 url : this.MY_URL+"/im/getroomlength"
               }).then(d =>{
-                //console.log("获取到房间未读的信息",d.data)
                 this.room_length = d.data;
 
               }).catch(err =>{});
@@ -108,14 +109,13 @@
            * @return {[type]}        [description]
            */
           room_length : function( val ,oldVal){
-              let room_array = val.room_array;
-              let room_list = this.list;
+              let room_array = val.room_array; //所有房间的信息长度
+              let room_list = this.list; //房间列表数据
               //循环房间列表
               for(let elem in this.list){
                 for( let i in  room_array){
                   if(room_array[i].room_number && room_array[i].room_number == this.list[elem].number){
-
-                    this.list[elem].differ = this.list[elem].room_length - room_array[i].room_record_length  ;
+                    this.list[elem].differ = Math.abs(room_array[i].room_record_length - this.list[elem].room_length) ;
                     break;
                   } 
                 }
@@ -157,12 +157,8 @@
           newRoom (room_data){
             this.list = this.list instanceof Array ? {} : this.list;
             this.$set(this.list,room_data.number ,room_data);
-
-            var roomArray = {
-                number:room_data.number,
-                username :this.username,
-                useremail : room_data.creator
-            }
+            this.allroom_length+=1;
+            this.$emit("updata_room_length",this.allroom_length);
           }
         },
      	created() {
@@ -175,8 +171,7 @@
             data : {},
             url :this.MY_URL+"/getroomim"
           }).then( d =>{
-            //console.log("查询房间成功",d)
-            //返回正确数据
+            
             this.loading = false;
            
 
@@ -184,11 +179,12 @@
               //console.log("所有房间信息",d)
                 //房间数据添加到list上进行视图渲染
                 for (let item in d.data.imlistarry){
+                  this.allroom_length ++;
                   d.data.imlistarry[item].differ  = d.data.imlistarry[item].differ || 0
                 }
                 this.list = d.data.imlistarry;
-              
-          	}
+                this.$emit("updata_room_length",this.allroom_length);
+            }
           });
 
         },

@@ -11,6 +11,7 @@ const state = {
   router:{},
   pageName:"index",
   loginstart : false,
+  room_length : 0,
   MY_URL : Server.url //接口请求的所在域名
 };
 const storage = window.localStorage;
@@ -61,6 +62,9 @@ const mutations ={
     },
     change_MY_URL (state,newdata){
       state.MY_URL = newdata;
+    },
+    update_room_length(state,data){
+      state.room_length = data;
     }
 }
 export default new Vuex.Store({

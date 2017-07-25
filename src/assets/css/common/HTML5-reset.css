@@ -52,7 +52,6 @@ embed {max-width: 100%;}
 */
 
 /* force a vertical scrollbar to prevent a jumpy page */
-html {overflow-y: scroll;}
 body{
     background: #efeff4;
 }

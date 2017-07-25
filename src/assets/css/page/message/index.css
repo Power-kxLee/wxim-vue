@@ -145,9 +145,14 @@ overflow: hidden;
 }
 .msg-room-list .msg-room-article{
 	flex:1;
+	overflow: hidden;
 }
 .msg-room-list .msg-room-article section{
 	color: #bfbfbf;
+	 overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+
 }
 .msg-room-list .msg-room-date{
 	flex:0 0 60px;

@@ -1,43 +1,46 @@
 <template>
-	<div class='app-message many_conetnt'>
+	<div  class='app-message many_conetnt'>
 		
 		<div class="mui-content">
 			<div id="msg-list">
 				<div class="msg-list-height my-gallery" data-pswp-uid="1">
 					<div v-for='(value,i) in msgarry' class="msg-item " :class='[  useremail == value.useremail ? "msg-item-self" : ""]'>
 						<p v-if='!!value.addroom ' class='newuser'>{{value.username}},加入了房间.赶紧怼他吧</p>
-
-						<div v-if='!value.addroom || !value.addroom' class="nameandimg">
+						<p v-if='!!value.leaveroom ' class='newuser'>{{value.username}},离开了房间.怂了呗</p>
+						<div v-if='!value.addroom && !value.leaveroom'>
 							
-							<img v-if='useremail == value.useremail' class="msg-user" src='../../assets/image/huaji2.jpg'>
-							<img v-else class="msg-user" src='../../assets/image/huaji1.jpg'>
-							
-						   	<span class="msg-name">{{value.userename}}</span>
-						</div>
-						<div class="ms-content-warp">
-							<h4 class='inusername'>{{value.username}}</h4>
-							<div class="msg-content">
-
-								<div class="msg-content-inner">
-									
-									<span>{{value.message}}</span>
-								</div>
-								<div class="msg-content-arrow"></div>
+							<div class="nameandimg">
+								
+								<img v-if='useremail == value.useremail' class="msg-user" src='../../assets/image/huaji2.jpg'>
+								<img v-else class="msg-user" src='../../assets/image/huaji1.jpg'>
+								
+							   	<span class="msg-name">{{value.userename}}</span>
 							</div>
-							<div class="msg-conte	nt-time">{{value.date | timestamp}}</div>
+							<div class="ms-content-warp">
+								<h4 class='inusername'>{{value.username}}</h4>
+								<div class="msg-content">
+
+									<div class="msg-content-inner">
+										
+										<span>{{value.message}}</span>
+									</div>
+									<div class="msg-content-arrow"></div>
+								</div>
+								<div class="msg-conte	nt-time">{{value.date | timestamp}}</div>
+							</div>
+							<div class="mui-item-clear"></div>
 						</div>
-						<div class="mui-item-clear"></div>
 					</div>
 					
 					
 				</div>
 
-				<m-voice @sendfn = "sendfn"></m-voice>
+				
 				
 			</div>
 		</div>
 		
-
+		
 	
 	</div>
 </template>
@@ -65,10 +68,16 @@
     line-height: 24px;
     color: #828282;
 	}
+	.mui-content{
+	/* 	position: absolute; */
+
+	}
+	
 </style>
 <script type="text/javascript">
 	import '../../assets/css/common/message.css'; 
-	import mVoice from "./app-message-voice.vue"
+	
+	
 	const storage = window.localStorage;
 	export default {
 		data (){
@@ -82,11 +91,10 @@
 				MY_URL    :this.$store.state.MY_URL
 			}
 		},
-		components : {
-			mVoice
-		},
+		components : {},
 		beforeRouteLeave (to, from, next) {
-	      	this.socket.emit("leave",{
+		
+	      	this.$socket.emit("leave",{
 	      		number : this.number,
 	      		useremail : this.useremail,
 	      		username : this.username
@@ -104,50 +112,53 @@
           next();
         },
 		sockets : {
+      
+    			/**
+			 * [newJoinUser 用户进入进行提示]
+			 */
 			newJoinUser (data){
 				data["addroom"] = 1;
-				console.log("有用户加入了房间",data)
 				this.msgarry.push(data);
-				console.log(this.msgarry)
 			},
-			user_leave (){
-				console.log("有用户离开了房间")
+			/**
+			 * [newJoinUser 用户离开进行提示]
+			 */
+			user_leave (data){
+				data["leaveroom"] = 1;
+				this.msgarry.push(data);
 			},
-			event(){
-				let gallery = document.querySelector(".my-gallery");
-                let div = document.createElement("div");
-                div.innerHTML = msg;
-                gallery.insertBefore(div,gallery.childNodes[0])
-			},
-			add_to_new_info(msg){
-				this.msgarry.push(msg);
-            	this.$nextTick(() =>{
-            		window.scrollTo(0,document.body.scrollHeight);
-            	})
-			}
+			/**
+		       * [add_to_new_info 添加新数据]
+		       * @param {[type]} msg [description]
+		       */
+		      add_to_new_info(msg){
+		        this.msgarry.push(msg);
+		      }
 		},
-		
-		methods : {
-			//发送消息
-			sendfn (form){
-				console.log("发送form",form)
-				////console.log("this.data",this.data)
-				this.$ajax({
-					method :"post",
-					data:form,
-					url:this.MY_URL+"/im/sendmessage"
-				}).then(options =>{
-					form.username = this.username;
-					this.$socket.emit("add_to_new_info",{
-						form,
-						number : this.number,
-						username:this.username
-					});
-
-				}).catch(err =>{
-
+		watch :{
+			msgarry : function(val,old){
+				this.$nextTick(function(){
+					this.$emit("scrollBottom",document.querySelector(".app-message").scrollHeight)
 				})
 			}
+		},
+		methods : {
+			//发送消息
+		    sendfn (form){
+		        this.$ajax({
+		          method :"post",
+		          data:form,
+		          url:this.MY_URL+"/im/sendmessage"
+		        }).then(options =>{
+		          form.username = this.username;
+		          this.$socket.emit("add_to_new_info",{
+		            form,
+		            number : this.number,
+		            username:this.username
+		          });
+
+		        });
+		    }
 		},
 		filters : {
 	  		timestamp (value){
@@ -172,23 +183,20 @@
         		username , 
         		useremail
         	});
-
-        	//获取房间的聊天信息
-        	this.$ajax({
-				method :"post",
-				data:{number},
-				url:this.MY_URL+"/im/queryallmsg"
-			}).then(options =>{
-				//console.log("房间信息",options)
-				this.msgarry = !!options.data.msgarry ? options.data.msgarry : [];
-				//保持在最底部
-				this.$nextTick(() =>{
-            		window.scrollTo(0,document.body.scrollHeight);
-            	});
-			});
-       
         },
         mounted (){
+      		//获取房间的聊天信息
+        	this.$ajax({
+				method :"post",
+				data:{number:this.number},
+				url:this.MY_URL+"/im/queryallmsg"
+			}).then(options =>{
+				this.msgarry = !!options.data.msgarry ? options.data.msgarry : [];
+			});
+		     
+		},
+		updated (){
+
 		}
 		
 	}

@@ -1,14 +1,15 @@
 <template>
 	<div>
-		<im-header></im-header>
+		<im-header ref='imheader'></im-header>
 		<div id='layout_body' class='layout_body'>
 			<transition :name="transitionName"  >
-				<router-view class=''></router-view>
+				<router-view @updata_room_length = 'updata_room_length'></router-view>
 			</transition>
 		</div>
 		<im-footer></im-footer>
 	</div>
 </template>
+
 <script type="text/javascript">
   	import imFooter from './common/footer.vue';
   	import imHeader from './common/header.vue';
@@ -28,21 +29,14 @@
         this.transitionName = direction == "reverse" ? 'bounce-out' : 'bounce-in';
       }
     },
+    methods :{
+      updata_room_length(data){
+        this.$refs.imheader.room_length = data;
+      }
+    },
     components:{
       imFooter,
       imHeader
     }
   };
 </script>
-<style type="text/css">
-	.layout_body{
-		    min-height: 100%;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-
-	}
-	
-	
-</style>
