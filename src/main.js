@@ -12,10 +12,12 @@ import FastClick from 'fastclick' //消除点击延迟
 import App from './App.vue' //加载路由中间模版
 import routes from './route.js' //加载路由器模版
 import VueSocketio from 'vue-socket.io';
+import server from './server_data';
 //import Cordova from '../platforms/android/assets/www/cordova.js'
 FastClick.attach(document.body);
 Vue.use(VueRouter);
-Vue.use(VueSocketio, 'http://127.0.0.1:80');
+console.log("server.url",server.url)
+Vue.use(VueSocketio, server.url);
 Vue.use(MintUI); //调用使用
 
 

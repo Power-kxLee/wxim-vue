@@ -1,6 +1,7 @@
+var url = process.env.NODE_ENV === 'production' ? "39.108.216.96:27017" : "127.0.0.1:80";
+
 module.exports =  {
-	//url : "http://39.108.216.96",
-	url : "http://127.0.0.1:80",
+	url : url,
 	db_url:"39.108.216.96:27017",
 	db_name : "test",
 	db_number: "test",
