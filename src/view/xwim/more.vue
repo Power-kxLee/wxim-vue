@@ -1,5 +1,5 @@
 <template>
-	<div  class='app-message many_conetnt'>
+	<div  class='app-message many_conetnt' ref='is_more_body'>
 		
 		<div class="mui-content">
 			<div id="msg-list">

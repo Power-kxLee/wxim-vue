@@ -6,7 +6,7 @@
 		<div id='layout_body' ref='body_dom' class='layout_two_body'>
 			<router-view ref='body' v-on:scrollBottom='scrollBottom'></router-view>
     </div>
-    <m-voice  @sendfn = "sendfn"></m-voice>
+    <m-voice v-on:updatepadding='updatepadding'  @sendfn = "sendfn"></m-voice>
   </div>
 </template>
 <script type="text/javascript">
@@ -30,6 +30,10 @@
       },      
       scrollBottom(data){
         this.$refs.body_dom.scrollTop = data;
+      },
+      updatepadding(data){
+        this.$refs.body_dom.style.bottom = data+"px";
+        this.scrollBottom(this.$refs.body.$refs.is_more_body.offsetHeight);
       }
     },
     mounted (){

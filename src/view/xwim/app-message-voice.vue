@@ -1,9 +1,9 @@
 <!--  -->
 
 <template>
-	<footer class='messagtc'>
+	<footer class='messagtc' ref='is_addmsg'>
 		<form action="" method="post">
-			<div class="usergoban flex">
+			<div class="usergoban">
 				<div class="footer-left">
                     <div class="mifileinput" @click='taptalk'>
                         <span v-if='talk' class='iconfont icon-jianpan'></span>
@@ -15,8 +15,8 @@
                         <span >{{talkname}}</span>
                     </div>
                     <div v-else class='textin'>
-                        <div @keyup.enter='sendio'  id='textareafield' class="textareafield" @input='textinfn'  contenteditable="true" ></div>
-					   <input type="hidden" v-model='formdata.message'>
+                    <pre><span>{{textareval}}</span><br></pre>
+                    <textarea ref='textarea' :class='{textcur:checkinput}' @focus='oncur' @blur='removecur' @keyup.enter='sendio' @input='textinfn'   v-model='textareval'></textarea>
                       
                     </div>
 				</div>
@@ -26,10 +26,10 @@
                 <div class='footer-jia' >
                     <div class='f-jia-warp'>
                         <transition name="fade">
-                        <span v-if='!inputshow' class='iconfont icon-jiahao'></span>
+                        <span v-if='!inputshow' w class='iconfont icon-jiahao'></span>
                         </transition>
                         <transition name="fade">
-    				    <button @click='sendio'  v-if='inputshow'  class='ms-send' type='button'>发送</button>
+    				    <button @click='sendio'  v-if='inputshow'   class='ms-send' type='button'>发送</button>
                         </transition>
                     </div>
                 </div>
@@ -93,6 +93,7 @@ import '../../assets/css/common/talk-tools.css';
                 touchY       : 0,
                 touchclientY : 0,
                 textareval   : "",
+                checkinput   : false,
                 formdata : {
                     number : "",
                     date : 0,
@@ -107,26 +108,39 @@ import '../../assets/css/common/talk-tools.css';
         },
        
         methods:{
+            oncur(){
+                this.checkinput = true;
+            },
+            removecur(){
+                this.checkinput = false;
+            },
             textinfn (event){
-                let inhtml = event.target.innerHTML;
-                this.inputshow = inhtml.length < 1 ? false : true;
-                this.formdata.message = event.target.innerHTML;
+                
+                this.inputshow = this.textareval < 1 ? false : true;
+                this.formdata.message = this.textareval;
+                let foot_height = this.$refs.is_addmsg.offsetHeight;
+                if(foot_height > 51){
+
+                this.$emit("updatepadding",foot_height);
+                }
             },
             sendio (event){
-                let text = document.getElementById("textareafield");
+
+                if(String.trim(this.textareval).length < 1){
+                    return false;
+                }
                 this.formdata.date = parseInt(new Date().getTime() / 1000);
                 ////console.log("this.formdata",this.formdata)
                 this.$emit("sendfn",this.formdata);
-                text.innerHTML = "";
                 this.inputshow  = false;
+                this.textareval = "";
                 return false;
             },
             taptalk (){
                 this.talk = this.talk ? false : true;
                 this.$nextTick(function(){
-                    var textarea = document.querySelector(".textareafield");
                     if(!this.talk){
-                        textarea.focus();
+                        this.$refs.textarea.focus();
                     }else{
                         this.inputshow = false;
                     }
@@ -197,8 +211,8 @@ import '../../assets/css/common/talk-tools.css';
             this.formdata.username =  storage.getItem("USER_NAME");
         },
         mounted (){
-            let textareafield = document.querySelector(".textareafield");
-            textareafield.style.width = textareafield.offsetWidth+"px";
+            /*let textareafield = document.querySelector(".textareafield");
+            textareafield.style.width = textareafield.offsetWidth+"px";*/
         },
         updated(){
             if(this.talkmodule && !this.talkcancel){
