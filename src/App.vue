@@ -1,7 +1,7 @@
 <template>
   <div id='app'>
-
-    <guiance-page v-if='apphao != appGuide && guibtn' v-on:changenext='changenextchild'></guiance-page>
+    
+    <guiance-page  v-on:changenext='changenextchild'></guiance-page>
       <transition  :name="transitionName"  >
       <router-view class='appviews'  ></router-view>
       </transition>
@@ -9,7 +9,7 @@
 </template>
 
 <script type="text/javascript">
-
+//v-if='apphao != appGuide && guibtn'
 import "./assets/font/xwim/common/iconfont.css";
 import './assets/css/common/common.css'; //加载公共css
 import './assets/css/common/HTML5-reset.css'; //加载css reste表
