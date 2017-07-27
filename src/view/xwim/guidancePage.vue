@@ -101,9 +101,9 @@
 	.slide-1-p1-title{
 		color: white;
 	    font-size: 36px;
-	    position: relative;
-	    top: 50px;
-	    right: -70px;
+	      position: relative;
+    top: 50px;
+    left: 104px;
 	}
 	.slide-1 .slide-1-p2{
 	    visibility: visible;
@@ -147,12 +147,17 @@
 		color: black;
 		    position: absolute;
     top: 40%;
+        width: 100%;
+    text-align: center;
 	}
 	.slide-3 .slide-3-p2{
 		color: black;
 		    visibility: visible;
     position: absolute;
-    bottom: 80px;
+       bottom: 80px;
+    display: block;
+    text-align: center;
+    width: 100%;
 	}
 </style>
 <script type="text/javascript">
