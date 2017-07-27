@@ -19,6 +19,7 @@
         -webkit-user-select:none;
         -ms-user-select:none;
         user-select:none;
+        z-index: 1;
     }
     .messagtc .ms-send{
         color: white;
@@ -34,22 +35,23 @@
     }
     .messagtc .iconfont{
         color: #6F7378;
-        font-size: 26px!important;
+        font-size: 30px!important;
+        display: block;
     }
     .messagtc .footer-jia{
         position: relative;
     }
     .messagtc .footer-jia .f-jia-warp{
-        width: 50px;
-        text-align: center;
-        height: 28px;
+            width: 50px;
+    text-align: center;
+    height: 28px;
+    position: relative;
+    top: -5px;
     }
     .messagtc .footer-jia .icon-jiahao{
 
     }
-    .messagtc textarea{
-        overflow:hidden
-    }
+  
     .messagtc .footer-left {
 
         text-align: center;
@@ -67,17 +69,26 @@
         display: inline-block
     }
 
-    .messagtc .footer-center {
-        min-height: 50px;
-        width:100%;
-        position: relative;
+    .messagtc .usergoban div.footer-center {
+           min-height: 50px;
+    width: 100%;
+    position: relative;
+    padding-left: 40px;
+    padding-right: 100px;
+    z-index: 1;
+    overflow: hidden;
+    bottom: 0px;
+    }
+    .messagtc .usergoban div.footer-bq{
+        right: 60px;
+    }
+   .messagtc .usergoban div.footer-jia{
+    right:5px;
     }
      .messagtc .footer-center > .taptalk{
-        position: absolute;
         top:0px;
         left: 0px;
-        width: 100%;
-        padding: 8px 0;
+        padding: 7px 0;
         height: 100%;
      }
     .messagtc .footer-center [class*=input] {
@@ -130,7 +141,9 @@
         padding: 0 6px;
     }
     .messagtc  .usergoban > div{
-        margin-right: 5px;
+            position: absolute;
+            bottom:8px;
+    z-index: 2;
     }
     .messagtc  .mui-icon {
         color: #000
@@ -190,7 +203,45 @@
     }
     .messagtc .textin {
         width: 100%;
+        position: relative;
+        bottom: 0px;
+        top:15px;
     }
+    .messagtc .textin textarea{
+        position: absolute;
+        top:0px;
+        left: 0px;
+        height: 100%;
+        width: 100%;
+        outline: none;
+        border:none;
+        padding: 0px;
+        margin:0px;
+        border-bottom:1px solid #bdbdbd;
+        font-size: 18px;
+    }
+    .messagtc .textin .textcur{
+        border-bottom-color: #1AAD19;
+    }
+    .messagtc .textin pre{
+          display:block;
+        visibility:hidden;
+        min-height: 24px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-text-overflow: ellipsis;
+        -moz-text-overflow: ellipsis;
+        -o-text-overflow: ellipsis;
+        overflow: ellipsis;
+        display: -webkit-box;
+        display: -moz-box;
+        display: -o-box;
+        -webkit-box-orient: vertical;
+        -moz-box-orient: vertical;
+        -o-box-orient: vertical;
+        box-orient: vertical;
+        font-size: 18px;
+     }
     .messagtc .textareafield{
         border-bottom: 1px solid #d8d8d8;
         outline: none;
