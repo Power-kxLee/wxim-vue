@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class='many_conetnt'>
     <div class="pd10">
       <mt-cell title="微信号" value="weixin_188133"></mt-cell>
       <mt-cell title="手机号" is-link>
@@ -57,3 +57,25 @@
     height: 16px;
   }
 </style>
+<script type="text/javascript">
+  export default {
+    data () {
+      return {
+        MY_URL:this.$store.state.MY_URL
+      }
+    },
+    components:{
+    },
+    watch: {
+      '$route' (to, from) {
+       console.log(this.$router)
+      }
+    },
+    methods:{
+    },
+    mounted (){
+    
+        
+    }
+  };
+</script>

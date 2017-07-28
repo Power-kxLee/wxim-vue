@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class='many_conetnt'>
     <div class="pd10">
-      <mt-cell title="账号与安全" is-link to="/account"></mt-cell>
+      <mt-cell title="账号与安全" is-link to="/me/account"></mt-cell>
     </div>
     <div class="pd10">
       <mt-cell title="新消息通知" is-link></mt-cell>

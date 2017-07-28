@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class='many_conetnt'>
     <div class="pd10" v-show="content">
       <mt-cell title="性别" is-link value="女" @click.native="chooseSex"></mt-cell>
-      <mt-cell title="地区" is-link value="百慕大" to="/area"></mt-cell>
+      <mt-cell title="地区" is-link value="百慕大" to="/me/area"></mt-cell>
       <mt-cell title="个性签名" is-link>
         <span>学习是一种信仰</span>
       </mt-cell>

@@ -19,7 +19,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
   .vip_card {
     margin: 10px;
     background: #fff;

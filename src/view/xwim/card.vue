@@ -21,7 +21,7 @@
     <div class="bottom">
       <p>优惠券</p>
       <div class="pdb10">
-        <mt-cell title="朋友的券" is-link to="coupon">
+        <mt-cell title="朋友的券" is-link to="/me/coupon">
           <img slot="icon" src="../../assets/image/6135373832343233323531343739313739383233333937_big.jpg" class="avatar">
         </mt-cell>
       </div>
@@ -34,7 +34,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
   .vip_card {
     margin: 10px;
   }

@@ -24,43 +24,64 @@
 			        {
 			          "path": "my",
 			          "component": "/xwim/wx_my.vue"
+			        }
+				],
+				"meta":{
+					"requireAuth": true,
+					"showHeader": true
+				}
+			},
+			{
+				"path": "/me",
+				"name": "我",
+				"component" : "/xwim/wx_my_layout.vue",
+				"children":[
+					{
+						"path": "information",
+						"component": "/xwim/information.vue",
+						"name":"个人信息"
 			        },
 			        {
-			          "path": "settings",
-			          "component": "/xwim/settings.vue"
+						"path": "wallet",
+						"component": "/xwim/wallet.vue",
+						"name":"我的钱包"
+					},
+			        {
+						"path": "more-information",
+						"component": "/xwim/more-information.vue",
+						"name":"更多信息"
+					},
+					{
+						"path": "area",
+						"component": "/xwim/area.vue",
+						"name":"选择地区"
+					},
+					{
+						"path": "collection",
+						"component": "/xwim/collection.vue",
+						"name":"我的收藏"
+						
+					},
+					{
+						"path": "card",
+						"component": "/xwim/card.vue",
+						"name":"我的卡包"
+					},
+					{
+						"path": "coupon",
+						"component": "/xwim/coupon.vue",
+						"name":"会员卡"
+					},
+					{
+						"path": "settings",
+						"component": "/xwim/settings.vue",
+						"name":"设置"
 			        },
 			        {
-			          "path": "information",
-			          "component": "/xwim/information.vue"
-			        },
-			        {
-			          "path": "account",
-			          "component": "/xwim/account.vue"
-			        },
-              {
-                "path": "more-information",
-                "component": "/xwim/more-information.vue"
-              },
-              {
-                "path": "area",
-                "component": "/xwim/area.vue"
-              },
-              {
-                "path": "wallet",
-                "component": "/xwim/wallet.vue"
-              },
-              {
-                "path": "collection",
-                "component": "/xwim/collection.vue"
-              },
-              {
-                "path": "card",
-                "component": "/xwim/card.vue"
-              },
-              {
-                "path": "coupon",
-                "component": "/xwim/coupon.vue"
-              }
+						"path": "account",
+						"component": "/xwim/account.vue",
+						"name":"账号与安全"
+			        }
 
 				],
 				"meta":{

@@ -16,7 +16,7 @@
           <img slot="icon" src="../../assets/image/code.png" style="width: 18px;height: 18px;">
         </span>
       </mt-cell>
-      <mt-cell title="更多" is-link to="/more-information"></mt-cell>
+      <mt-cell title="更多" is-link to="/me/more-information"></mt-cell>
     </div>
 
     <div class="pd10">

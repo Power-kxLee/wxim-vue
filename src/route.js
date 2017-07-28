@@ -36,6 +36,7 @@ const checkRouter = (config) => {
           loginInCheckIndex  : !!page.meta.loginInCheckIndex ? true : false
         }
       })
+
     )
   );
 
