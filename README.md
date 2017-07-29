@@ -6,6 +6,13 @@
 
 ![二维码](https://github.com/Power-kxLee/wxim-vue/blob/master/server/erweima.png)
 
+## APP
+
+![图片演示](https://github.com/Power-kxLee/wxim-vue/blob/master/server/appgif.gif)
+
+APP下载地址[http://wxim66.oss-cn-shenzhen.aliyuncs.com/xwim-android.apk](http://wxim66.oss-cn-shenzhen.aliyuncs.com/xwim-android.apk)
+(目前暂时只知道安卓 木有OS系统所以`IOS`打包不了/(ㄒoㄒ)/~~)
+
 ## 技术栈
 前端 : `vue` + `vue-router` + `vuex` + `vue-cil` + `axios` + `mint-ui` + `socket.io` + `webpack`
 
