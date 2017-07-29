@@ -75,7 +75,7 @@
 	
 </style>
 <script type="text/javascript">
-	import '../../assets/css/common/message.css'; 
+	import '../../assets/css/message.css'; 
 	
 	
 	const storage = window.localStorage;

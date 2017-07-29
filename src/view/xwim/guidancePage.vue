@@ -161,7 +161,7 @@
 	}
 </style>
 <script type="text/javascript">
-	import "../../assets/css/common/animate.min.css";	
+	import "../../assets/css/animate.min.css";	
 	import '../../assets/plugin/particles/particles.min.js';
 	import swiper_animate from "../../assets/js/swiper.animate.min.js";
 	import particles_background from '../../assets/plugin/particles/background.js';

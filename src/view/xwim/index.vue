@@ -37,7 +37,7 @@
 
 <script>
 
-    import '../../assets/css/page/message/index.css';
+    import '../../assets/css/wxindex.css';
     const storage = window.localStorage;
 
     export default  {

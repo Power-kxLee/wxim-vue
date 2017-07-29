@@ -52,7 +52,7 @@
 </template>
 
 <script>
-	import '../../assets/css/page/loginRegister.css';
+	import '../../assets/css/loginRegister.css';
 	import '../../assets/plugin/particles/particles.min.js';
 	import particles_background from '../../assets/plugin/particles/background.js';
 	import * as types from '../../vuex/mutation-types'

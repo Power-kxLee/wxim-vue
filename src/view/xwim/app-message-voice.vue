@@ -67,7 +67,7 @@
 <style type="text/css"></style>
 <script type="text/javascript">
     
-import '../../assets/css/common/talk-tools.css';
+import '../../assets/css/talk-tools.css';
     const storage = window.localStorage;
     
     const $ = (obj) =>{

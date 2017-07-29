@@ -11,8 +11,8 @@
 <script type="text/javascript">
 //
 import "./assets/font/xwim/common/iconfont.css";
-import './assets/css/common/common.css'; //加载公共css
-import './assets/css/common/HTML5-reset.css'; //加载css reste表
+import './assets/css/common.css'; //加载公共css
+import './assets/css/HTML5-reset.css'; //加载css reste表
 import 'mint-ui/lib/style.css'; //加载mint依赖的css
 import * as types from './vuex/mutation-types';
 import imFooter from './view/xwim/common/footer.vue';

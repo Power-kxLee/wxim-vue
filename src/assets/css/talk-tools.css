@@ -219,6 +219,7 @@
         margin:0px;
         border-bottom:1px solid #bdbdbd;
         font-size: 18px;
+            background: #fafafa;
     }
     .messagtc .textin .textcur{
         border-bottom-color: #1AAD19;
