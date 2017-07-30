@@ -11,7 +11,8 @@ const mychild = (child) =>{
     in_arrys.push({
       path : val.path,
       name : val.name || "",
-      component : resolve => require([`./view${val.component}`], resolve)
+      component : resolve => require([`./view${val.component}`], resolve),
+      meta:val.meta || {}
     })
   }
   return in_arrys;

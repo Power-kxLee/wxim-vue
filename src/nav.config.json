@@ -11,19 +11,31 @@
 					{
 			          "path": "wx",
 			          "name":"wx",
-			          "component": "/xwim/index.vue"
+			          "component": "/xwim/index.vue",
+			          "meta":{
+			          	"mark":1
+			          }
 			        },
 			        {
 			          "path": "find",
-			          "component": "/xwim/find.vue"
+			          "component": "/xwim/find.vue",
+			          "meta":{
+			          	"mark":1
+			          }
 			        },
 			        {
 			          "path": "book",
-			          "component": "/xwim/wx_book.vue"
+			          "component": "/xwim/wx_book.vue",
+			          "meta":{
+			          	"mark":1
+			          }
 			        },
 			        {
 			          "path": "my",
-			          "component": "/xwim/wx_my.vue"
+			          "component": "/xwim/wx_my.vue",
+			          "meta":{
+			          	"mark":1
+			          }
 			        }
 				],
 				"meta":{
