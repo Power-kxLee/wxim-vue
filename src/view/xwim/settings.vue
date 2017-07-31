@@ -4,7 +4,7 @@
       <mt-cell title="账号与安全" is-link to="/me/account"></mt-cell>
     </div>
     <div class="pd10">
-      <mt-cell title="新消息通知" is-link></mt-cell>
+      <mt-cell title="新消息通知" is-link to="/me/new_message"></mt-cell>
       <mt-cell title="隐私" is-link></mt-cell>
       <mt-cell title="通用" is-link></mt-cell>
     </div>

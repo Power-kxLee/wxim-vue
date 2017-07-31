@@ -20,14 +20,14 @@
 
 <script>
   export default {
-    data() {
+    data () {
       return {
         alphabet: [],
         sexShow: false,
         content: true
       }
     },
-    created() {
+    created () {
     },
     methods: {
       chooseSex () {

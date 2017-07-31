@@ -72,7 +72,7 @@
 						"path": "collection",
 						"component": "/xwim/collection.vue",
 						"name":"我的收藏"
-						
+
 					},
 					{
 						"path": "card",
@@ -85,15 +85,25 @@
 						"name":"会员卡"
 					},
 					{
-						"path": "settings",
-						"component": "/xwim/settings.vue",
-						"name":"设置"
-			        },
-			        {
-						"path": "account",
-						"component": "/xwim/account.vue",
-						"name":"账号与安全"
-			        }
+            "path": "settings",
+            "component": "/xwim/settings.vue",
+            "name":"设置"
+          },
+          {
+            "path": "account",
+            "component": "/xwim/account.vue",
+            "name":"账号与安全"
+          },
+          {
+            "path": "new_message",
+            "component": "/xwim/new_message.vue",
+            "name":"新消息通知"
+          },
+          {
+            "path": "do_not",
+            "component": "/xwim/do_not.vue",
+            "name":"功能消息免打扰"
+          }
 
 				],
 				"meta":{
