@@ -1,6 +1,20 @@
 <template>
   <div>
-    <div class="top"></div>
+    <div class="top">
+      <div class="top_box">
+        <i class="money_icon"></i>
+        <p>收付款</p>
+      </div>
+      <div class="top_box">
+        <i class="pocket_icon"></i>
+        <p>零钱</p>
+        <span>¥3.35</span>
+      </div>
+      <div class="top_box">
+        <i class="card_icon"></i>
+        <p>银行卡</p>
+      </div>
+    </div>
     <div class="grid-box">
 
       <div class="grid-view">
@@ -134,6 +148,42 @@
 </template>
 
 <style scope>
+  .top {
+    background: #62667b;
+    display: flex;
+    color: #fff;
+    text-align: center;
+    padding: 30px 0;
+  }
+  .top .top_box {
+    flex: 1;
+  }
+  .top .top_box p {
+    padding-top: 2px;
+  }
+  .top .top_box span {
+    font-size: 12px;
+    display: block;
+  }
+
+  .top i {
+    display: block;
+    width: 38px;
+    height: 38px;
+    margin: 0 auto;
+  }
+  .pocket_icon {
+    background: url("../../assets/image/pocket.png") no-repeat center center;
+    background-size:  auto 100%;
+  }
+  .money_icon {
+    background: url("../../assets/image/money.png") no-repeat center center;
+    background-size:  auto 100%;
+  }
+  .card_icon {
+    background: url("../../assets/image/card.png") no-repeat center center;
+    background-size:  auto 100%;
+  }
   .pd10 {
     padding: 10px 0;
   }
