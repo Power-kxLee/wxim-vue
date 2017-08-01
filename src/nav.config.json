@@ -103,6 +103,26 @@
             "path": "do_not",
             "component": "/xwim/do_not.vue",
             "name":"功能消息免打扰"
+          },
+          {
+            "path": "privacy",
+            "component": "/xwim/privacy.vue",
+            "name":"隐私"
+          },
+          {
+            "path": "way",
+            "component": "/xwim/way.vue",
+            "name":"添加我的方式"
+          },
+          {
+            "path": "currency",
+            "component": "/xwim/currency.vue",
+            "name":"通用"
+          },
+          {
+            "path": "language",
+            "component": "/xwim/language.vue",
+            "name":"多语言"
           }
 
 				],
